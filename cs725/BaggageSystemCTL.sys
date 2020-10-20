@@ -186,7 +186,6 @@
         <FB Name="FCOne" Type="TwoConCtl" x="1933.3333" y="427.77777" >
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
-          <Parameter Name="PE" Value="0" />
           <Parameter Name="PE_A" Value="0" />
         </FB>
         <FB Name="FCTwo" Type="TwoConCtl" x="2216.6665" y="2088.889" >
@@ -198,7 +197,7 @@
         <FB Name="FCThree" Type="TwoConCtl" x="2916.6665" y="11.111111" >
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
-          <Parameter Name="PE" Value="0" />
+          <Parameter Name="PE_A" Value="0" />
         </FB>
         <FB Name="ConControl" Type="PUBL_11" x="6205.555" y="33.333332" >
           <Parameter Name="ID" Value="&#34;L5&#34;" />
@@ -214,7 +213,6 @@
         <FB Name="FCFour" Type="TwoConCtl" x="3144.4443" y="1366.6666" >
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
-          <Parameter Name="PE" Value="0" />
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="BagInOne.INIT" dx1="27.777777" dx2="20.0" dy="-60.0" />
