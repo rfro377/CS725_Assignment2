@@ -276,11 +276,11 @@
           <Connection Source="PE.RD_2" Destination="FCTwo.PE_B" dx1="255.55554" />
           <Connection Source="PE.RD_3" Destination="FCThree.PE_B" dx1="844.4444" />
           <Connection Source="PE.RD_4" Destination="FCFour.PE_B" dx1="1027.7777" />
+          <Connection Source="PE.RD_5" Destination="TCOne.PE_A" dx1="905.55554" />
           <Connection Source="PE.RD_6" Destination="TCOne.PE_B" dx1="838.88885" />
           <Connection Source="PE.RD_7" Destination="TCOne.PE_C" dx1="916.6666" />
           <Connection Source="PE.RD_8" Destination="TCOne.PE_D" dx1="849.99994" />
           <Connection Source="PE.RD_9" Destination="TCOne.PE_E" dx1="788.88885" />
-          <Connection Source="PE.RD_5" Destination="TCOne.PE_A" dx1="994.4444" />
         </DataConnections>
       </FBNetwork>
     </Resource>
