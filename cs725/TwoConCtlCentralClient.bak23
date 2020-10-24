@@ -30,8 +30,6 @@
         <With Var="PE_A" />
         <With Var="PE_B" />
       </Event>
-      <Event Name="GRANTED_TOKE" >
-      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="INITO" Comment="Initialization Confirm" >
@@ -43,10 +41,6 @@
         <With Var="MotoRotate1" />
         <With Var="MotoRotate2" />
         <With Var="BlockCon" />
-      </Event>
-      <Event Name="REQUEST_TOKE" >
-      </Event>
-      <Event Name="RELEASE_TOKE" >
       </Event>
     </EventOutputs>
     <InputVars>
@@ -80,9 +74,6 @@
       <Connection Source="FC12.START" Destination="FC11.CAS_START" dx1="127.77777" dx2="127.77777" dy="-605.55554" />
       <Connection Source="FC11.INITO" Destination="FC12.INIT" dx1="138.88889" />
       <Connection Source="PE_EVENT" Destination="FC12.I_PE_EVENT" dx1="1688.8888" />
-      <Connection Source="FC12.REQUEST_TOKE" Destination="REQUEST_TOKE" dx1="3150.0" />
-      <Connection Source="FC12.RELEASE_TOKE" Destination="RELEASE_TOKE" dx1="3144.4443" />
-      <Connection Source="GRANTED_TOKE" Destination="FC12.GRANTED_TOKE" dx1="1600.0" />
     </EventConnections>
     <DataConnections>
       <Connection Source="Block" Destination="FC12.Block" dx1="1766.6666" />

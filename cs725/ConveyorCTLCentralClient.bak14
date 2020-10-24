@@ -10,12 +10,12 @@
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" >
-        <With Var="PE_IN" />
+        <With Var="PE" />
         <With Var="Block" />
         <With Var="Candidate" />
       </Event>
       <Event Name="REQ" Comment="Normal Execution Request" >
-        <With Var="PE_IN" />
+        <With Var="PE" />
         <With Var="Block" />
         <With Var="Candidate" />
       </Event>
@@ -24,10 +24,7 @@
       <Event Name="CAS_START" >
       </Event>
       <Event Name="I_PE_EVENT" >
-        <With Var="PE_IN" />
-        <With Var="PE_OUT" />
-      </Event>
-      <Event Name="GRANTED_TOKE" >
+        <With Var="PE" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -43,16 +40,11 @@
       </Event>
       <Event Name="START" >
       </Event>
-      <Event Name="REQUEST_TOKE" >
-      </Event>
-      <Event Name="RELEASE_TOKE" >
-      </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="PE_IN" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="PE" Type="BOOL" Comment="Input event qualifier" />
       <VarDeclaration Name="Block" Type="BOOL" />
       <VarDeclaration Name="Candidate" Type="BOOL" />
-      <VarDeclaration Name="PE_OUT" Type="BOOL" Comment="Output event qualifier" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="MotoRotate" Type="BOOL" Comment="Output event qualifier" />
@@ -82,16 +74,9 @@
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="ST_REQUEST_TOKE" x="2172.2222" y="2111.111" >
+      <ECState Name="PE_READ" x="2127.7776" y="1861.1111" >
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
-      </ECState>
-      <ECState Name="ST_ACQUIRED_TOKE" x="3249.9998" y="1844.4443" >
-        <ECAction Algorithm="START" Output="START" />
-        <ECAction Output="CNF" />
-      </ECState>
-      <ECState Name="ST_RELEASE_TOKE" x="3249.9998" y="1433.3333" >
-        <ECAction Output="RELEASE_TOKE" />
       </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1155.5555" y="577.7778" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="916.6666" y="744.4444" />
@@ -101,16 +86,14 @@
       <ECTransition Source="CAS_START" Destination="START" Condition="1" x="2116.6665" y="422.2222" />
       <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="2061.111" y="1044.4445" />
       <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="2072.2222" y="722.22217" />
-      <ECTransition Source="START" Destination="ST_REQUEST_TOKE" Condition="I_PE_EVENT&#38;!PE_IN" x="961.1111" y="1716.6666" />
-      <ECTransition Source="ST_REQUEST_TOKE" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="2172.2222" y="1844.4443" />
-      <ECTransition Source="ST_ACQUIRED_TOKE" Destination="ST_RELEASE_TOKE" Condition="I_PE_EVENT&#38;!PE_OUT" x="3249.9998" y="1661.1111" />
-      <ECTransition Source="ST_RELEASE_TOKE" Destination="START" Condition="1" x="1705.5555" y="1166.6666" />
+      <ECTransition Source="START" Destination="PE_READ" Condition="I_PE_EVENT&#38;lastPE" x="916.6666" y="1466.6666" />
+      <ECTransition Source="PE_READ" Destination="START" Condition="1" x="1405.5555" y="1222.2222" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;" />
   </Algorithm>
   <Algorithm Name="REQ" Comment="Normally executed algorithm" >
-    <ST Text="System.out.println(this +  &#34; -> Candidate&#34; + Candidate);&#10;IF Candidate THEN&#10;IF lastPE !:= PE_IN THEN&#10;IF NOT PE_IN THEN&#10;BlockCon:= TRUE;&#10;System.out.println(&#34;BlockCon = true&#34;);&#10;ELSE&#10;BlockCon:=FALSE;&#10;System.out.println(&#34;BlockCon = false&#34;);&#10;END_IF&#10;lastPE := PE_IN;&#10;END_IF&#10;IF lastBlock !:= Block THEN&#10;IF Block THEN&#10;STOP.serviceEvent(this);&#10;MotoRotate := FALSE;&#10;System.out.println(&#34;Cas Stop&#34;);&#10;ELSE&#10;START.serviceEvent(this);&#10;MotoRotate := TRUE;&#10;System.out.println(&#34;Cas Start&#34;);&#10;END_IF&#10;lastBlock := Block;&#10;END_IF&#10;END_IF&#10;" />
+    <ST Text="System.out.println(this +  &#34; -> Candidate&#34; + Candidate);&#10;IF Candidate THEN&#10;IF lastPE !:= PE THEN&#10;IF NOT PE THEN&#10;BlockCon:= TRUE;&#10;System.out.println(&#34;BlockCon = true&#34;);&#10;ELSE&#10;BlockCon:=FALSE;&#10;System.out.println(&#34;BlockCon = false&#34;);&#10;END_IF&#10;lastPE := PE;&#10;END_IF&#10;IF lastBlock !:= Block THEN&#10;IF Block THEN&#10;STOP.serviceEvent(this);&#10;MotoRotate := FALSE;&#10;System.out.println(&#34;Cas Stop&#34;);&#10;ELSE&#10;START.serviceEvent(this);&#10;MotoRotate := TRUE;&#10;System.out.println(&#34;Cas Start&#34;);&#10;END_IF&#10;lastBlock := Block;&#10;END_IF&#10;END_IF&#10;" />
   </Algorithm>
   <Algorithm Name="START" >
     <ST Text="MotoRotate:=TRUE;&#10;System.out.println(this + &#34; Start &#34; + MotoRotate);&#10;&#10;System.out.println(&#34;Start &#34; + MotoRotate);&#10;" />
