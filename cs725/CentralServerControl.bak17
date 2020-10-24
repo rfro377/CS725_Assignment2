@@ -77,8 +77,8 @@
       <ECTransition Source="RELEASE_CURRENT_TOKEN" Destination="GRANT_NEXT" Condition="1" x="1705.5555" y="2227.7776" />
       <ECTransition Source="GRANT_6" Destination="START" Condition="1" x="4805.555" y="2894.4443" />
       <ECTransition Source="GRANT_2" Destination="START" Condition="1" x="2955.5554" y="3472.2222" />
-      <ECTransition Source="GRANT_NEXT" Destination="GRANT_2" Condition="targ2" x="3294.4443" y="2888.8887" />
-      <ECTransition Source="GRANT_NEXT" Destination="GRANT_6" Condition="targ6" x="5033.333" y="2605.5554" />
+      <ECTransition Source="GRANT_NEXT" Destination="GRANT_2" Condition="targ2 &#38; tokenAvailable" x="3294.4443" y="2888.8887" />
+      <ECTransition Source="GRANT_NEXT" Destination="GRANT_6" Condition="targ6 &#38; tokenAvailable" x="5033.333" y="2605.5554" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="tokenAvailable := TRUE;&#10;tokenOwner := 0;&#10;arrayStart := 0;&#10;arrayEnd := 0;&#10;" />
@@ -87,7 +87,7 @@
     <ST Text="" />
   </Algorithm>
   <Algorithm Name="GRANT_FROM_QUEUE" >
-    <ST Text="System.out.println(&#34;Entered queue granting algorithm&#34;);&#10;&#10;//first check if the token is already taken&#10;IF tokenAvailable = TRUE THEN&#10;&#10;//if so, check if either position of the queue has a waiting requeust&#10;    IF requestQueue[arrayStart] &#60;> 0 THEN&#10;        tokenAvailable := FALSE;&#10;        tokenOwner := requestQueue[arrayStart];&#10;        requestQueue[arrayStart] := 0;&#10;        arrayStart := ((arrayStart + 1) MOD 20);&#10;    END_IF;    &#10;&#10;    IF tokenOwner = 2 THEN&#10;        System.out.println(&#34;2&#34;);&#10;    targ2 := TRUE;&#10;    targ6 := FALSE;&#10;    ELSIF tokenOwner = 6 THEN&#10;        System.out.println(&#34;6&#34;);&#10;    targ6 := TRUE;&#10;    targ2 := FALSE;&#10;    ELSIF tokenOwner = 0 THEN&#10;        System.out.println(&#34;0&#34;);&#10;    targ2 := FALSE;&#10;    targ6 := FALSE;&#10;    END_IF;&#10;&#10;ELSE&#10;    targ2 := FALSE;&#10;    targ6 := FALSE;&#10;END_IF;&#10;" />
+    <ST Text="System.out.println(&#34;Entered queue granting algorithm&#34;);&#10;&#10;//first check if the token is already taken&#10;IF tokenAvailable = TRUE THEN&#10;&#10;//if so, check if either position of the queue has a waiting requeust&#10;    IF requestQueue[arrayStart] &#60;> 0 THEN&#10;        tokenAvailable := FALSE;&#10;        tokenOwner := requestQueue[arrayStart];&#10;        requestQueue[arrayStart] := 0;&#10;        arrayStart := ((arrayStart + 1) MOD 20);&#10;    END_IF;    &#10;&#10;    IF tokenOwner = 2 THEN&#10;        System.out.println(&#34;2&#34;);&#10;    targ2 := TRUE;&#10;    targ6 := FALSE;&#10;    ELSIF tokenOwner = 6 THEN&#10;        System.out.println(&#34;6&#34;);&#10;    targ6 := TRUE;&#10;    targ2 := FALSE;&#10;    ELSE&#10;        System.out.println(&#34;0&#34;);&#10;    targ2 := FALSE;&#10;    targ6 := FALSE;&#10;    END_IF;&#10;&#10;END_IF;&#10;" />
   </Algorithm>
   <Algorithm Name="RECLAIM_TOKEN" >
     <ST Text="tokenAvailable := TRUE;&#10;tokenOwner := 0;&#10;System.out.println(&#34;Token released and reclaimed!&#34;);&#10;" />

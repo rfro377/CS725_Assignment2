@@ -106,6 +106,8 @@
       <ECState Name="ST_RELEASE_TOKE_2" x="2605.5554" y="2383.3333" >
         <ECAction Output="RELEASE_TOKE" />
       </ECState>
+      <ECState Name="AWAIT_2ND_GRANT" x="2944.4443" y="2805.5554" >
+      </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1183.3333" y="672.22217" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="944.4444" y="838.88885" />
       <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="555.55554" y="616.6666" />
@@ -122,7 +124,8 @@
       <ECTransition Source="SECOND_BAG" Destination="LEFT_CONV2" Condition="1" x="4166.6665" y="2338.889" />
       <ECTransition Source="ST_REQUEST_TOKE" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="977.7777" y="3399.9998" />
       <ECTransition Source="LEFT_CONV2" Destination="ST_RELEASE_TOKE_2" Condition="I_PE_EVENT&#38;!PE_OUT" x="3111.111" y="2122.2222" />
-      <ECTransition Source="ST_RELEASE_TOKE_2" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="5427.7773" y="2950.0" />
+      <ECTransition Source="ST_RELEASE_TOKE_2" Destination="AWAIT_2ND_GRANT" Condition="1" x="2827.7776" y="2661.111" />
+      <ECTransition Source="AWAIT_2ND_GRANT" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="5544.4443" y="3094.4443" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;" />

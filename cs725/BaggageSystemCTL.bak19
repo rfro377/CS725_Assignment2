@@ -186,6 +186,7 @@
         <FB Name="FCOne" Type="TwoConCtlCentralClient" x="1933.3333" y="427.77777" >
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
+          <Parameter Name="PE_B" Value="0" />
         </FB>
         <FB Name="FCTwo" Type="TwoConCtl" x="2216.6665" y="2088.889" >
           <Parameter Name="Candidate" Value="1" />
@@ -193,9 +194,10 @@
         <FB Name="TCOne" Type="ThreeConCtl" x="4288.8887" y="2338.889" >
           <Parameter Name="Candidate" Value="1" />
         </FB>
-        <FB Name="FCThree" Type="TwoConCtlCentralClient" x="3949.9998" y="44.444443" >
+        <FB Name="FCThree" Type="TwoConCtl" x="2916.6665" y="11.111111" >
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
+          <Parameter Name="PE_A" Value="0" />
         </FB>
         <FB Name="ConControl" Type="PUBL_11" x="6205.555" y="33.333332" >
           <Parameter Name="ID" Value="&#34;L5&#34;" />
@@ -212,7 +214,6 @@
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
         </FB>
-        <FB Name="CServer" Type="CentralServerControl" x="8083.333" y="1038.8888" />
         <EventConnections>
           <Connection Source="START.COLD" Destination="BagInOne.INIT" dx1="27.777777" dx2="20.0" dy="-60.0" />
           <Connection Source="BagInThree.IND" Destination="BagIn3.REQ" dx1="61.111107" />
@@ -224,7 +225,7 @@
           <Connection Source="PE.IND" Destination="FCTwo.REQ" dx1="311.11108" dx2="129.41176" dy="-2205.8823" />
           <Connection Source="PE.IND" Destination="TCOne.REQ" dx1="1294.4443" dx2="126.666664" dy="-2206.6665" />
           <Connection Source="TCOne.CNF" Destination="ConControl.REQ" dx1="833.3333" />
-          <Connection Source="FCThree.CNF" Destination="ConControl.REQ" dx1="27.777777" dx2="5.5555553" dy="-3544.4443" />
+          <Connection Source="FCThree.CNF" Destination="ConControl.REQ" dx1="2272.2222" />
           <Connection Source="TCOne.START" Destination="FCOne.START" dx1="27.777777" dx2="72.22222" dy="-2672.2222" />
           <Connection Source="TCOne.STOP" Destination="FCOne.STOP" dx1="27.777777" dx2="122.22221" dy="-2783.3333" />
           <Connection Source="TCOne.STOP" Destination="FCTwo.STOP" dx1="27.777777" dx2="122.22221" dy="-2783.3333" />
@@ -251,20 +252,12 @@
           <Connection Source="BagIn4.INITO" Destination="PE.INIT" dx1="227.77777" dx2="26.666666" dy="693.3333" />
           <Connection Source="PE.INITO" Destination="FCOne.INIT" dx1="161.1111" />
           <Connection Source="FCOne.INITO" Destination="FCThree.INIT" dx1="55.555553" />
-          <Connection Source="FCThree.INITO" Destination="FCTwo.INIT" dx1="27.777777" dx2="5.5555553" dy="-3433.3333" />
+          <Connection Source="FCThree.INITO" Destination="FCTwo.INIT" dx1="27.777777" dx2="0.0" dy="-66.666664" />
           <Connection Source="FCTwo.INITO" Destination="FCFour.INIT" dx1="122.22221" />
           <Connection Source="FCFour.INITO" Destination="TCOne.INIT" dx1="244.44443" />
           <Connection Source="TCOne.INITO" Destination="ConControl.INIT" dx1="777.7778" />
           <Connection Source="START.STOP" Destination="TCOne.CAS_STOP" dx1="777.7778" />
           <Connection Source="PE.IND" Destination="FCOne.PE_EVENT" dx1="166.66666" />
-          <Connection Source="FCOne.REQUEST_TOKE" Destination="CServer.REQUEST_TOKE_2" dx1="3722.2222" />
-          <Connection Source="FCOne.RELEASE_TOKE" Destination="CServer.RELEASE_TOKE_2" dx1="3894.4443" />
-          <Connection Source="CServer.GRANT_TOKE_2" Destination="FCOne.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-1338.8888" />
-          <Connection Source="ConControl.INITO" Destination="CServer.INIT" dx1="1288.8888" />
-          <Connection Source="PE.IND" Destination="FCThree.PE_EVENT" dx1="3272.2222" />
-          <Connection Source="CServer.GRANT_TOKE_6" Destination="FCThree.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-1450.0" />
-          <Connection Source="FCThree.REQUEST_TOKE" Destination="CServer.REQUEST_TOKE_6" dx1="238.88889" />
-          <Connection Source="FCThree.RELEASE_TOKE" Destination="CServer.RELEASE_TOKE_6" dx1="244.44443" />
         </EventConnections>
         <DataConnections>
           <Connection Source="FCTwo.BlockCon" Destination="TCOne.Block" dx1="266.66666" />
@@ -272,8 +265,8 @@
           <Connection Source="TCOne.MotoRotate1" Destination="ConControl.SD_3" dx1="994.4444" />
           <Connection Source="TCOne.MotoRotate2" Destination="ConControl.SD_4" dx1="1027.7777" />
           <Connection Source="TCOne.MotoRotate3" Destination="ConControl.SD_5" dx1="1061.1111" />
-          <Connection Source="FCThree.MotoRotate1" Destination="ConControl.SD_1" dx1="27.777777" dx2="5.5555553" dy="266.66666" />
-          <Connection Source="FCThree.MotoRotate2" Destination="ConControl.SD_2" dx1="27.777777" dx2="5.5555553" dy="172.22221" />
+          <Connection Source="FCThree.MotoRotate1" Destination="ConControl.SD_1" dx1="700.0" />
+          <Connection Source="FCThree.MotoRotate2" Destination="ConControl.SD_2" dx1="766.6666" />
           <Connection Source="FCOne.MotoRotate1" Destination="ConControl.SD_6" dx1="2316.6665" />
           <Connection Source="FCOne.MotoRotate2" Destination="ConControl.SD_7" dx1="2227.7776" />
           <Connection Source="FCTwo.MotoRotate1" Destination="ConControl.SD_8" dx1="1111.1111" />
@@ -281,6 +274,7 @@
           <Connection Source="FCFour.MotoRotate1" Destination="ConControl.SD_10" dx1="1361.1111" dx2="53.333332" dy="586.6666" />
           <Connection Source="FCFour.MotoRotate2" Destination="ConControl.SD_11" dx1="1416.6666" dx2="53.333332" dy="466.66666" />
           <Connection Source="PE.RD_2" Destination="FCTwo.PE_B" dx1="255.55554" />
+          <Connection Source="PE.RD_3" Destination="FCThree.PE_B" dx1="844.4444" />
           <Connection Source="PE.RD_4" Destination="FCFour.PE_B" dx1="1027.7777" />
           <Connection Source="PE.RD_6" Destination="TCOne.PE_B" dx1="838.88885" />
           <Connection Source="PE.RD_7" Destination="TCOne.PE_C" dx1="916.6666" />
@@ -288,9 +282,6 @@
           <Connection Source="PE.RD_9" Destination="TCOne.PE_E" dx1="788.88885" />
           <Connection Source="PE.RD_5" Destination="TCOne.PE_A" dx1="994.4444" />
           <Connection Source="PE.RD_1" Destination="FCOne.PE_A" dx1="188.88889" />
-          <Connection Source="PE.RD_5" Destination="FCOne.PE_B" dx1="222.22221" />
-          <Connection Source="PE.RD_3" Destination="FCThree.PE_A" dx1="2744.4443" />
-          <Connection Source="PE.RD_5" Destination="FCThree.PE_B" dx1="2538.8887" />
         </DataConnections>
       </FBNetwork>
     </Resource>

@@ -65,6 +65,10 @@
       <ECState Name="GRANT_6" x="5477.7773" y="3233.3333" >
         <ECAction Output="GRANT_TOKE_6" />
       </ECState>
+      <ECState Name="TICK_DELAY" x="3683.3333" y="3027.7776" >
+      </ECState>
+      <ECState Name="TICK_DELAY2" x="6355.555" y="2683.3333" >
+      </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2116.6665" y="427.77777" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="1749.9999" y="194.44444" />
       <ECTransition Source="START" Destination="REQUESTED_6" Condition="REQUEST_TOKE_6" x="4144.4443" y="272.2222" />
@@ -75,10 +79,12 @@
       <ECTransition Source="START" Destination="RELEASE_CURRENT_TOKEN" Condition="RELEASE_TOKE_2" x="266.66666" y="1238.8888" />
       <ECTransition Source="START" Destination="RELEASE_CURRENT_TOKEN" Condition="RELEASE_TOKE_6" x="966.6666" y="1222.2222" />
       <ECTransition Source="RELEASE_CURRENT_TOKEN" Destination="GRANT_NEXT" Condition="1" x="1705.5555" y="2227.7776" />
-      <ECTransition Source="GRANT_6" Destination="START" Condition="1" x="4805.555" y="2894.4443" />
+      <ECTransition Source="GRANT_6" Destination="START" Condition="1" x="5222.222" y="3083.3333" />
       <ECTransition Source="GRANT_2" Destination="START" Condition="1" x="2955.5554" y="3472.2222" />
-      <ECTransition Source="GRANT_NEXT" Destination="GRANT_2" Condition="targ2" x="3294.4443" y="2888.8887" />
-      <ECTransition Source="GRANT_NEXT" Destination="GRANT_6" Condition="targ6" x="5033.333" y="2605.5554" />
+      <ECTransition Source="GRANT_NEXT" Destination="TICK_DELAY" Condition="targ2" x="3538.8887" y="2538.8887" />
+      <ECTransition Source="TICK_DELAY" Destination="GRANT_2" Condition="1" x="3433.3333" y="3377.7776" />
+      <ECTransition Source="GRANT_NEXT" Destination="TICK_DELAY2" Condition="targ6" x="5300.0" y="2311.111" />
+      <ECTransition Source="TICK_DELAY2" Destination="GRANT_6" Condition="1" x="5772.222" y="3044.4443" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="tokenAvailable := TRUE;&#10;tokenOwner := 0;&#10;arrayStart := 0;&#10;arrayEnd := 0;&#10;" />
@@ -87,7 +93,7 @@
     <ST Text="" />
   </Algorithm>
   <Algorithm Name="GRANT_FROM_QUEUE" >
-    <ST Text="System.out.println(&#34;Entered queue granting algorithm&#34;);&#10;&#10;//first check if the token is already taken&#10;IF tokenAvailable = TRUE THEN&#10;&#10;//if so, check if either position of the queue has a waiting requeust&#10;    IF requestQueue[arrayStart] &#60;> 0 THEN&#10;        tokenAvailable := FALSE;&#10;        tokenOwner := requestQueue[arrayStart];&#10;        requestQueue[arrayStart] := 0;&#10;        arrayStart := ((arrayStart + 1) MOD 20);&#10;    END_IF;    &#10;&#10;    IF tokenOwner = 2 THEN&#10;        System.out.println(&#34;2&#34;);&#10;    targ2 := TRUE;&#10;    targ6 := FALSE;&#10;    ELSIF tokenOwner = 6 THEN&#10;        System.out.println(&#34;6&#34;);&#10;    targ6 := TRUE;&#10;    targ2 := FALSE;&#10;    ELSIF tokenOwner = 0 THEN&#10;        System.out.println(&#34;0&#34;);&#10;    targ2 := FALSE;&#10;    targ6 := FALSE;&#10;    END_IF;&#10;&#10;ELSE&#10;    targ2 := FALSE;&#10;    targ6 := FALSE;&#10;END_IF;&#10;" />
+    <ST Text="System.out.println(&#34;Entered queue granting algorithm&#34;);&#10;&#10;//first check if the token is already taken&#10;IF tokenAvailable = TRUE THEN&#10;&#10;//if so, check if either position of the queue has a waiting requeust&#10;    IF requestQueue[arrayStart] &#60;> 0 THEN&#10;        tokenAvailable := FALSE;&#10;        tokenOwner := requestQueue[arrayStart];&#10;        requestQueue[arrayStart] := 0;&#10;        arrayStart := ((arrayStart + 1) MOD 20);&#10;    END_IF;    &#10;&#10;    IF tokenOwner = 2 THEN&#10;        System.out.println(&#34;2&#34;);&#10;    targ2 := TRUE;&#10;    targ6 := FALSE;&#10;    ELSIF tokenOwner = 6 THEN&#10;        System.out.println(&#34;6&#34;);&#10;    targ6 := TRUE;&#10;    targ2 := FALSE;&#10;    ELSE&#10;        System.out.println(&#34;0&#34;);&#10;    targ2 := FALSE;&#10;    targ6 := FALSE;&#10;    END_IF;&#10;&#10;END_IF;&#10;" />
   </Algorithm>
   <Algorithm Name="RECLAIM_TOKEN" >
     <ST Text="tokenAvailable := TRUE;&#10;tokenOwner := 0;&#10;System.out.println(&#34;Token released and reclaimed!&#34;);&#10;" />
