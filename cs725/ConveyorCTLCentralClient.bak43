@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="ConveyorCTLCentralClient" Comment="Basic Function Block Type" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-30" />
+  <CompilerInfo header="package fb.rt.cs725;" >
+  </CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="PE_IN" />
+        <With Var="Block" />
+        <With Var="Candidate" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="PE_IN" />
+        <With Var="Block" />
+        <With Var="Candidate" />
+      </Event>
+      <Event Name="CAS_STOP" >
+      </Event>
+      <Event Name="CAS_START" >
+      </Event>
+      <Event Name="I_PE_EVENT" >
+        <With Var="PE_IN" />
+        <With Var="PE_OUT" />
+      </Event>
+      <Event Name="GRANTED_TOKE" >
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="MotoRotate" />
+        <With Var="BlockCon" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="MotoRotate" />
+        <With Var="BlockCon" />
+      </Event>
+      <Event Name="STOP" >
+      </Event>
+      <Event Name="START" >
+      </Event>
+      <Event Name="REQUEST_TOKE" >
+      </Event>
+      <Event Name="RELEASE_TOKE" >
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="PE_IN" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="Block" Type="BOOL" />
+      <VarDeclaration Name="Candidate" Type="BOOL" />
+      <VarDeclaration Name="PE_OUT" Type="BOOL" Comment="Output event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="MotoRotate" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="BlockCon" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Name="lastPE" Type="BOOL" InitialValue="1" />
+      <VarDeclaration Name="lastBlock" Type="BOOL" InitialValue="0" />
+    </InternalVars>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="944.4444" y="1127.7777" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="922.22217" y="138.88889" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="83.33333" y="183.33333" >
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="CAS_START" x="2444.4443" y="144.44444" >
+        <ECAction Algorithm="START" Output="START" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="CAS_STOP" x="2994.4443" y="722.22217" >
+        <ECAction Algorithm="STOP" Output="STOP" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="ST_REQUEST_TOKE" x="977.7777" y="3061.111" >
+        <ECAction Algorithm="STOP" Output="STOP" />
+        <ECAction Output="CNF" />
+        <ECAction Output="REQUEST_TOKE" />
+      </ECState>
+      <ECState Name="ST_ACQUIRED_TOKE" x="6888.8887" y="3244.4443" >
+        <ECAction Algorithm="START" Output="START" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="ST_RELEASE_TOKE" x="3261.111" y="1516.6666" >
+        <ECAction Output="RELEASE_TOKE" />
+      </ECState>
+      <ECState Name="LEFT_CONV" x="7094.4443" y="1372.2222" >
+      </ECState>
+      <ECState Name="SECOND_BAG" x="4494.4443" y="2600.0" >
+        <ECAction Algorithm="STOP" Output="STOP" />
+        <ECAction Output="CNF" />
+        <ECAction Output="REQUEST_TOKE" />
+      </ECState>
+      <ECState Name="LEFT_CONV2" x="3888.8887" y="2122.2222" >
+      </ECState>
+      <ECState Name="ST_RELEASE_TOKE_2" x="2605.5554" y="2383.3333" >
+        <ECAction Output="RELEASE_TOKE" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1183.3333" y="672.22217" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="944.4444" y="838.88885" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="555.55554" y="616.6666" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="233.33333" y="750.0" />
+      <ECTransition Source="START" Destination="CAS_START" Condition="CAS_START" x="1688.8888" y="511.11108" />
+      <ECTransition Source="CAS_START" Destination="START" Condition="1" x="2144.4443" y="516.6666" />
+      <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="2088.889" y="1138.8888" />
+      <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="2100.0" y="816.6666" />
+      <ECTransition Source="ST_RELEASE_TOKE" Destination="START" Condition="1" x="1888.8888" y="1344.4443" />
+      <ECTransition Source="LEFT_CONV" Destination="ST_RELEASE_TOKE" Condition="I_PE_EVENT&#38;!PE_OUT" x="5983.333" y="994.4444" />
+      <ECTransition Source="ST_ACQUIRED_TOKE" Destination="LEFT_CONV" Condition="I_PE_EVENT&#38;PE_IN" x="7799.9995" y="1699.9999" />
+      <ECTransition Source="START" Destination="ST_REQUEST_TOKE" Condition="I_PE_EVENT&#38;!PE_IN" x="366.66666" y="1694.4443" />
+      <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="I_PE_EVENT&#38;!PE_IN" x="4916.6665" y="2222.2222" />
+      <ECTransition Source="SECOND_BAG" Destination="LEFT_CONV2" Condition="1" x="4166.6665" y="2338.889" />
+      <ECTransition Source="ST_REQUEST_TOKE" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="977.7777" y="3399.9998" />
+      <ECTransition Source="LEFT_CONV2" Destination="ST_RELEASE_TOKE_2" Condition="I_PE_EVENT&#38;!PE_OUT" x="3111.111" y="2122.2222" />
+      <ECTransition Source="ST_RELEASE_TOKE_2" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="5427.7773" y="2950.0" />
+    </ECC>
+  <Algorithm Name="INIT" Comment="Initialization algorithm" >
+    <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;" />
+  </Algorithm>
+  <Algorithm Name="REQ" Comment="Normally executed algorithm" >
+    <ST Text="System.out.println(this +  &#34; -> Candidate&#34; + Candidate);&#10;IF Candidate THEN&#10;IF lastPE !:= PE_IN THEN&#10;IF NOT PE_IN THEN&#10;BlockCon:= TRUE;&#10;System.out.println(&#34;BlockCon = true&#34;);&#10;ELSE&#10;BlockCon:=FALSE;&#10;System.out.println(&#34;BlockCon = false&#34;);&#10;END_IF&#10;lastPE := PE_IN;&#10;END_IF&#10;IF lastBlock !:= Block THEN&#10;IF Block THEN&#10;STOP.serviceEvent(this);&#10;MotoRotate := FALSE;&#10;System.out.println(&#34;Cas Stop&#34;);&#10;ELSE&#10;START.serviceEvent(this);&#10;MotoRotate := TRUE;&#10;System.out.println(&#34;Cas Start&#34;);&#10;END_IF&#10;lastBlock := Block;&#10;END_IF&#10;END_IF&#10;" />
+  </Algorithm>
+  <Algorithm Name="START" >
+    <ST Text="MotoRotate:=TRUE;&#10;System.out.println(this + &#34; Start &#34; + MotoRotate);&#10;&#10;System.out.println(&#34;Start &#34; + MotoRotate);&#10;" />
+  </Algorithm>
+  <Algorithm Name="STOP" >
+    <ST Text="MotoRotate := FALSE;&#10;System.out.println(this + &#34; Stop &#34; + MotoRotate);&#10;&#10;System.out.println(&#34;Stop &#34; + MotoRotate);&#10;" />
+  </Algorithm>
+  </BasicFB>
+</FBType>

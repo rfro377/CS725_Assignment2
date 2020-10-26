@@ -187,11 +187,11 @@
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
         </FB>
-        <FB Name="FCTwo" Type="TWOCONRINGTOKEN" x="3322.2222" y="2983.3333" >
-          <Parameter Name="Candidate" Value="0" />
+        <FB Name="FCTwo" Type="TWOCONRINGTOKEN" x="3038.8887" y="2894.4443" >
+          <Parameter Name="Candidate" Value="1" />
         </FB>
         <FB Name="TCOne" Type="ThreeConCtl" x="6333.333" y="4505.555" >
-          <Parameter Name="Candidate" Value="0" />
+          <Parameter Name="Candidate" Value="1" />
         </FB>
         <FB Name="FCThree" Type="TwoConCtlCentralClient" x="3949.9998" y="44.444443" >
           <Parameter Name="Candidate" Value="0" />
@@ -213,9 +213,6 @@
           <Parameter Name="Block" Value="0" />
         </FB>
         <FB Name="CServer" Type="CentralServerControl" x="8083.333" y="1038.8888" />
-        <FB Name="Delay_Ring" Type="E_DELAY" x="6711.111" y="3427.7776" >
-          <Parameter Name="DT" Value="t#100ms" />
-        </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="BagInOne.INIT" dx1="27.777777" dx2="20.0" dy="-60.0" />
           <Connection Source="BagInThree.IND" Destination="BagIn3.REQ" dx1="61.111107" />
@@ -268,14 +265,13 @@
           <Connection Source="FCThree.RELEASE_TOKE" Destination="CServer.RELEASE_TOKE_6" dx1="244.44443" />
           <Connection Source="PE.IND" Destination="FCTwo.I_PE_EVENT" dx1="794.4444" />
           <Connection Source="PE.IND" Destination="TCOne.I_PE_EVENT" dx1="1905.5555" />
+          <Connection Source="FCTwo.RELEASED_RING_TOKE" Destination="TCOne.GRANTED_RING_TOKEN" dx1="972.22217" />
           <Connection Source="FCTwo.CONFIRM_RECEIVED_RING_TOKEN_OUT" Destination="TCOne.CONFIRM_RELEASE_RING_TOKEN_IN" dx1="944.4444" />
           <Connection Source="TCOne.RELEASE_RING_TOKEN" Destination="FCTwo.GRANTED_RING_TOKE" dx1="111.11111" dx2="177.77777" dy="-5072.222" />
           <Connection Source="TCOne.CONFIRM_RELEASE_RING_TOKEN_OUT" Destination="FCTwo.CONFIRM_RECEIVED_RING_TOKEN_IN" dx1="55.555553" dx2="183.33333" dy="-5183.333" />
           <Connection Source="FCThree.INITO" Destination="TCOne.INIT" dx1="1494.4443" />
           <Connection Source="TCOne.INITO" Destination="FCTwo.INIT" dx1="27.777777" dx2="5.5555553" dy="-4622.222" />
-          <Connection Source="FCTwo.Initial_Release" Destination="Delay_Ring.START" dx1="838.88885" />
-          <Connection Source="Delay_Ring.EO" Destination="TCOne.GRANTED_RING_TOKEN" dx1="27.777777" dx2="5.5555553" dy="-3616.6665" />
-          <Connection Source="FCTwo.RELEASED_RING_TOKE" Destination="Delay_Ring.START" dx1="994.4444" />
+          <Connection Source="FCTwo.Initial_Release" Destination="TCOne.GRANTED_RING_TOKEN" dx1="916.6666" />
         </EventConnections>
         <DataConnections>
           <Connection Source="TCOne.MotoRotate1" Destination="ConControl.SD_3" dx1="27.777777" dx2="5.5555553" dy="1022.22217" />

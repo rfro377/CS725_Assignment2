@@ -59,8 +59,6 @@
       </Event>
       <Event Name="CONFIRM_RELEASE_RING_TOKEN_OUT" >
       </Event>
-      <Event Name="Initial_Release" >
-      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="Candidate" Type="BOOL" />
@@ -80,7 +78,7 @@
   </InterfaceList>
   <FBNetwork >
     <FB Name="FC11" Type="ConveyorRingTokenCTL" x="1150.0" y="499.99997" >
-      <Parameter Name="HAS_INITIAL_TOKEN" Value="0" />
+      <Parameter Name="HAS_INITIAL_TOKEN" Value="1" />
     </FB>
     <FB Name="FC12" Type="ConveyorCTL" x="3972.2222" y="161.1111" >
       <Parameter Name="Block" Value="0" />

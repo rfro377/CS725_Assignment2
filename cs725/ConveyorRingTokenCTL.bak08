@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
-<FBType Name="ConveyorCTL" Comment="Basic Function Block Type" >
+<FBType Name="ConveyorRingTokenCTL" Comment="Basic Function Block Type" >
   <Identification Standard="61499-2" />
   <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
   <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
@@ -10,18 +10,28 @@
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" >
-        <With Var="PE" />
+        <With Var="PE_IN" />
         <With Var="Block" />
         <With Var="Candidate" />
+        <With Var="PE_OUT" />
       </Event>
       <Event Name="REQ" Comment="Normal Execution Request" >
-        <With Var="PE" />
         <With Var="Block" />
         <With Var="Candidate" />
+        <With Var="PE_OUT" />
+        <With Var="PE_IN" />
       </Event>
       <Event Name="CAS_STOP" >
       </Event>
       <Event Name="CAS_START" >
+      </Event>
+      <Event Name="GRANTED_RING_TOKEN" >
+      </Event>
+      <Event Name="I_PE_EVENT" >
+        <With Var="PE_IN" />
+        <With Var="PE_OUT" />
+      </Event>
+      <Event Name="CONFIRM_TOKEN_RECEIVED_IN" >
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -37,11 +47,16 @@
       </Event>
       <Event Name="START" >
       </Event>
+      <Event Name="RELEASE_RING_TOKEN" >
+      </Event>
+      <Event Name="CONFIRM_TOKEN_RECEIVED_OUT" >
+      </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="PE" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="PE_IN" Type="BOOL" Comment="Input event qualifier" />
       <VarDeclaration Name="Block" Type="BOOL" />
       <VarDeclaration Name="Candidate" Type="BOOL" />
+      <VarDeclaration Name="PE_OUT" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="MotoRotate" Type="BOOL" Comment="Output event qualifier" />
@@ -54,37 +69,47 @@
       <VarDeclaration Name="lastBlock" Type="BOOL" InitialValue="0" />
     </InternalVars>
     <ECC >
-      <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
+      <ECState Name="START" Comment="Initial State" x="911.1111" y="449.99997" >
       </ECState>
       <ECState Name="INIT" Comment="Initialization" x="922.22217" y="138.88889" >
         <ECAction Algorithm="INIT" Output="INITO" />
         <ECAction Output="CNF" />
+        <ECAction Algorithm="START" Output="START" />
       </ECState>
-      <ECState Name="REQ" Comment="Normal execution" x="222.22221" y="972.22217" >
+      <ECState Name="REQ" Comment="Normal execution" x="144.44444" y="949.99994" >
         <ECAction Algorithm="REQ" Output="CNF" />
       </ECState>
-      <ECState Name="CAS_START" x="1300.0" y="1294.4443" >
+      <ECState Name="CAS_START" x="4405.555" y="744.4444" >
         <ECAction Algorithm="START" Output="START" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="CAS_STOP" x="1538.8888" y="700.0" >
+      <ECState Name="CAS_STOP" x="4277.778" y="294.44443" >
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="922.22217" y="427.77777" />
-      <ECTransition Source="INIT" Destination="START" Condition="1" x="555.55554" y="138.88889" />
-      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="555.55554" y="716.6666" />
-      <ECTransition Source="REQ" Destination="START" Condition="1" x="222.22221" y="644.4444" />
-      <ECTransition Source="START" Destination="CAS_START" Condition="CAS_START" x="966.6666" y="1066.6666" />
-      <ECTransition Source="CAS_START" Destination="START" Condition="1" x="1216.6666" y="1005.55554" />
-      <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="1111.1111" y="700.0" />
-      <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="1405.5555" y="583.3333" />
+      <ECState Name="AWAIT_TOKE" x="4638.8887" y="1422.2222" >
+        <ECAction Algorithm="STOP" Output="STOP" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="RELEASE_TOKE" x="1116.6666" y="2155.5554" >
+        <ECAction Output="RELEASE_RING_TOKEN" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="516.6666" y="138.88889" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="911.1111" y="161.1111" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="427.77777" y="600.0" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="144.44444" y="449.99997" />
+      <ECTransition Source="START" Destination="CAS_START" Condition="CAS_START" x="4427.778" y="538.88885" />
+      <ECTransition Source="CAS_START" Destination="START" Condition="1" x="4677.778" y="477.77777" />
+      <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="4205.555" y="316.66666" />
+      <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="4500.0" y="200.0" />
+      <ECTransition Source="START" Destination="AWAIT_TOKE" Condition="I_PE_EVENT&#38;!PE_IN" x="3894.4443" y="1244.4443" />
+      <ECTransition Source="START" Destination="RELEASE_TOKE" Condition="GRANTED_RING_TOKEN" x="461.11108" y="1594.4443" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;" />
   </Algorithm>
   <Algorithm Name="REQ" Comment="Normally executed algorithm" >
-    <ST Text="//System.out.println(this +  &#34; -> Candidate&#34; + Candidate);&#10;IF Candidate THEN&#10;IF lastPE !:= PE THEN&#10;IF NOT PE THEN&#10;BlockCon:= TRUE;&#10;System.out.println(&#34;BlockCon = true&#34;);&#10;ELSE&#10;BlockCon:=FALSE;&#10;System.out.println(&#34;BlockCon = false&#34;);&#10;END_IF&#10;lastPE := PE;&#10;END_IF&#10;IF lastBlock !:= Block THEN&#10;IF Block THEN&#10;STOP.serviceEvent(this);&#10;MotoRotate := FALSE;&#10;System.out.println(&#34;Cas Stop&#34;);&#10;ELSE&#10;START.serviceEvent(this);&#10;MotoRotate := TRUE;&#10;System.out.println(&#34;Cas Start&#34;);&#10;END_IF&#10;lastBlock := Block;&#10;END_IF&#10;END_IF&#10;" />
+    <ST Text="System.out.println(this +  &#34; -> Candidate&#34; + Candidate);&#10;IF Candidate THEN&#10;IF lastPE !:= PE_IN THEN&#10;IF NOT PE_IN THEN&#10;BlockCon:= TRUE;&#10;System.out.println(&#34;BlockCon = true&#34;);&#10;ELSE&#10;BlockCon:=FALSE;&#10;System.out.println(&#34;BlockCon = false&#34;);&#10;END_IF&#10;lastPE := PE_IN;&#10;END_IF&#10;IF lastBlock !:= Block THEN&#10;IF Block THEN&#10;STOP.serviceEvent(this);&#10;MotoRotate := FALSE;&#10;System.out.println(&#34;Cas Stop&#34;);&#10;ELSE&#10;START.serviceEvent(this);&#10;MotoRotate := TRUE;&#10;System.out.println(&#34;Cas Start&#34;);&#10;END_IF&#10;lastBlock := Block;&#10;END_IF&#10;END_IF&#10;" />
   </Algorithm>
   <Algorithm Name="START" >
     <ST Text="MotoRotate:=TRUE;&#10;System.out.println(this + &#34; Start &#34; + MotoRotate);&#10;&#10;System.out.println(&#34;Start &#34; + MotoRotate);&#10;" />

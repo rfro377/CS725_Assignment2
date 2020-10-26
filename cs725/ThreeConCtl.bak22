@@ -59,8 +59,6 @@
       </Event>
       <Event Name="CONFIRM_RELEASE_RING_TOKEN_OUT" >
       </Event>
-      <Event Name="Initial_Release" >
-      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="Candidate" Type="BOOL" />
