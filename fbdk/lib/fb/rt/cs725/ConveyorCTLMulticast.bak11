@@ -1,0 +1,396 @@
+/* Copyright (c)2020 Rockwell Automation. All rights reserved. */
+package fb.rt.cs725;
+import fb.datatype.*;
+import fb.rt.*;
+import fb.rt.events.*;
+/** FUNCTION_BLOCK ConveyorCTLMulticast
+  * @author JHC
+  * @version 20201026/JHC
+  */
+public class ConveyorCTLMulticast extends FBInstance
+{
+/** Input event qualifier */
+  public BOOL PE_IN = new BOOL();
+/** VAR Block */
+  public BOOL Block = new BOOL();
+/** VAR Candidate */
+  public BOOL Candidate = new BOOL();
+/** VAR PE_OUT */
+  public BOOL PE_OUT = new BOOL();
+/** VAR IN_LAMPORT */
+  public UINT IN_LAMPORT = new UINT();
+/** VAR IN_MESSAGE_ID */
+  public UINT IN_MESSAGE_ID = new UINT();
+/** VAR THIS_ID */
+  public UINT THIS_ID = new UINT();
+/** Output event qualifier */
+  public BOOL MotoRotate = new BOOL();
+/** VAR BlockCon */
+  public BOOL BlockCon = new BOOL();
+/** VAR OUT_LAMPORT */
+  public UINT OUT_LAMPORT = new UINT();
+/** VAR OUT_MESSAGE_ID */
+  public UINT OUT_MESSAGE_ID = new UINT();
+/** VAR lastPE */
+  public BOOL lastPE = new BOOL();
+/** VAR lastBlock */
+  public BOOL lastBlock = new BOOL();
+/** VAR lamportTime */
+  public UINT lamportTime = new UINT();
+/** VAR previousState */
+  public INT previousState = new INT();
+/** VAR allReplied */
+  public BOOL allReplied = new BOOL();
+/** Initialization Request */
+ public EventServer INIT = new EventInput(this);
+/** Normal Execution Request */
+ public EventServer REQ = new EventInput(this);
+/** EVENT CAS_STOP */
+ public EventServer CAS_STOP = new EventInput(this);
+/** EVENT CAS_START */
+ public EventServer CAS_START = new EventInput(this);
+/** EVENT PE_EVENT */
+ public EventServer PE_EVENT = new EventInput(this);
+/** EVENT IN_REPLY */
+ public EventServer IN_REPLY = new EventInput(this);
+/** EVENT IN_REQUEST */
+ public EventServer IN_REQUEST = new EventInput(this);
+/** Initialization Confirm */
+ public EventOutput INITO = new EventOutput();
+/** Execution Confirmation */
+ public EventOutput CNF = new EventOutput();
+/** EVENT STOP */
+ public EventOutput STOP = new EventOutput();
+/** EVENT START */
+ public EventOutput START = new EventOutput();
+/** EVENT OUT_REPLY */
+ public EventOutput OUT_REPLY = new EventOutput();
+/** EVENT OUT_REQUEST */
+ public EventOutput OUT_REQUEST = new EventOutput();
+/** {@inheritDoc}
+* @param s {@inheritDoc}
+* @return {@inheritDoc}
+*/
+  public EventServer eiNamed(String s){
+    if("INIT".equals(s)) return INIT;
+    if("REQ".equals(s)) return REQ;
+    if("CAS_STOP".equals(s)) return CAS_STOP;
+    if("CAS_START".equals(s)) return CAS_START;
+    if("PE_EVENT".equals(s)) return PE_EVENT;
+    if("IN_REPLY".equals(s)) return IN_REPLY;
+    if("IN_REQUEST".equals(s)) return IN_REQUEST;
+    return super.eiNamed(s);}
+/** {@inheritDoc}
+* @param s {@inheritDoc}
+* @return {@inheritDoc}
+*/
+  public EventOutput eoNamed(String s){
+    if("INITO".equals(s)) return INITO;
+    if("CNF".equals(s)) return CNF;
+    if("STOP".equals(s)) return STOP;
+    if("START".equals(s)) return START;
+    if("OUT_REPLY".equals(s)) return OUT_REPLY;
+    if("OUT_REQUEST".equals(s)) return OUT_REQUEST;
+    return super.eoNamed(s);}
+/** {@inheritDoc}
+* @param s {@inheritDoc}
+* @return {@inheritDoc}
+* @throws FBRManagementException {@inheritDoc}
+*/
+  public ANY ivNamed(String s) throws FBRManagementException{
+    if("PE_IN".equals(s)) return PE_IN;
+    if("Block".equals(s)) return Block;
+    if("Candidate".equals(s)) return Candidate;
+    if("PE_OUT".equals(s)) return PE_OUT;
+    if("IN_LAMPORT".equals(s)) return IN_LAMPORT;
+    if("IN_MESSAGE_ID".equals(s)) return IN_MESSAGE_ID;
+    if("THIS_ID".equals(s)) return THIS_ID;
+    return super.ivNamed(s);}
+/** {@inheritDoc}
+* @param s {@inheritDoc}
+* @return {@inheritDoc}
+* @throws FBRManagementException {@inheritDoc}
+*/
+  public ANY ovNamed(String s) throws FBRManagementException{
+    if("MotoRotate".equals(s)) return MotoRotate;
+    if("BlockCon".equals(s)) return BlockCon;
+    if("OUT_LAMPORT".equals(s)) return OUT_LAMPORT;
+    if("OUT_MESSAGE_ID".equals(s)) return OUT_MESSAGE_ID;
+    return super.ovNamed(s);}
+/** {@inheritDoc}
+* @param ivName {@inheritDoc}
+* @param newIV {@inheritDoc}
+* @throws FBRManagementException {@inheritDoc} */
+  public void connectIV(String ivName, ANY newIV)
+    throws FBRManagementException{
+    if("PE_IN".equals(ivName)) connect_PE_IN((BOOL)newIV);
+    else if("Block".equals(ivName)) connect_Block((BOOL)newIV);
+    else if("Candidate".equals(ivName)) connect_Candidate((BOOL)newIV);
+    else if("PE_OUT".equals(ivName)) connect_PE_OUT((BOOL)newIV);
+    else if("IN_LAMPORT".equals(ivName)) connect_IN_LAMPORT((UINT)newIV);
+    else if("IN_MESSAGE_ID".equals(ivName)) connect_IN_MESSAGE_ID((UINT)newIV);
+    else if("THIS_ID".equals(ivName)) connect_THIS_ID((UINT)newIV);
+    else super.connectIV(ivName, newIV);
+    }
+/** Connect the given variable to the input variable PE_IN
+  * @param newIV The variable to connect
+ */
+  public void connect_PE_IN(BOOL newIV){
+    PE_IN = newIV;
+    }
+/** Connect the given variable to the input variable Block
+  * @param newIV The variable to connect
+ */
+  public void connect_Block(BOOL newIV){
+    Block = newIV;
+    }
+/** Connect the given variable to the input variable Candidate
+  * @param newIV The variable to connect
+ */
+  public void connect_Candidate(BOOL newIV){
+    Candidate = newIV;
+    }
+/** Connect the given variable to the input variable PE_OUT
+  * @param newIV The variable to connect
+ */
+  public void connect_PE_OUT(BOOL newIV){
+    PE_OUT = newIV;
+    }
+/** Connect the given variable to the input variable IN_LAMPORT
+  * @param newIV The variable to connect
+ */
+  public void connect_IN_LAMPORT(UINT newIV){
+    IN_LAMPORT = newIV;
+    }
+/** Connect the given variable to the input variable IN_MESSAGE_ID
+  * @param newIV The variable to connect
+ */
+  public void connect_IN_MESSAGE_ID(UINT newIV){
+    IN_MESSAGE_ID = newIV;
+    }
+/** Connect the given variable to the input variable THIS_ID
+  * @param newIV The variable to connect
+ */
+  public void connect_THIS_ID(UINT newIV){
+    THIS_ID = newIV;
+    }
+private static final int index_START = 0;
+private void state_START(){
+  eccState = index_START;
+}
+private static final int index_INIT = 1;
+private void state_INIT(){
+  eccState = index_INIT;
+  alg_INIT();
+  INITO.serviceEvent(this);
+  CNF.serviceEvent(this);
+state_START();
+}
+private static final int index_REQ = 2;
+private void state_REQ(){
+  eccState = index_REQ;
+  alg_REQ();
+  CNF.serviceEvent(this);
+state_START();
+}
+private static final int index_CAS_START = 3;
+private void state_CAS_START(){
+  eccState = index_CAS_START;
+  alg_START();
+  START.serviceEvent(this);
+  CNF.serviceEvent(this);
+state_START();
+}
+private static final int index_CAS_STOP = 4;
+private void state_CAS_STOP(){
+  eccState = index_CAS_STOP;
+  alg_STOP();
+  STOP.serviceEvent(this);
+  CNF.serviceEvent(this);
+state_START();
+}
+private static final int index_WANTED = 5;
+private void state_WANTED(){
+  eccState = index_WANTED;
+  alg_SEND_ALL_REQUESTS();
+  alg_STOP();
+  STOP.serviceEvent(this);
+  CNF.serviceEvent(this);
+  alg_WANTED_ALG();
+state_WANTED_PENDING();
+}
+private static final int index_HELD = 6;
+private void state_HELD(){
+  eccState = index_HELD;
+  alg_START();
+  START.serviceEvent(this);
+  CNF.serviceEvent(this);
+  alg_HELD_ALG();
+}
+private static final int index_RELEASED = 7;
+private void state_RELEASED(){
+  eccState = index_RELEASED;
+  alg_REPLY_ALL();
+  alg_RELEASED_ALG();
+state_START();
+}
+private static final int index_WANTED_PENDING = 8;
+private void state_WANTED_PENDING(){
+  eccState = index_WANTED_PENDING;
+  alg_WANTED_PENDING_ALG();
+}
+private static final int index_NEW_REPLY = 9;
+private void state_NEW_REPLY(){
+  eccState = index_NEW_REPLY;
+  alg_HANDLE_REPLY();
+  alg_NEW_REPLY_ALG();
+    if(!allReplied.value) state_WANTED_PENDING();
+    else if(allReplied.value) state_HELD();
+}
+private static final int index_ADD_TO_QUEUE = 10;
+private void state_ADD_TO_QUEUE(){
+  eccState = index_ADD_TO_QUEUE;
+  alg_QUEUE_ALG();
+    if(previousState.value==1) state_RELEASED();
+    else if(previousState.value==2) state_HELD();
+    else if(previousState.value==3) state_NEW_REPLY();
+    else if(previousState.value==4) state_WANTED_PENDING();
+    else if(previousState.value==5) state_WANTED();
+}
+/** The default constructor. */
+public ConveyorCTLMulticast(){
+    super();
+    lastPE.initializeNoException("1");
+    lastBlock.initializeNoException("0");
+  }
+/** {@inheritDoc}
+* @param e {@inheritDoc} */
+  public void serviceEvent(EventServer e){
+    if (e == INIT) service_INIT();
+    else if (e == REQ) service_REQ();
+    else if (e == CAS_STOP) service_CAS_STOP();
+    else if (e == CAS_START) service_CAS_START();
+    else if (e == PE_EVENT) service_PE_EVENT();
+    else if (e == IN_REPLY) service_IN_REPLY();
+    else if (e == IN_REQUEST) service_IN_REQUEST();
+  }
+/** Services the INIT event. */
+  public void service_INIT(){
+    if ((eccState == index_START)) state_INIT();
+  }
+/** Services the REQ event. */
+  public void service_REQ(){
+    if ((eccState == index_START) && (Candidate.value)) state_REQ();
+  }
+/** Services the CAS_STOP event. */
+  public void service_CAS_STOP(){
+    if ((eccState == index_START)) state_CAS_STOP();
+  }
+/** Services the CAS_START event. */
+  public void service_CAS_START(){
+    if ((eccState == index_START)) state_CAS_START();
+  }
+/** Services the PE_EVENT event. */
+  public void service_PE_EVENT(){
+    if ((eccState == index_START) && (!PE_IN.value)) state_WANTED();
+    else if ((eccState == index_HELD) && (!PE_OUT.value)) state_RELEASED();
+  }
+/** Services the IN_REPLY event. */
+  public void service_IN_REPLY(){
+    if ((eccState == index_WANTED_PENDING)) state_NEW_REPLY();
+    else if ((eccState == index_RELEASED)) state_ADD_TO_QUEUE();
+    else if ((eccState == index_HELD)) state_ADD_TO_QUEUE();
+    else if ((eccState == index_WANTED_PENDING)) state_ADD_TO_QUEUE();
+    else if ((eccState == index_WANTED)) state_ADD_TO_QUEUE();
+    else if ((eccState == index_NEW_REPLY)) state_ADD_TO_QUEUE();
+  }
+/** Services the IN_REQUEST event. */
+  public void service_IN_REQUEST(){
+  }
+  /** ALGORITHM INIT IN ST*/
+public void alg_INIT(){
+MotoRotate.value=true;
+Block.value=false;
+
+System.out.println(this+" "+MotoRotate.value);
+System.out.println(MotoRotate.value);
+
+lamportTime.value=(int)(0);
+}
+  /** ALGORITHM REQ IN ST*/
+public void alg_REQ(){
+//System.out.println(this+" -> Candidate"+Candidate.value);
+if(Candidate.value){
+if(lastPE.value!=PE_IN.value){
+if(!PE_IN.value){
+BlockCon.value=true;
+System.out.println("BlockCon = true");
+}
+else{
+BlockCon.value=false;
+System.out.println("BlockCon = false");
+}
+lastPE.value=PE_IN.value;
+}
+if(lastBlock.value!=Block.value){
+if(Block.value){
+STOP.serviceEvent(this);
+MotoRotate.value=false;
+System.out.println("Cas Stop");
+}
+else{
+START.serviceEvent(this);
+MotoRotate.value=true;
+System.out.println("Cas Start");
+}
+lastBlock.value=Block.value;
+}
+}
+}
+  /** ALGORITHM START IN ST*/
+public void alg_START(){
+MotoRotate.value=true;
+System.out.println(this+" Start "+MotoRotate.value);
+
+System.out.println("Start "+MotoRotate.value);
+}
+  /** ALGORITHM STOP IN ST*/
+public void alg_STOP(){
+MotoRotate.value=false;
+System.out.println(this+" Stop "+MotoRotate.value);
+
+System.out.println("Stop "+MotoRotate.value);
+}
+  /** ALGORITHM SEND_ALL_REQUESTS IN ST*/
+public void alg_SEND_ALL_REQUESTS(){
+}
+  /** ALGORITHM HANDLE_REPLY IN ST*/
+public void alg_HANDLE_REPLY(){
+}
+  /** ALGORITHM REPLY_ALL IN ST*/
+public void alg_REPLY_ALL(){
+}
+  /** ALGORITHM WANTED_PENDING_ALG IN ST*/
+public void alg_WANTED_PENDING_ALG(){
+previousState.value=(short)(4);
+}
+  /** ALGORITHM WANTED_ALG IN ST*/
+public void alg_WANTED_ALG(){
+previousState.value=(short)(5);
+}
+  /** ALGORITHM NEW_REPLY_ALG IN ST*/
+public void alg_NEW_REPLY_ALG(){
+previousState.value=(short)(3);
+}
+  /** ALGORITHM RELEASED_ALG IN ST*/
+public void alg_RELEASED_ALG(){
+previousState.value=(short)(1);
+}
+  /** ALGORITHM HELD_ALG IN ST*/
+public void alg_HELD_ALG(){
+previousState.value=(short)(2);
+}
+  /** ALGORITHM QUEUE_ALG IN ST*/
+public void alg_QUEUE_ALG(){
+}
+}

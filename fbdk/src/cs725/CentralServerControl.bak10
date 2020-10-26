@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="CentralServerControl" Comment="Central Server Controller" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-30" />
+  <CompilerInfo header="package fb.rt.cs725;" >
+  </CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+      </Event>
+      <Event Name="REQUEST_TOKE_2" >
+      </Event>
+      <Event Name="RELEASE_TOKE_2" >
+      </Event>
+      <Event Name="REQUEST_TOKE_6" >
+      </Event>
+      <Event Name="RELEASE_TOKE_6" >
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+      </Event>
+      <Event Name="GRANT_TOKE_2" >
+      </Event>
+      <Event Name="GRANT_TOKE_6" >
+      </Event>
+    </EventOutputs>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Name="requestQueue" Type="INT" ArraySize="20" />
+      <VarDeclaration Name="arrayStart" Type="INT" />
+      <VarDeclaration Name="arrayEnd" Type="INT" />
+      <VarDeclaration Name="tokenAvailable" Type="BOOL" />
+      <VarDeclaration Name="tokenOwner" Type="INT" />
+      <VarDeclaration Name="targ2" Type="BOOL" />
+      <VarDeclaration Name="targ6" Type="BOOL" />
+    </InternalVars>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="2116.6665" y="194.44444" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQUESTED_2" x="2911.111" y="883.3333" >
+        <ECAction Algorithm="ADD_QUEUE_2" />
+      </ECState>
+      <ECState Name="REQUESTED_6" x="5122.222" y="511.11108" >
+        <ECAction Algorithm="ADD_QUEUE_6" />
+      </ECState>
+      <ECState Name="GRANT_NEXT" x="3294.4443" y="1616.6666" >
+        <ECAction Algorithm="GRANT_FROM_QUEUE" />
+      </ECState>
+      <ECState Name="RELEASE_CURRENT_TOKEN" x="672.22217" y="1633.3333" >
+        <ECAction Algorithm="RECLAIM_TOKEN" />
+      </ECState>
+      <ECState Name="GRANT_2" x="3561.111" y="2900.0" >
+        <ECAction Output="GRANT_TOKE_2" />
+      </ECState>
+      <ECState Name="GRANT_6" x="3955.5554" y="2561.111" >
+        <ECAction Output="GRANT_TOKE_6" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2116.6665" y="427.77777" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="1749.9999" y="194.44444" />
+      <ECTransition Source="START" Destination="REQUESTED_6" Condition="REQUEST_TOKE_6" x="4144.4443" y="272.2222" />
+      <ECTransition Source="START" Destination="REQUESTED_2" Condition="REQUEST_TOKE_2" x="2405.5554" y="738.88885" />
+      <ECTransition Source="REQUESTED_6" Destination="GRANT_NEXT" Condition="1" x="3644.4443" y="1394.4443" />
+      <ECTransition Source="REQUESTED_2" Destination="GRANT_NEXT" Condition="1" x="3138.8887" y="1350.0" />
+      <ECTransition Source="GRANT_NEXT" Destination="START" Condition="!targ2 &#38;&#38; !targ6" x="1411.1111" y="711.1111" />
+      <ECTransition Source="START" Destination="RELEASE_CURRENT_TOKEN" Condition="RELEASE_TOKE_2" x="266.66666" y="1238.8888" />
+      <ECTransition Source="START" Destination="RELEASE_CURRENT_TOKEN" Condition="RELEASE_TOKE_6" x="966.6666" y="1222.2222" />
+      <ECTransition Source="RELEASE_CURRENT_TOKEN" Destination="GRANT_NEXT" Condition="1" x="1733.3333" y="2244.4443" />
+      <ECTransition Source="GRANT_NEXT" Destination="GRANT_2" Condition="targ2" x="3561.111" y="2627.7776" />
+      <ECTransition Source="GRANT_NEXT" Destination="GRANT_6" Condition="targ6" x="3955.5554" y="2283.3333" />
+      <ECTransition Source="GRANT_6" Destination="START" Condition="1" x="3699.9998" y="2411.111" />
+      <ECTransition Source="GRANT_2" Destination="START" Condition="1" x="3205.5554" y="2811.111" />
+    </ECC>
+  <Algorithm Name="INIT" Comment="Initialization algorithm" >
+    <ST Text="tokenAvailable := TRUE;&#10;tokenOwner := 0;&#10;arrayStart := 0;&#10;arrayEnd := 0;&#10;" />
+  </Algorithm>
+  <Algorithm Name="REQ" Comment="Normally executed algorithm" >
+    <ST Text="" />
+  </Algorithm>
+  <Algorithm Name="GRANT_FROM_QUEUE" >
+    <ST Text="System.out.println(&#34;Entered queue granting algorithm&#34;);&#10;&#10;//first check if the token is already taken&#10;IF tokenAvailable = TRUE THEN&#10;&#10;//if so, check if either position of the queue has a waiting requeust&#10;    IF requestQueue[arrayStart] &#60;> 0 THEN&#10;        tokenAvailable := FALSE;&#10;        tokenOwner := requestQueue[arrayStart];&#10;        requestQueue[arrayStart] := 0;&#10;        arrayStart := ((arrayStart + 1) MOD 20);&#10;    END_IF;    &#10;&#10;    IF tokenOwner = 2 THEN&#10;        System.out.println(&#34;2&#34;);&#10;    targ2 := TRUE;&#10;    targ6 := FALSE;&#10;    ELSIF tokenOwner = 6 THEN&#10;        System.out.println(&#34;6&#34;);&#10;    targ6 := TRUE;&#10;    targ2 := FALSE;&#10;    ELSE&#10;        System.out.println(&#34;0&#34;);&#10;    targ2 := FALSE;&#10;    targ6 := FALSE;&#10;    END_IF;&#10;&#10;END_IF;&#10;" />
+  </Algorithm>
+  <Algorithm Name="RECLAIM_TOKEN" >
+    <ST Text="tokenAvailable := TRUE;&#10;tokenOwner := 0;&#10;System.out.println(&#34;Token released and reclaimed!&#34;);&#10;" />
+  </Algorithm>
+  <Algorithm Name="ADD_QUEUE_2" >
+    <ST Text="requestQueue[arrayEnd] := 2;&#10;arrayEnd := ((arrayEnd + 1) MOD 20);&#10;" />
+  </Algorithm>
+  <Algorithm Name="ADD_QUEUE_6" >
+    <ST Text="requestQueue[arrayEnd] := 6;&#10;arrayEnd := ((arrayEnd + 1) MOD 20);&#10;" />
+  </Algorithm>
+  </BasicFB>
+</FBType>

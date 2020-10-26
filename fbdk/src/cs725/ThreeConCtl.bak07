@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="ThreeConCtl" Comment="Composite Function Block Type" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+  <CompilerInfo header="package fb.rt.cs725;" >
+  </CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="Candidate" />
+        <With Var="Block" />
+        <With Var="PE_A" />
+        <With Var="PE_B" />
+        <With Var="PE_C" />
+        <With Var="PE_D" />
+        <With Var="PE_E" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="Block" />
+        <With Var="Candidate" />
+        <With Var="PE_A" />
+        <With Var="PE_B" />
+        <With Var="PE_C" />
+        <With Var="PE_D" />
+        <With Var="PE_E" />
+      </Event>
+      <Event Name="CAS_STOP" >
+      </Event>
+      <Event Name="CAS_START" >
+      </Event>
+      <Event Name="GRANTED_RING_TOKEN" >
+      </Event>
+      <Event Name="I_PE_EVENT" >
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="MotoRotate1" />
+        <With Var="MotoRotate2" />
+        <With Var="MotoRotate3" />
+        <With Var="BlockCon" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="MotoRotate1" />
+        <With Var="MotoRotate2" />
+        <With Var="MotoRotate3" />
+        <With Var="BlockCon" />
+      </Event>
+      <Event Name="START" >
+      </Event>
+      <Event Name="STOP" >
+      </Event>
+      <Event Name="RELEASE_RING_TOKEN" >
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Candidate" Type="BOOL" />
+      <VarDeclaration Name="Block" Type="BOOL" />
+      <VarDeclaration Name="PE_A" Type="BOOL" />
+      <VarDeclaration Name="PE_B" Type="BOOL" />
+      <VarDeclaration Name="PE_C" Type="BOOL" />
+      <VarDeclaration Name="PE_D" Type="BOOL" />
+      <VarDeclaration Name="PE_E" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="MotoRotate1" Type="BOOL" />
+      <VarDeclaration Name="MotoRotate2" Type="BOOL" />
+      <VarDeclaration Name="MotoRotate3" Type="BOOL" />
+      <VarDeclaration Name="BlockCon" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="FC11" Type="ConveyorRingTokenCTL" x="416.66666" y="144.44444" />
+    <FB Name="FC12" Type="ConveyorCTL" x="2405.5554" y="427.77777" >
+      <Parameter Name="Block" Value="0" />
+      <Parameter Name="Candidate" Value="0" />
+    </FB>
+    <FB Name="FC13" Type="ConveyorCTL" x="5377.7773" y="600.0" >
+      <Parameter Name="Block" Value="0" />
+      <Parameter Name="Candidate" Value="0" />
+    </FB>
+    <EventConnections>
+      <Connection Source="INIT" Destination="FC11.INIT" dx1="311.11108" />
+      <Connection Source="REQ" Destination="FC11.REQ" dx1="305.55554" />
+      <Connection Source="FC11.INITO" Destination="FC12.INIT" dx1="261.1111" dx2="22.222221" dy="-72.22222" />
+      <Connection Source="FC12.INITO" Destination="FC13.INIT" dx1="1344.4443" />
+      <Connection Source="FC13.INITO" Destination="INITO" dx1="6088.8887" />
+      <Connection Source="FC13.CNF" Destination="CNF" dx1="6066.6665" />
+      <Connection Source="REQ" Destination="FC12.REQ" dx1="2294.4443" />
+      <Connection Source="REQ" Destination="FC13.REQ" dx1="5266.6665" />
+      <Connection Source="FC11.CNF" Destination="CNF" dx1="1922.2222" />
+      <Connection Source="FC12.CNF" Destination="CNF" dx1="3094.4443" />
+      <Connection Source="CAS_STOP" Destination="FC11.CAS_STOP" dx1="211.1111" />
+      <Connection Source="CAS_START" Destination="FC11.CAS_START" dx1="194.44444" />
+      <Connection Source="FC13.STOP" Destination="STOP" dx1="6088.8887" />
+      <Connection Source="FC13.START" Destination="START" dx1="6105.555" />
+      <Connection Source="I_PE_EVENT" Destination="FC11.I_PE_EVENT" dx1="188.88889" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="FC13.MotoRotate" Destination="MotoRotate3" dx1="6177.7773" />
+      <Connection Source="FC12.MotoRotate" Destination="MotoRotate2" dx1="3205.5554" />
+      <Connection Source="FC11.MotoRotate" Destination="MotoRotate1" dx1="2033.3333" />
+      <Connection Source="Block" Destination="FC11.Block" dx1="294.44443" />
+      <Connection Source="FC11.BlockCon" Destination="BlockCon" dx1="1988.8888" />
+      <Connection Source="Candidate" Destination="FC11.Candidate" dx1="227.77777" />
+      <Connection Source="PE_B" Destination="FC12.PE" dx1="2283.3333" />
+      <Connection Source="PE_C" Destination="FC13.PE" dx1="5255.555" />
+      <Connection Source="PE_A" Destination="FC11.PE_IN" dx1="294.44443" />
+      <Connection Source="PE_B" Destination="FC11.PE_OUT" dx1="294.44443" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>
