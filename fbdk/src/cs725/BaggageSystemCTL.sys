@@ -187,10 +187,10 @@
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
         </FB>
-        <FB Name="FCTwo" Type="TWOCONRINGTOKEN" x="3155.5554" y="3772.2222" >
+        <FB Name="FCTwo" Type="TWOCONRINGTOKEN" x="3511.111" y="1905.5555" >
           <Parameter Name="Candidate" Value="0" />
         </FB>
-        <FB Name="TCOne" Type="ThreeConCtl" x="6561.111" y="4472.222" >
+        <FB Name="TCOne" Type="ThreeConCtl" x="5972.222" y="2866.6665" >
           <Parameter Name="Candidate" Value="0" />
         </FB>
         <FB Name="FCThree" Type="TwoConCtlCentralClient" x="4505.555" y="11.111111" >
@@ -208,15 +208,15 @@
           <Parameter Name="LABEL" Value="&#34;BAG IN 4&#34;" />
         </FB>
         <FB Name="BagIn4" Type="PUBL_0" x="622.22217" y="2666.6665" />
-        <FB Name="FCFour" Type="TwoConCtl" x="3355.5554" y="1377.7777" >
+        <FB Name="FCFour" Type="TwoConCtlMulticast" x="4205.555" y="4472.222" >
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
         </FB>
         <FB Name="CServer" Type="CentralServerControl" x="8077.7773" y="1083.3333" />
-        <FB Name="Delay_Ring" Type="E_DELAY" x="6711.111" y="3427.7776" >
+        <FB Name="Delay_Ring" Type="E_DELAY" x="7477.7773" y="1905.5555" >
           <Parameter Name="DT" Value="t#100ms" />
         </FB>
-        <FB Name="Delay_Ring2" Type="E_DELAY" x="7383.333" y="3172.2222" >
+        <FB Name="Delay_Ring2" Type="E_DELAY" x="7961.111" y="2005.5554" >
           <Parameter Name="DT" Value="t#100ms" />
         </FB>
         <FB Name="Delay_CS1" Type="E_DELAY" x="9305.556" y="1505.5555" >
@@ -225,13 +225,25 @@
         <FB Name="Delay_CS2" Type="E_DELAY" x="8594.444" y="255.55554" >
           <Parameter Name="DT" Value="t#100ms" />
         </FB>
+        <FB Name="Delay_Multicast" Type="E_DELAY" x="8461.11" y="3433.3333" >
+          <Parameter Name="DT" Value="t#20ms" />
+        </FB>
+        <FB Name="Delay_Multicast2" Type="E_DELAY" x="8472.222" y="4150.0" >
+          <Parameter Name="DT" Value="t#20ms" />
+        </FB>
+        <FB Name="Delay_Multicast3" Type="E_DELAY" x="6822.222" y="5583.333" >
+          <Parameter Name="DT" Value="t#20ms" />
+        </FB>
+        <FB Name="Delay_Multicast4" Type="E_DELAY" x="7855.555" y="5655.555" >
+          <Parameter Name="DT" Value="t#20ms" />
+        </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="BagInOne.INIT" dx1="27.777777" dx2="20.0" dy="-60.0" />
           <Connection Source="BagInThree.IND" Destination="BagIn3.REQ" dx1="61.111107" />
           <Connection Source="BagInOne.INITO" Destination="BagIn1.INIT" dx1="161.1111" dx2="46.666664" dy="-773.3333" />
           <Connection Source="BagInOne.IND" Destination="BagIn1.REQ" dx1="155.55554" dx2="46.666664" dy="-886.6666" />
           <Connection Source="BagInThree.INITO" Destination="BagIn3.INIT" dx1="61.111107" />
-          <Connection Source="BagIn1.INITO" Destination="BagInTwo.INIT" dx1="27.777777" dx2="0.0" dy="-72.22222" />
+          <Connection Source="BagIn1.INITO" Destination="BagInTwo.INIT" dx1="27.777777" />
           <Connection Source="BagInTwo.INITO" Destination="BagIn2.INIT" dx1="44.444443" />
           <Connection Source="PE.IND" Destination="FCTwo.REQ" dx1="311.11108" dx2="129.41176" dy="-2205.8823" />
           <Connection Source="PE.IND" Destination="TCOne.REQ" dx1="1111.1111" dx2="126.666664" dy="-2206.6665" />
@@ -240,7 +252,7 @@
           <Connection Source="TCOne.START" Destination="FCOne.START" dx1="188.88889" dx2="72.22222" dy="-2672.2222" />
           <Connection Source="TCOne.STOP" Destination="FCOne.STOP" dx1="244.44443" dx2="122.22221" dy="-2783.3333" />
           <Connection Source="TCOne.STOP" Destination="FCTwo.STOP" dx1="322.2222" dx2="116.666664" dy="-2783.3333" />
-          <Connection Source="TCOne.STOP" Destination="FCFour.STOP" dx1="422.2222" dx2="122.22221" dy="-2783.3333" />
+          <Connection Source="TCOne.STOP" Destination="FCFour.STOP" dx1="422.2222" dx2="183.33333" dy="-2783.3333" />
           <Connection Source="TCOne.START" Destination="FCThree.START" dx1="505.55554" dx2="127.77777" dy="-2672.2222" />
           <Connection Source="TCOne.START" Destination="FCFour.START" dx1="138.88889" dx2="127.77777" dy="-2672.2222" />
           <Connection Source="TCOne.START" Destination="FCTwo.START" dx1="150.0" dx2="127.77777" dy="-2672.2222" />
@@ -258,12 +270,12 @@
           <Connection Source="FCOne.CNF" Destination="ConControl.REQ" dx1="1388.8888" />
           <Connection Source="FCFour.CNF" Destination="ConControl.REQ" dx1="1055.5555" dx2="153.33333" dy="-2646.6665" />
           <Connection Source="FCTwo.CNF" Destination="ConControl.REQ" dx1="2022.2222" />
-          <Connection Source="BagIn2.INITO" Destination="BagInThree.INIT" dx1="27.777777" dx2="0.0" dy="-955.55554" />
+          <Connection Source="BagIn2.INITO" Destination="BagInThree.INIT" dx1="27.777777" />
           <Connection Source="BagIn3.INITO" Destination="BagInFour.INIT" dx1="27.777777" dx2="5.5555553" dy="-1877.7777" />
           <Connection Source="BagIn4.INITO" Destination="PE.INIT" dx1="227.77777" dx2="26.666666" dy="693.3333" />
           <Connection Source="PE.INITO" Destination="FCOne.INIT" dx1="105.55555" />
           <Connection Source="FCOne.INITO" Destination="FCThree.INIT" dx1="55.555553" />
-          <Connection Source="FCTwo.INITO" Destination="FCFour.INIT" dx1="27.777777" dx2="5.5555553" dy="-2950.0" />
+          <Connection Source="FCTwo.INITO" Destination="FCFour.INIT" dx1="27.777777" dx2="594.4444" dy="-2950.0" />
           <Connection Source="TCOne.INITO" Destination="ConControl.INIT" dx1="144.44444" dx2="5.5555553" dy="-4622.222" />
           <Connection Source="START.STOP" Destination="TCOne.CAS_STOP" dx1="777.7778" />
           <Connection Source="PE.IND" Destination="FCOne.PE_EVENT" dx1="138.88889" />
@@ -285,14 +297,23 @@
           <Connection Source="TCOne.RELEASE_RING_TOKEN" Destination="Delay_Ring2.START" dx1="27.777777" dx2="5.5555553" dy="-5072.222" />
           <Connection Source="Delay_Ring2.EO" Destination="FCTwo.GRANTED_RING_TOKE" dx1="27.777777" dx2="5.5555553" dy="-3272.2222" />
           <Connection Source="CServer.GRANT_TOKE_6" Destination="Delay_CS1.START" dx1="133.33333" />
-          <Connection Source="Delay_CS1.EO" Destination="FCThree.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-1577.7777" />
-          <Connection Source="Delay_CS2.EO" Destination="FCOne.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-311.11108" />
-          <Connection Source="CServer.GRANT_TOKE_2" Destination="Delay_CS2.START" dx1="27.777777" dx2="0.0" dy="-1377.7777" />
+          <Connection Source="Delay_CS1.EO" Destination="FCThree.GRANTED_TOKE" dx1="27.777777" />
+          <Connection Source="Delay_CS2.EO" Destination="FCOne.GRANTED_TOKE" dx1="27.777777" />
+          <Connection Source="CServer.GRANT_TOKE_2" Destination="Delay_CS2.START" dx1="27.777777" />
+          <Connection Source="PE.IND" Destination="FCFour.PE_EVENT" dx1="1755.5555" />
+          <Connection Source="TCOne.OUT_REPLY" Destination="Delay_Multicast.START" dx1="555.55554" />
+          <Connection Source="Delay_Multicast.EO" Destination="FCFour.IN_REPLY" dx1="27.777777" dx2="427.77777" dy="-3533.3333" />
+          <Connection Source="TCOne.OUT_REQUEST" Destination="Delay_Multicast2.START" dx1="400.0" />
+          <Connection Source="Delay_Multicast2.EO" Destination="FCFour.IN_REQUEST" dx1="27.777777" dx2="5.5555553" dy="-4261.111" />
+          <Connection Source="FCFour.OUT_REPLY" Destination="Delay_Multicast3.START" dx1="533.3333" />
+          <Connection Source="Delay_Multicast3.EO" Destination="TCOne.IN_REPLY" dx1="27.777777" dx2="5.5555553" dy="-5716.6665" />
+          <Connection Source="FCFour.OUT_REQUEST" Destination="Delay_Multicast4.START" dx1="816.6666" />
+          <Connection Source="Delay_Multicast4.EO" Destination="TCOne.IN_REQUEST" dx1="27.777777" dx2="5.5555553" dy="-5788.8887" />
         </EventConnections>
         <DataConnections>
-          <Connection Source="TCOne.MotoRotate1" Destination="ConControl.SD_3" dx1="27.777777" dx2="5.5555553" dy="1022.22217" />
-          <Connection Source="TCOne.MotoRotate2" Destination="ConControl.SD_4" dx1="27.777777" dx2="5.5555553" dy="888.88885" />
-          <Connection Source="TCOne.MotoRotate3" Destination="ConControl.SD_5" dx1="27.777777" dx2="5.5555553" dy="761.1111" />
+          <Connection Source="TCOne.MotoRotate1" Destination="ConControl.SD_3" dx1="188.88889" dx2="5.5555553" dy="1022.22217" />
+          <Connection Source="TCOne.MotoRotate2" Destination="ConControl.SD_4" dx1="150.0" dx2="5.5555553" dy="888.88885" />
+          <Connection Source="TCOne.MotoRotate3" Destination="ConControl.SD_5" dx1="277.77777" dx2="5.5555553" dy="761.1111" />
           <Connection Source="FCThree.MotoRotate1" Destination="ConControl.SD_1" dx1="27.777777" dx2="5.5555553" dy="266.66666" />
           <Connection Source="FCThree.MotoRotate2" Destination="ConControl.SD_2" dx1="27.777777" dx2="5.5555553" dy="172.22221" />
           <Connection Source="FCOne.MotoRotate1" Destination="ConControl.SD_6" dx1="2316.6665" />
@@ -313,13 +334,13 @@
           <Connection Source="PE.RD_6" Destination="TCOne.PE_C" dx1="344.44443" />
           <Connection Source="PE.RD_9" Destination="TCOne.PE_D" dx1="461.11108" />
           <Connection Source="PE.RD_4" Destination="FCFour.PE_A" dx1="1016.6666" />
-          <Connection Source="PE.RD_9" Destination="FCFour.PE_B" dx1="727.7778" />
-          <Connection Source="TCOne.OUT_LAMPORT" Destination="FCFour.IN_LAMPORT" dx1="27.777777" dx2="5.5555553" dy="638.88885" />
+          <Connection Source="PE.RD_9" Destination="FCFour.PE_B" dx1="538.88885" />
+          <Connection Source="TCOne.OUT_LAMPORT" Destination="FCFour.IN_LAMPORT" dx1="588.88885" dx2="5.5555553" dy="638.88885" />
           <Connection Source="FCFour.OUT_LAMPORT" Destination="TCOne.IN_LAMPORT" dx1="1333.3333" />
-          <Connection Source="FCFour.thisProcRequested" Destination="TCOne.isProc0Requested" dx1="1305.5555" />
-          <Connection Source="FCFour.replyToProc0" Destination="TCOne.isProc0Replied" dx1="1266.6666" />
-          <Connection Source="TCOne.thisProcRequested" Destination="FCFour.isProc0Requested" dx1="27.777777" dx2="5.5555553" dy="527.7778" />
-          <Connection Source="TCOne.replyToProc0" Destination="FCFour.isProc0Replied" dx1="27.777777" dx2="5.5555553" dy="416.66666" />
+          <Connection Source="FCFour.thisProcRequested" Destination="TCOne.isProc0Requested" dx1="683.3333" />
+          <Connection Source="FCFour.replyToProc0" Destination="TCOne.isProc0Replied" dx1="611.1111" />
+          <Connection Source="TCOne.thisProcRequested" Destination="FCFour.isProc0Requested" dx1="27.777777" dx2="861.1111" dy="527.7778" />
+          <Connection Source="TCOne.replyToProc0" Destination="FCFour.isProc0Replied" dx1="27.777777" dx2="1150.0" dy="416.66666" />
         </DataConnections>
       </FBNetwork>
     </Resource>

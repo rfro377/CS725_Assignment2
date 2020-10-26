@@ -455,7 +455,7 @@ public void alg_QUEUE_ALG(){
 replyToProc0.value=false;//resetvariables
 
 if((isProc0Requested.value==true)){
-if((IN_LAMPORT.value>=lamportTime.value)||(previousState.value==2)){
+if((IN_LAMPORT.value>=lamportTime.value)|(previousState.value==2))){
 System.out.println("Incoming lamport time was higher or mutex already held so it gets queued");
 ((BOOL)requests.value[0]).value=true;
 }

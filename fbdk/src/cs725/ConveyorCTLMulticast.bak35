@@ -162,10 +162,12 @@
       <ECTransition Source="NEW_REPLY" Destination="WANTED_PENDING" Condition="!allReplied" x="988.88885" y="2850.0" />
       <ECTransition Source="NEW_REPLY" Destination="HELD" Condition="allReplied" x="2655.5554" y="3305.5554" />
       <ECTransition Source="RELEASED" Destination="START" Condition="1" x="4766.6665" y="705.55554" />
+      <ECTransition Source="RELEASED" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4194.4443" y="1822.2222" />
       <ECTransition Source="HELD" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="3455.5554" y="2250.0" />
       <ECTransition Source="WANTED_PENDING" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="1588.8888" y="1494.4443" />
       <ECTransition Source="WANTED" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="2377.7776" y="1288.8888" />
       <ECTransition Source="NEW_REPLY" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="2400.0" y="2572.2222" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="RELEASED" Condition="previousState = 1" x="3949.9998" y="2144.4443" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="HELD" Condition="previousState = 2" x="3799.9998" y="2633.3333" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="NEW_REPLY" Condition="previousState = 3" x="2738.8887" y="2655.5554" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED_PENDING" Condition="previousState = 4" x="1972.2222" y="1600.0" />
@@ -188,10 +190,10 @@
     <ST Text="MotoRotate := FALSE;&#10;System.out.println(this + &#34; Stop &#34; + MotoRotate);&#10;&#10;System.out.println(&#34;Stop &#34; + MotoRotate);&#10;" />
   </Algorithm>
   <Algorithm Name="SEND_ALL_REQUESTS" >
-    <ST Text="OUT_LAMPORT := lamportTime;&#10;thisProcRequested := TRUE;&#10;System.out.println(this + &#34; :The value of thisProcRequestedis &#34; + replyToProc0);&#10;" />
+    <ST Text="OUT_LAMPORT := lamportTime;&#10;thisProcRequested := TRUE;&#10;" />
   </Algorithm>
   <Algorithm Name="HANDLE_INCOMING_REPLY" >
-    <ST Text="//first, check which processes are replying&#10;IF (isProc0Replied = TRUE) THEN&#10;    System.out.println(&#34;Reply variable true!&#34;);&#10;    replies[0] := TRUE;&#10;END_IF;&#10;&#10;//now, check if all replies are present&#10;allReplied := TRUE;&#10;FOR I := 0 TO 0 DO&#10;    System.out.println(&#34;Checking reply from process &#34; + I + &#34;:&#34; + replies[I]);&#10;    IF replies[I] = FALSE THEN&#10;        allReplied := FALSE;&#10;    END_IF;&#10;END_FOR&#10;" />
+    <ST Text="//first, check which processes are replying&#10;IF (isProc0Replied = TRUE) THEN&#10;    replies[0] := TRUE;&#10;END_IF;&#10;&#10;//now, check if all replies are present&#10;allReplied := TRUE;&#10;FOR I := 0 TO 0 DO&#10;    IF replies[I] = FALSE THEN&#10;        allReplied := FALSE;&#10;    END_IF;&#10;END_FOR&#10;" />
   </Algorithm>
   <Algorithm Name="REPLY_ALL" >
     <ST Text="IF requests[0] = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;END_IF;&#10;" />
@@ -200,7 +202,7 @@
     <ST Text="previousState := 4;&#10;System.out.println(&#34;In the wanted_pending state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="WANTED_ALG" >
-    <ST Text="previousState := 5;&#10;//reset all&#10;replyToProc0 := FALSE;&#10;System.out.println(&#34;In the wanted state&#34;);&#10;" />
+    <ST Text="previousState := 5;&#10;//reset all&#10;replyToProc0 := FALSE;&#10;thisProcRequested := FALSE;&#10;System.out.println(&#34;In the wanted state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="NEW_REPLY_ALG" >
     <ST Text="previousState := 3;&#10;System.out.println(&#34;In the new_reply state&#34;);&#10;" />
@@ -212,13 +214,13 @@
     <ST Text="previousState := 2;&#10;thisProcRequested := FALSE;&#10;System.out.println(&#34;In the held state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="QUEUE_ALG" >
-    <ST Text="replyToProc0 := FALSE; //reset variables&#10;&#10;IF (isProc0Requested = TRUE) THEN&#10;    IF (IN_LAMPORT >= lamportTime) || (previousState = 2) THEN&#10;        System.out.println(&#34;Incoming lamport time was higher or mutex already held so it gets queued&#34;);&#10;        requests[0] := TRUE;&#10;    ELSE&#10;        System.out.println(&#34;Incoming lamport time was lower so our request gets preempted.&#34;);&#10;        previousState := 100; //mutex request preemption&#10;    END_IF;&#10;END_IF;&#10;&#10;System.out.println(&#34;In the queue state&#34;);&#10;" />
+    <ST Text="replyToProc0 := FALSE; //reset variables&#10;&#10;IF (isProc0Requested = TRUE) THEN&#10;    IF IN_LAMPORT > lamportTime THEN&#10;        System.out.println(&#34;Incoming lamport time was higher so it gets queued&#34;);&#10;        requests[0] := TRUE;&#10;    ELSE&#10;        System.out.println(&#34;Incoming lamport time was lower so our request gets preempted.&#34;);&#10;        previousState := 100;&#10;    END_IF;&#10;END_IF;&#10;&#10;System.out.println(&#34;In the queue state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="IMMEDATE_REPLY" >
-    <ST Text="//reset all&#10;replyToProc0 := FALSE;&#10;IF isProc0Requested = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;END_IF;&#10;System.out.println(this + &#34; :The value of replyToProc0 is &#34; + replyToProc0);&#10;" />
+    <ST Text="//reset all&#10;replyToProc0 := FALSE;&#10;IF isProc0Requested = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;END_IF;&#10;" />
   </Algorithm>
   <Algorithm Name="LAMPORT_UPDATE" >
-    <ST Text="IF IN_LAMPORT >= lamportTime THEN&#10;    lamportTime := IN_LAMPORT;&#10;END_IF;&#10;lamportTime := lamportTime + 1;&#10;OUT_LAMPORT := lamportTime;&#10;System.out.println(this + &#34; lamport time updated to &#34; + lamportTime);&#10;" />
+    <ST Text="IF IN_LAMPORT > lamportTime THEN&#10;    lamportTime := IN_LAMPORT;&#10;END_IF;&#10;lamportTime := lamportTime + 1;&#10;" />
   </Algorithm>
   </BasicFB>
 </FBType>

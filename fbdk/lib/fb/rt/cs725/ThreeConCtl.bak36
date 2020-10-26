@@ -223,11 +223,9 @@ public class ThreeConCtl extends FBInstance
     }
 /** Connect the given variable to the input variable isProc0Requested
   * @param newIV The variable to connect
-  * @throws FBRManagementException An internal connection failed.
  */
-  public void connect_isProc0Requested(BOOL newIV) throws FBRManagementException{
+  public void connect_isProc0Requested(BOOL newIV){
     isProc0Requested = newIV;
-    FC12.connectIVNoException("isProc0Requested",isProc0Requested);
     }
 /** Connect the given variable to the input variable isProc0Replied
   * @param newIV The variable to connect
@@ -283,12 +281,12 @@ public ThreeConCtl(){
     FC11.connectIVNoException("PE_OUT",PE_B);
     FC12.connectIVNoException("PE_OUT",PE_D);
     FC12.connectIVNoException("PE_IN",PE_C);
+    FC12.connectIVNoException("isProc0Requested",thisProcRequested);
     FC12.connectIVNoException("isProc0Replied",isProc0Replied);
     thisProcRequested = (BOOL)FC12.ovNamedNoException("thisProcRequested");
     replyToProc0 = (BOOL)FC12.ovNamedNoException("replyToProc0");
     FC12.connectIVNoException("IN_LAMPORT",IN_LAMPORT);
     OUT_LAMPORT = (UINT)FC12.ovNamedNoException("OUT_LAMPORT");
-    FC12.connectIVNoException("isProc0Requested",isProc0Requested);
     FC11.HAS_INITIAL_TOKEN.initializeNoException("0");
     FC12.Block.initializeNoException("0");
     FC12.Candidate.initializeNoException("0");

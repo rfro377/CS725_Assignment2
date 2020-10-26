@@ -40,19 +40,12 @@
       <Event Name="GRANTED_RING_TOKEN" >
       </Event>
       <Event Name="I_PE_EVENT" >
-        <With Var="PE_A" />
-        <With Var="PE_B" />
-        <With Var="PE_C" />
-        <With Var="PE_D" />
-        <With Var="PE_E" />
       </Event>
       <Event Name="CONFIRM_RELEASE_RING_TOKEN_IN" >
       </Event>
       <Event Name="IN_REPLY" >
-        <With Var="isProc0Replied" />
       </Event>
       <Event Name="IN_REQUEST" >
-        <With Var="isProc0Requested" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -85,10 +78,8 @@
       <Event Name="Initial_Release" >
       </Event>
       <Event Name="OUT_REPLY" >
-        <With Var="replyToProc0" />
       </Event>
       <Event Name="OUT_REQUEST" >
-        <With Var="thisProcRequested" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -165,12 +156,12 @@
       <Connection Source="PE_B" Destination="FC11.PE_OUT" dx1="1027.7777" />
       <Connection Source="PE_D" Destination="FC12.PE_OUT" dx1="4816.6665" />
       <Connection Source="PE_C" Destination="FC12.PE_IN" dx1="4816.6665" />
+      <Connection Source="thisProcRequested" Destination="FC12.isProc0Requested" dx1="4644.4443" />
       <Connection Source="isProc0Replied" Destination="FC12.isProc0Replied" dx1="4688.8887" />
       <Connection Source="FC12.thisProcRequested" Destination="thisProcRequested" dx1="6005.555" />
       <Connection Source="FC12.replyToProc0" Destination="replyToProc0" dx1="5938.8887" />
       <Connection Source="IN_LAMPORT" Destination="FC12.IN_LAMPORT" dx1="4700.0" />
       <Connection Source="FC12.OUT_LAMPORT" Destination="OUT_LAMPORT" dx1="5977.7773" />
-      <Connection Source="isProc0Requested" Destination="FC12.isProc0Requested" dx1="4650.0" />
     </DataConnections>
   </FBNetwork>
 </FBType>

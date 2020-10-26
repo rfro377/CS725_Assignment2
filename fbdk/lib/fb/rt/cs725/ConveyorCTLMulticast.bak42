@@ -267,7 +267,8 @@ private void state_ADD_TO_QUEUE(){
   alg_QUEUE_ALG();
   alg_LAMPORT_UPDATE();
   CNF.serviceEvent(this);
-    if(previousState.value==2) state_HELD();
+    if(previousState.value==1) state_RELEASED();
+    else if(previousState.value==2) state_HELD();
     else if(previousState.value==3) state_NEW_REPLY();
     else if(previousState.value==4) state_WANTED_PENDING();
     else if(previousState.value==5) state_WANTED();
@@ -333,7 +334,8 @@ public ConveyorCTLMulticast(){
   }
 /** Services the IN_REQUEST event. */
   public void service_IN_REQUEST(){
-    if ((eccState == index_HELD)) state_ADD_TO_QUEUE();
+    if ((eccState == index_RELEASED)) state_ADD_TO_QUEUE();
+    else if ((eccState == index_HELD)) state_ADD_TO_QUEUE();
     else if ((eccState == index_WANTED_PENDING)) state_ADD_TO_QUEUE();
     else if ((eccState == index_WANTED)) state_ADD_TO_QUEUE();
     else if ((eccState == index_NEW_REPLY)) state_ADD_TO_QUEUE();
@@ -455,13 +457,13 @@ public void alg_QUEUE_ALG(){
 replyToProc0.value=false;//resetvariables
 
 if((isProc0Requested.value==true)){
-if((IN_LAMPORT.value>=lamportTime.value)||(previousState.value==2)){
-System.out.println("Incoming lamport time was higher or mutex already held so it gets queued");
+if(IN_LAMPORT.value>=lamportTime.value){
+System.out.println("Incoming lamport time was higher so it gets queued");
 ((BOOL)requests.value[0]).value=true;
 }
 else{
 System.out.println("Incoming lamport time was lower so our request gets preempted.");
-previousState.value=(short)(100);//mutexrequestpreemption
+previousState.value=(short)(100);
 };
 };
 

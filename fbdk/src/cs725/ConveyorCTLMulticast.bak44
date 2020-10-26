@@ -212,7 +212,7 @@
     <ST Text="previousState := 2;&#10;thisProcRequested := FALSE;&#10;System.out.println(&#34;In the held state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="QUEUE_ALG" >
-    <ST Text="replyToProc0 := FALSE; //reset variables&#10;&#10;IF (isProc0Requested = TRUE) THEN&#10;    IF (IN_LAMPORT >= lamportTime) || (previousState = 2) THEN&#10;        System.out.println(&#34;Incoming lamport time was higher or mutex already held so it gets queued&#34;);&#10;        requests[0] := TRUE;&#10;    ELSE&#10;        System.out.println(&#34;Incoming lamport time was lower so our request gets preempted.&#34;);&#10;        previousState := 100; //mutex request preemption&#10;    END_IF;&#10;END_IF;&#10;&#10;System.out.println(&#34;In the queue state&#34;);&#10;" />
+    <ST Text="replyToProc0 := FALSE; //reset variables&#10;&#10;IF (isProc0Requested = TRUE) THEN&#10;    IF (IN_LAMPORT >= lamportTime) OR (previousState = 2)) THEN&#10;        System.out.println(&#34;Incoming lamport time was higher or mutex already held so it gets queued&#34;);&#10;        requests[0] := TRUE;&#10;    ELSE&#10;        System.out.println(&#34;Incoming lamport time was lower so our request gets preempted.&#34;);&#10;        previousState := 100; //mutex request preemption&#10;    END_IF;&#10;END_IF;&#10;&#10;System.out.println(&#34;In the queue state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="IMMEDATE_REPLY" >
     <ST Text="//reset all&#10;replyToProc0 := FALSE;&#10;IF isProc0Requested = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;END_IF;&#10;System.out.println(this + &#34; :The value of replyToProc0 is &#34; + replyToProc0);&#10;" />
