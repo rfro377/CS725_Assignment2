@@ -212,17 +212,11 @@
           <Parameter Name="Candidate" Value="0" />
           <Parameter Name="Block" Value="0" />
         </FB>
-        <FB Name="CServer" Type="CentralServerControl" x="8077.7773" y="1083.3333" />
+        <FB Name="CServer" Type="CentralServerControl" x="8083.333" y="1038.8888" />
         <FB Name="Delay_Ring" Type="E_DELAY" x="6711.111" y="3427.7776" >
           <Parameter Name="DT" Value="t#100ms" />
         </FB>
         <FB Name="Delay_Ring2" Type="E_DELAY" x="7383.333" y="3172.2222" >
-          <Parameter Name="DT" Value="t#100ms" />
-        </FB>
-        <FB Name="Delay_CS1" Type="E_DELAY" x="9305.556" y="1505.5555" >
-          <Parameter Name="DT" Value="t#100ms" />
-        </FB>
-        <FB Name="Delay_CS2" Type="E_DELAY" x="8594.444" y="255.55554" >
           <Parameter Name="DT" Value="t#100ms" />
         </FB>
         <EventConnections>
@@ -269,8 +263,10 @@
           <Connection Source="PE.IND" Destination="FCOne.PE_EVENT" dx1="138.88889" />
           <Connection Source="FCOne.REQUEST_TOKE" Destination="CServer.REQUEST_TOKE_2" dx1="3722.2222" />
           <Connection Source="FCOne.RELEASE_TOKE" Destination="CServer.RELEASE_TOKE_2" dx1="3894.4443" />
+          <Connection Source="CServer.GRANT_TOKE_2" Destination="FCOne.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-1333.3333" />
           <Connection Source="ConControl.INITO" Destination="CServer.INIT" dx1="1288.8888" />
           <Connection Source="PE.IND" Destination="FCThree.PE_EVENT" dx1="3272.2222" />
+          <Connection Source="CServer.GRANT_TOKE_6" Destination="FCThree.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-1444.4443" />
           <Connection Source="FCThree.REQUEST_TOKE" Destination="CServer.REQUEST_TOKE_6" dx1="238.88889" />
           <Connection Source="FCThree.RELEASE_TOKE" Destination="CServer.RELEASE_TOKE_6" dx1="244.44443" />
           <Connection Source="PE.IND" Destination="FCTwo.I_PE_EVENT" dx1="794.4444" />
@@ -284,10 +280,6 @@
           <Connection Source="FCTwo.RELEASED_RING_TOKE" Destination="Delay_Ring.START" dx1="994.4444" />
           <Connection Source="TCOne.RELEASE_RING_TOKEN" Destination="Delay_Ring2.START" dx1="27.777777" dx2="5.5555553" dy="-5072.222" />
           <Connection Source="Delay_Ring2.EO" Destination="FCTwo.GRANTED_RING_TOKE" dx1="27.777777" dx2="5.5555553" dy="-3272.2222" />
-          <Connection Source="CServer.GRANT_TOKE_6" Destination="Delay_CS1.START" dx1="133.33333" />
-          <Connection Source="Delay_CS1.EO" Destination="FCThree.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-1577.7777" />
-          <Connection Source="Delay_CS2.EO" Destination="FCOne.GRANTED_TOKE" dx1="27.777777" dx2="0.0" dy="-311.11108" />
-          <Connection Source="CServer.GRANT_TOKE_2" Destination="Delay_CS2.START" dx1="27.777777" dx2="0.0" dy="-1377.7777" />
         </EventConnections>
         <DataConnections>
           <Connection Source="TCOne.MotoRotate1" Destination="ConControl.SD_3" dx1="27.777777" dx2="5.5555553" dy="1022.22217" />

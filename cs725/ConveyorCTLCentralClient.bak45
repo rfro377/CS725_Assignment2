@@ -101,14 +101,12 @@
         <ECAction Output="CNF" />
         <ECAction Output="REQUEST_TOKE" />
       </ECState>
-      <ECState Name="LEFT_CONV2" x="4066.6665" y="1838.8888" >
+      <ECState Name="LEFT_CONV2" x="3888.8887" y="2122.2222" >
       </ECState>
-      <ECState Name="ST_RELEASE_TOKE_2" x="2661.111" y="3000.0" >
+      <ECState Name="ST_RELEASE_TOKE_2" x="2605.5554" y="2383.3333" >
         <ECAction Output="RELEASE_TOKE" />
       </ECState>
       <ECState Name="WAITING_FOR_LEAVE" x="5061.111" y="999.99994" >
-      </ECState>
-      <ECState Name="WAITING_FOR_LEAVE_2" x="3449.9998" y="2350.0" >
       </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1183.3333" y="672.22217" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="944.4444" y="838.88885" />
@@ -122,13 +120,12 @@
       <ECTransition Source="ST_ACQUIRED_TOKE" Destination="LEFT_CONV" Condition="I_PE_EVENT&#38;PE_IN" x="7799.9995" y="1699.9999" />
       <ECTransition Source="START" Destination="ST_REQUEST_TOKE" Condition="I_PE_EVENT&#38;!PE_IN" x="355.55554" y="1494.4443" />
       <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="I_PE_EVENT&#38;!PE_IN" x="5300.0" y="1888.8888" />
-      <ECTransition Source="SECOND_BAG" Destination="LEFT_CONV2" Condition="1" x="4877.778" y="1838.8888" />
+      <ECTransition Source="SECOND_BAG" Destination="LEFT_CONV2" Condition="1" x="4550.0" y="2005.5554" />
       <ECTransition Source="ST_REQUEST_TOKE" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="966.6666" y="3200.0" />
-      <ECTransition Source="ST_RELEASE_TOKE_2" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="5494.4443" y="3000.0" />
+      <ECTransition Source="LEFT_CONV2" Destination="ST_RELEASE_TOKE_2" Condition="I_PE_EVENT&#38;!PE_OUT" x="3111.111" y="2122.2222" />
+      <ECTransition Source="ST_RELEASE_TOKE_2" Destination="ST_ACQUIRED_TOKE" Condition="GRANTED_TOKE" x="5427.7773" y="2950.0" />
       <ECTransition Source="LEFT_CONV" Destination="WAITING_FOR_LEAVE" Condition="I_PE_EVENT&#38;!PE_OUT" x="6116.6665" y="999.99994" />
       <ECTransition Source="WAITING_FOR_LEAVE" Destination="ST_RELEASE_TOKE" Condition="I_PE_EVENT&#38;PE_OUT" x="3583.3333" y="999.99994" />
-      <ECTransition Source="LEFT_CONV2" Destination="WAITING_FOR_LEAVE_2" Condition="I_PE_EVENT&#38;!PE_OUT" x="4066.6665" y="2150.0" />
-      <ECTransition Source="WAITING_FOR_LEAVE_2" Destination="ST_RELEASE_TOKE_2" Condition="I_PE_EVENT&#38;PE_OUT" x="3449.9998" y="2800.0" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;" />

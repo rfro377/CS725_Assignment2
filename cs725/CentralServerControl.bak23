@@ -33,7 +33,7 @@
   </InterfaceList>
   <BasicFB>
     <InternalVars>
-      <VarDeclaration Name="requestQueue" Type="INT" ArraySize="25" />
+      <VarDeclaration Name="requestQueue" Type="INT" ArraySize="21" />
       <VarDeclaration Name="arrayStart" Type="INT" />
       <VarDeclaration Name="arrayEnd" Type="INT" />
       <VarDeclaration Name="tokenAvailable" Type="BOOL" />
