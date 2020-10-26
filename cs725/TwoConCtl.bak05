@@ -14,17 +14,11 @@
         <With Var="Block" />
         <With Var="PE_A" />
         <With Var="PE_B" />
-        <With Var="IN_LAMPORT" />
-        <With Var="isProc0Requested" />
-        <With Var="isProc0Replied" />
       </Event>
       <Event Name="REQ" Comment="Normal Execution Request" >
         <With Var="Candidate" />
         <With Var="PE_A" />
         <With Var="PE_B" />
-        <With Var="IN_LAMPORT" />
-        <With Var="isProc0Requested" />
-        <With Var="isProc0Replied" />
       </Event>
       <Event Name="START" >
         <With Var="Block" />
@@ -44,17 +38,11 @@
         <With Var="MotoRotate1" />
         <With Var="MotoRotate2" />
         <With Var="BlockCon" />
-        <With Var="OUT_LAMPORT" />
-        <With Var="thisProcRequested" />
-        <With Var="replyToProc0" />
       </Event>
       <Event Name="CNF" Comment="Execution Confirmation" >
         <With Var="MotoRotate1" />
         <With Var="MotoRotate2" />
         <With Var="BlockCon" />
-        <With Var="OUT_LAMPORT" />
-        <With Var="thisProcRequested" />
-        <With Var="replyToProc0" />
       </Event>
       <Event Name="OUT_REPLY" >
       </Event>
@@ -66,6 +54,7 @@
       <VarDeclaration Name="Block" Type="BOOL" />
       <VarDeclaration Name="PE_A" Type="BOOL" />
       <VarDeclaration Name="PE_B" Type="BOOL" />
+      <VarDeclaration Name="PE_OUT" Type="BOOL" />
       <VarDeclaration Name="IN_LAMPORT" Type="UINT" />
       <VarDeclaration Name="isProc0Requested" Type="BOOL" />
       <VarDeclaration Name="isProc0Replied" Type="BOOL" />

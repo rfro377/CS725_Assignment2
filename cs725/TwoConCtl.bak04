@@ -14,17 +14,11 @@
         <With Var="Block" />
         <With Var="PE_A" />
         <With Var="PE_B" />
-        <With Var="IN_LAMPORT" />
-        <With Var="isProc0Requested" />
-        <With Var="isProc0Replied" />
       </Event>
       <Event Name="REQ" Comment="Normal Execution Request" >
         <With Var="Candidate" />
         <With Var="PE_A" />
         <With Var="PE_B" />
-        <With Var="IN_LAMPORT" />
-        <With Var="isProc0Requested" />
-        <With Var="isProc0Replied" />
       </Event>
       <Event Name="START" >
         <With Var="Block" />
@@ -44,17 +38,11 @@
         <With Var="MotoRotate1" />
         <With Var="MotoRotate2" />
         <With Var="BlockCon" />
-        <With Var="OUT_LAMPORT" />
-        <With Var="thisProcRequested" />
-        <With Var="replyToProc0" />
       </Event>
       <Event Name="CNF" Comment="Execution Confirmation" >
         <With Var="MotoRotate1" />
         <With Var="MotoRotate2" />
         <With Var="BlockCon" />
-        <With Var="OUT_LAMPORT" />
-        <With Var="thisProcRequested" />
-        <With Var="replyToProc0" />
       </Event>
       <Event Name="OUT_REPLY" >
       </Event>
@@ -66,6 +54,7 @@
       <VarDeclaration Name="Block" Type="BOOL" />
       <VarDeclaration Name="PE_A" Type="BOOL" />
       <VarDeclaration Name="PE_B" Type="BOOL" />
+      <VarDeclaration Name="PE_OUT" Type="BOOL" />
       <VarDeclaration Name="IN_LAMPORT" Type="UINT" />
       <VarDeclaration Name="isProc0Requested" Type="BOOL" />
       <VarDeclaration Name="isProc0Replied" Type="BOOL" />
@@ -96,11 +85,6 @@
       <Connection Source="FC12.STOP" Destination="FC11.CAS_STOP" dx1="100.0" dx2="100.0" dy="-444.44443" />
       <Connection Source="FC12.START" Destination="FC11.CAS_START" dx1="127.77777" dx2="127.77777" dy="-605.55554" />
       <Connection Source="FC11.INITO" Destination="FC12.INIT" dx1="138.88889" />
-      <Connection Source="PE_EVENT" Destination="FC12.PE_EVENT" dx1="2966.6665" />
-      <Connection Source="IN_REPLY" Destination="FC12.IN_REPLY" dx1="2983.3333" />
-      <Connection Source="IN_REQUEST" Destination="FC12.IN_REQUEST" dx1="2938.8887" />
-      <Connection Source="FC12.OUT_REPLY" Destination="OUT_REPLY" dx1="4166.6665" />
-      <Connection Source="FC12.OUT_REQUEST" Destination="OUT_REQUEST" dx1="4211.111" />
     </EventConnections>
     <DataConnections>
       <Connection Source="Block" Destination="FC12.Block" dx1="3050.0" />
@@ -111,12 +95,6 @@
       <Connection Source="PE_B" Destination="FC11.PE" dx1="205.55554" />
       <Connection Source="PE_A" Destination="FC12.PE_IN" dx1="3050.0" />
       <Connection Source="PE_B" Destination="FC12.PE_OUT" dx1="3050.0" />
-      <Connection Source="IN_LAMPORT" Destination="FC12.IN_LAMPORT" dx1="2933.3333" />
-      <Connection Source="FC12.OUT_LAMPORT" Destination="OUT_LAMPORT" dx1="4211.111" />
-      <Connection Source="FC12.thisProcRequested" Destination="thisProcRequested" dx1="4238.8887" />
-      <Connection Source="FC12.replyToProc0" Destination="replyToProc0" dx1="4172.222" />
-      <Connection Source="isProc0Requested" Destination="FC12.isProc0Requested" dx1="2883.3333" />
-      <Connection Source="isProc0Replied" Destination="FC12.isProc0Replied" dx1="2922.2222" />
     </DataConnections>
   </FBNetwork>
 </FBType>

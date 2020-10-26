@@ -14,6 +14,7 @@
         <With Var="Block" />
         <With Var="PE_A" />
         <With Var="PE_B" />
+        <With Var="PE_OUT" />
         <With Var="IN_LAMPORT" />
         <With Var="isProc0Requested" />
         <With Var="isProc0Replied" />
@@ -22,6 +23,7 @@
         <With Var="Candidate" />
         <With Var="PE_A" />
         <With Var="PE_B" />
+        <With Var="PE_OUT" />
         <With Var="IN_LAMPORT" />
         <With Var="isProc0Requested" />
         <With Var="isProc0Replied" />
@@ -66,6 +68,7 @@
       <VarDeclaration Name="Block" Type="BOOL" />
       <VarDeclaration Name="PE_A" Type="BOOL" />
       <VarDeclaration Name="PE_B" Type="BOOL" />
+      <VarDeclaration Name="PE_OUT" Type="BOOL" />
       <VarDeclaration Name="IN_LAMPORT" Type="UINT" />
       <VarDeclaration Name="isProc0Requested" Type="BOOL" />
       <VarDeclaration Name="isProc0Replied" Type="BOOL" />
