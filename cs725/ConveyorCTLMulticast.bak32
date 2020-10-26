@@ -133,7 +133,6 @@
       <ECState Name="NEW_REPLY" x="1749.9999" y="2966.6665" >
         <ECAction Algorithm="HANDLE_INCOMING_REPLY" />
         <ECAction Algorithm="NEW_REPLY_ALG" />
-        <ECAction Algorithm="LAMPORT_UPDATE" />
       </ECState>
       <ECState Name="ADD_TO_QUEUE" x="3461.111" y="1372.2222" >
         <ECAction Algorithm="QUEUE_ALG" />

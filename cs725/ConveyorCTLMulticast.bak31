@@ -112,11 +112,10 @@
         <ECAction Output="CNF" />
       </ECState>
       <ECState Name="WANTED" x="244.44443" y="1194.4445" >
-        <ECAction Algorithm="SEND_ALL_REQUESTS" />
+        <ECAction Algorithm="SEND_ALL_REQUESTS" Output="OUT_REQUEST" />
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
         <ECAction Algorithm="WANTED_ALG" />
-        <ECAction Output="OUT_REQUEST" />
       </ECState>
       <ECState Name="HELD" x="3005.5554" y="2988.8887" >
         <ECAction Algorithm="START" Output="START" />
@@ -133,7 +132,6 @@
       <ECState Name="NEW_REPLY" x="1749.9999" y="2966.6665" >
         <ECAction Algorithm="HANDLE_INCOMING_REPLY" />
         <ECAction Algorithm="NEW_REPLY_ALG" />
-        <ECAction Algorithm="LAMPORT_UPDATE" />
       </ECState>
       <ECState Name="ADD_TO_QUEUE" x="3461.111" y="1372.2222" >
         <ECAction Algorithm="QUEUE_ALG" />
