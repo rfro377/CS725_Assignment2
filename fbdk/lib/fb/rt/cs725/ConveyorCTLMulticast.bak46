@@ -272,8 +272,6 @@ private void state_ADD_TO_QUEUE(){
     else if(previousState.value==4) state_WANTED_PENDING();
     else if(previousState.value==5) state_WANTED();
     else if(previousState.value==100) state_PREEMPTED_REPLY();
-    else if(previousState.value==9) state_LEFT_CONV();
-    else if(previousState.value==8) state_SECOND_BAG();
 }
 private static final int index_IMMEDIATE_REPLY = 11;
 private void state_IMMEDIATE_REPLY(){
@@ -290,28 +288,6 @@ private void state_PREEMPTED_REPLY(){
   alg_IMMEDATE_REPLY();
   OUT_REPLY.serviceEvent(this);
 state_WANTED_PENDING();
-}
-private static final int index_SECOND_BAG = 13;
-private void state_SECOND_BAG(){
-  eccState = index_SECOND_BAG;
-  alg_STOP();
-  STOP.serviceEvent(this);
-  CNF.serviceEvent(this);
-  alg_SECOND_BAG_ALG();
-}
-private static final int index_LEFT_CONV = 14;
-private void state_LEFT_CONV(){
-  eccState = index_LEFT_CONV;
-  alg_LEFT_CONV_ALG();
-}
-private static final int index_RELEASE_2 = 15;
-private void state_RELEASE_2(){
-  eccState = index_RELEASE_2;
-  alg_REPLY_ALL();
-  OUT_REPLY.serviceEvent(this);
-  alg_RELEASED_ALG();
-  CNF.serviceEvent(this);
-state_WANTED();
 }
 /** The default constructor. */
 public ConveyorCTLMulticast(){
@@ -349,10 +325,7 @@ public ConveyorCTLMulticast(){
 /** Services the PE_EVENT event. */
   public void service_PE_EVENT(){
     if ((eccState == index_START) && (!PE_IN.value)) state_WANTED();
-    else if ((eccState == index_HELD) && (PE_IN.value)) state_LEFT_CONV();
-    else if ((eccState == index_LEFT_CONV) && (!PE_OUT.value)) state_RELEASED();
-    else if ((eccState == index_LEFT_CONV) && (!PE_IN.value)) state_SECOND_BAG();
-    else if ((eccState == index_SECOND_BAG) && (!PE_OUT.value)) state_RELEASE_2();
+    else if ((eccState == index_HELD) && (!PE_OUT.value)) state_RELEASED();
   }
 /** Services the IN_REPLY event. */
   public void service_IN_REPLY(){
@@ -365,8 +338,6 @@ public ConveyorCTLMulticast(){
     else if ((eccState == index_WANTED)) state_ADD_TO_QUEUE();
     else if ((eccState == index_NEW_REPLY)) state_ADD_TO_QUEUE();
     else if ((eccState == index_START)) state_IMMEDIATE_REPLY();
-    else if ((eccState == index_LEFT_CONV)) state_ADD_TO_QUEUE();
-    else if ((eccState == index_SECOND_BAG)) state_ADD_TO_QUEUE();
   }
   /** ALGORITHM INIT IN ST*/
 public void alg_INIT(){
@@ -484,7 +455,7 @@ public void alg_QUEUE_ALG(){
 replyToProc0.value=false;//resetvariables
 
 if((isProc0Requested.value==true)){
-if((IN_LAMPORT.value>=lamportTime.value)||(previousState.value==2)||(previousState.value==8)||(previousState.value==9)){
+if((IN_LAMPORT.value>=lamportTime.value)||(previousState.value==2)){
 System.out.println("Incoming lamport time was higher or mutex already held so it gets queued");
 ((BOOL)requests.value[0]).value=true;
 }
@@ -513,13 +484,5 @@ lamportTime.value=(int)(IN_LAMPORT.value);
 lamportTime.value=(int)(lamportTime.value+1);
 OUT_LAMPORT.value=(int)(lamportTime.value);
 System.out.println(this+" lamport time updated to "+lamportTime.value);
-}
-  /** ALGORITHM LEFT_CONV_ALG IN ST*/
-public void alg_LEFT_CONV_ALG(){
-previousState.value=(short)(9);
-}
-  /** ALGORITHM SECOND_BAG_ALG IN ST*/
-public void alg_SECOND_BAG_ALG(){
-previousState.value=(short)(8);
 }
 }
