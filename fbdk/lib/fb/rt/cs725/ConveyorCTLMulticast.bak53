@@ -432,21 +432,20 @@ System.out.println("Stop "+MotoRotate.value);
 public void alg_SEND_ALL_REQUESTS(){
 OUT_LAMPORT.value=(int)(lamportTime.value);
 thisProcRequested.value=true;
-//System.out.println(this+" :The value of thisProcRequestedis "+replyToProc0.value);
-System.out.println(this+" sending multicast to all peers");
+System.out.println(this+" :The value of thisProcRequestedis "+replyToProc0.value);
 }
   /** ALGORITHM HANDLE_INCOMING_REPLY IN ST*/
 public void alg_HANDLE_INCOMING_REPLY(){
 //first,checkwhichprocessesarereplying
 if((isProc0Replied.value==true)){
-System.out.println("Reply received from proc0!");
+System.out.println("Reply variable true!");
 ((BOOL)replies.value[0]).value=true;
 };
 
 //now,checkif(all((BOOL)replies.valuearepresent
 allReplied.value=true;
 for(I.value=(short)(0); I.value<=0; I.value++){
-System.out.println("Checking queued reply from process "+I.value+":"+((BOOL)replies.value[I.value]).value);
+System.out.println("Checking reply from process "+I.value+":"+((BOOL)replies.value[I.value]).value);
 if(((BOOL)replies.value[I.value]).value==false){
 allReplied.value=false;
 };
@@ -456,36 +455,35 @@ allReplied.value=false;
 public void alg_REPLY_ALL(){
 if(((BOOL)requests.value[0]).value==true){
 replyToProc0.value=true;
-System.out.println(this+" sending reply to proc0");
 };
-//System.out.println(this+" requests[0] = "+((BOOL)requests.value[0]).value);
+System.out.println(this+" requests[0] = "+((BOOL)requests.value[0]).value);
 }
   /** ALGORITHM WANTED_PENDING_ALG IN ST*/
 public void alg_WANTED_PENDING_ALG(){
 previousState.value=(short)(4);
-System.out.println(this+" In the wanted_pending state");
+System.out.println("In the wanted_pending state");
 }
   /** ALGORITHM WANTED_ALG IN ST*/
 public void alg_WANTED_ALG(){
 previousState.value=(short)(5);
-System.out.println(this+"in the wanted state");
+System.out.println("In the wanted state");
 }
   /** ALGORITHM NEW_REPLY_ALG IN ST*/
 public void alg_NEW_REPLY_ALG(){
 previousState.value=(short)(3);
-System.out.println(this+"In the new_reply state");
+System.out.println("In the new_reply state");
 }
   /** ALGORITHM RELEASED_ALG IN ST*/
 public void alg_RELEASED_ALG(){
 previousState.value=(short)(1);
-System.out.println(this+" In the released state");
+System.out.println("In the released state");
 }
   /** ALGORITHM HELD_ALG IN ST*/
 public void alg_HELD_ALG(){
 previousState.value=(short)(2);
 thisProcRequested.value=false;
 replyToProc0.value=false;
-System.out.println(this+" In the held state");
+System.out.println("In the held state");
 }
   /** ALGORITHM QUEUE_ALG IN ST*/
 public void alg_QUEUE_ALG(){
@@ -502,7 +500,7 @@ previousState.value=(short)(100);//mutexrequestpreemption
 };
 };
 
-System.out.println(this+" in the queue state");
+System.out.println("In the queue state");
 }
   /** ALGORITHM IMMEDATE_REPLY IN ST*/
 public void alg_IMMEDATE_REPLY(){

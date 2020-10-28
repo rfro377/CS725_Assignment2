@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK CentralServerControl
   * @author JHC
-  * @version 20201028/JHC
+  * @version 20201026/JHC
   */
 public class CentralServerControl extends FBInstance
 {
@@ -102,14 +102,12 @@ state_GRANT_NEXT();
 private static final int index_GRANT_2 = 6;
 private void state_GRANT_2(){
   eccState = index_GRANT_2;
-  alg_Granting_token();
   GRANT_TOKE_2.serviceEvent(this);
 state_START();
 }
 private static final int index_GRANT_6 = 7;
 private void state_GRANT_6(){
   eccState = index_GRANT_6;
-  alg_Granting_token();
   GRANT_TOKE_6.serviceEvent(this);
 state_START();
 }
@@ -197,22 +195,16 @@ targ6.value=false;
 public void alg_RECLAIM_TOKEN(){
 tokenAvailable.value=true;
 tokenOwner.value=(short)(0);
-System.out.println("Token released by client and reclaimed by server!");
+System.out.println("Token released and reclaimed!");
 }
   /** ALGORITHM ADD_QUEUE_2 IN ST*/
 public void alg_ADD_QUEUE_2(){
 ((INT)requestQueue.value[arrayEnd.value]).value=(short)(2);
 arrayEnd.value=(short)(((arrayEnd.value+1)%20));
-System.out.println("Adding request to queue");
 }
   /** ALGORITHM ADD_QUEUE_6 IN ST*/
 public void alg_ADD_QUEUE_6(){
 ((INT)requestQueue.value[arrayEnd.value]).value=(short)(6);
 arrayEnd.value=(short)(((arrayEnd.value+1)%20));
-System.out.println("Adding request to queue");
-}
-  /** ALGORITHM Granting_token IN ST*/
-public void alg_Granting_token(){
-System.out.println("Granting central server token");
 }
 }

@@ -155,6 +155,8 @@
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
         <ECAction Algorithm="SECOND_BAG_ALG" />
+        <ECAction Algorithm="SEND_ALL_REQUESTS" />
+        <ECAction Output="OUT_REQUEST" />
       </ECState>
       <ECState Name="LEFT_CONV" x="4277.778" y="3666.6665" >
         <ECAction Algorithm="LEFT_CONV_ALG" />
@@ -199,7 +201,7 @@
       <ECTransition Source="LEFT_CONV" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4977.7773" y="2455.5554" />
       <ECTransition Source="SECOND_BAG" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="5661.111" y="2116.6665" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="SECOND_BAG" Condition="previousState = 8" x="5844.4443" y="1994.4443" />
-      <ECTransition Source="RELEASE_2" Destination="WANTED" Condition="1" x="238.88889" y="4316.6665" />
+      <ECTransition Source="RELEASE_2" Destination="WANTED_PENDING" Condition="1" x="733.3333" y="4211.111" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;&#10;lamportTime := 0;&#10;" />
@@ -220,7 +222,7 @@
     <ST Text="//first, check which processes are replying&#10;IF (isProc0Replied = TRUE) THEN&#10;    System.out.println(&#34;Reply received from proc0!&#34;);&#10;    replies[0] := TRUE;&#10;END_IF;&#10;&#10;//now, check if all replies are present&#10;allReplied := TRUE;&#10;FOR I := 0 TO 0 DO&#10;    System.out.println(&#34;Checking queued reply from process &#34; + I + &#34;:&#34; + replies[I]);&#10;    IF replies[I] = FALSE THEN&#10;        allReplied := FALSE;&#10;    END_IF;&#10;END_FOR&#10;" />
   </Algorithm>
   <Algorithm Name="REPLY_ALL" >
-    <ST Text="IF requests[0] = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;    System.out.println(this + &#34; sending reply to proc0&#34;);&#10;END_IF;&#10;//System.out.println(this + &#34; requests[0] = &#34; + requests[0]);&#10;" />
+    <ST Text="IF requests[0] = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;    System.out.println(this + &#34; sending multicast to all peers&#34;);&#10;END_IF;&#10;//System.out.println(this + &#34; requests[0] = &#34; + requests[0]);&#10;" />
   </Algorithm>
   <Algorithm Name="WANTED_PENDING_ALG" >
     <ST Text="previousState := 4;&#10;System.out.println(this + &#34; In the wanted_pending state&#34;);&#10;" />

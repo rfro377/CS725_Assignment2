@@ -151,19 +151,18 @@
         <ECAction Algorithm="IMMEDATE_REPLY" Output="OUT_REPLY" />
         <ECAction Algorithm="LAMPORT_UPDATE" />
       </ECState>
-      <ECState Name="SECOND_BAG" x="5138.8887" y="4483.333" >
+      <ECState Name="SECOND_BAG" x="5127.7773" y="4483.333" >
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
         <ECAction Algorithm="SECOND_BAG_ALG" />
       </ECState>
-      <ECState Name="LEFT_CONV" x="4277.778" y="3666.6665" >
+      <ECState Name="LEFT_CONV" x="4277.778" y="3649.9998" >
         <ECAction Algorithm="LEFT_CONV_ALG" />
       </ECState>
-      <ECState Name="RELEASE_2" x="2438.889" y="4316.6665" >
+      <ECState Name="RELEASE_2" x="2450.0" y="4316.6665" >
         <ECAction Algorithm="REPLY_ALL" Output="OUT_REPLY" />
         <ECAction Algorithm="RELEASED_ALG" />
-        <ECAction Algorithm="LAMPORT_UPDATE" />
-        <ECAction Output="CNF" />
+        <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
       </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1627.7777" y="372.2222" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="1500.0" y="366.66666" />
@@ -191,15 +190,15 @@
       <ECTransition Source="IMMEDIATE_REPLY" Destination="START" Condition="1" x="2294.4443" y="927.7778" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="PREEMPTED_REPLY" Condition="previousState = 100" x="3094.4443" y="1877.7777" />
       <ECTransition Source="PREEMPTED_REPLY" Destination="WANTED_PENDING" Condition="1" x="1161.1111" y="2072.2222" />
-      <ECTransition Source="HELD" Destination="LEFT_CONV" Condition="PE_EVENT&#38;PE_IN" x="3172.2222" y="3799.9998" />
-      <ECTransition Source="LEFT_CONV" Destination="RELEASED" Condition="PE_EVENT&#38;!PE_OUT" x="6516.6665" y="3666.6665" />
-      <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="PE_EVENT&#38;!PE_IN" x="4288.8887" y="4200.0" />
+      <ECTransition Source="HELD" Destination="LEFT_CONV" Condition="PE_EVENT&#38;PE_IN" x="3172.2222" y="3783.3333" />
+      <ECTransition Source="LEFT_CONV" Destination="RELEASED" Condition="PE_EVENT&#38;!PE_OUT" x="6516.6665" y="3649.9998" />
+      <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="PE_EVENT&#38;!PE_IN" x="4277.778" y="4183.333" />
       <ECTransition Source="SECOND_BAG" Destination="RELEASE_2" Condition="PE_EVENT&#38;!PE_OUT" x="3649.9998" y="4783.333" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="LEFT_CONV" Condition="previousState = 9" x="5222.222" y="2355.5554" />
-      <ECTransition Source="LEFT_CONV" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4977.7773" y="2455.5554" />
-      <ECTransition Source="SECOND_BAG" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="5661.111" y="2116.6665" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="SECOND_BAG" Condition="previousState = 8" x="5844.4443" y="1994.4443" />
-      <ECTransition Source="RELEASE_2" Destination="WANTED" Condition="1" x="238.88889" y="4316.6665" />
+      <ECTransition Source="RELEASE_2" Destination="WANTED" Condition="1" x="288.8889" y="4305.555" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="LEFT_CONV" Condition="previousState = 9" x="5222.222" y="2338.889" />
+      <ECTransition Source="LEFT_CONV" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4977.7773" y="2438.889" />
+      <ECTransition Source="SECOND_BAG" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="5650.0" y="2116.6665" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="SECOND_BAG" Condition="previousState = 8" x="5833.333" y="1994.4443" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;&#10;lamportTime := 0;&#10;" />
@@ -214,31 +213,31 @@
     <ST Text="MotoRotate := FALSE;&#10;System.out.println(this + &#34; Stop &#34; + MotoRotate);&#10;&#10;System.out.println(&#34;Stop &#34; + MotoRotate);&#10;" />
   </Algorithm>
   <Algorithm Name="SEND_ALL_REQUESTS" >
-    <ST Text="OUT_LAMPORT := lamportTime;&#10;thisProcRequested := TRUE;&#10;//System.out.println(this + &#34; :The value of thisProcRequestedis &#34; + replyToProc0);&#10;System.out.println(this + &#34; sending multicast to all peers&#34;);&#10;" />
+    <ST Text="OUT_LAMPORT := lamportTime;&#10;thisProcRequested := TRUE;&#10;System.out.println(this + &#34; :The value of thisProcRequestedis &#34; + replyToProc0);&#10;" />
   </Algorithm>
   <Algorithm Name="HANDLE_INCOMING_REPLY" >
-    <ST Text="//first, check which processes are replying&#10;IF (isProc0Replied = TRUE) THEN&#10;    System.out.println(&#34;Reply received from proc0!&#34;);&#10;    replies[0] := TRUE;&#10;END_IF;&#10;&#10;//now, check if all replies are present&#10;allReplied := TRUE;&#10;FOR I := 0 TO 0 DO&#10;    System.out.println(&#34;Checking queued reply from process &#34; + I + &#34;:&#34; + replies[I]);&#10;    IF replies[I] = FALSE THEN&#10;        allReplied := FALSE;&#10;    END_IF;&#10;END_FOR&#10;" />
+    <ST Text="//first, check which processes are replying&#10;IF (isProc0Replied = TRUE) THEN&#10;    System.out.println(&#34;Reply variable true!&#34;);&#10;    replies[0] := TRUE;&#10;END_IF;&#10;&#10;//now, check if all replies are present&#10;allReplied := TRUE;&#10;FOR I := 0 TO 0 DO&#10;    System.out.println(&#34;Checking reply from process &#34; + I + &#34;:&#34; + replies[I]);&#10;    IF replies[I] = FALSE THEN&#10;        allReplied := FALSE;&#10;    END_IF;&#10;END_FOR&#10;" />
   </Algorithm>
   <Algorithm Name="REPLY_ALL" >
-    <ST Text="IF requests[0] = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;    System.out.println(this + &#34; sending reply to proc0&#34;);&#10;END_IF;&#10;//System.out.println(this + &#34; requests[0] = &#34; + requests[0]);&#10;" />
+    <ST Text="IF requests[0] = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;END_IF;&#10;System.out.println(this + &#34; requests[0] = &#34; + requests[0]);&#10;" />
   </Algorithm>
   <Algorithm Name="WANTED_PENDING_ALG" >
-    <ST Text="previousState := 4;&#10;System.out.println(this + &#34; In the wanted_pending state&#34;);&#10;" />
+    <ST Text="previousState := 4;&#10;System.out.println(&#34;In the wanted_pending state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="WANTED_ALG" >
-    <ST Text="previousState := 5;&#10;System.out.println(this + &#34;in the wanted state&#34;);&#10;" />
+    <ST Text="previousState := 5;&#10;System.out.println(&#34;In the wanted state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="NEW_REPLY_ALG" >
-    <ST Text="previousState := 3;&#10;System.out.println(this + &#34;In the new_reply state&#34;);&#10;" />
+    <ST Text="previousState := 3;&#10;System.out.println(&#34;In the new_reply state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="RELEASED_ALG" >
-    <ST Text="previousState := 1;&#10;System.out.println(this + &#34; In the released state&#34;);&#10;" />
+    <ST Text="previousState := 1;&#10;System.out.println(&#34;In the released state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="HELD_ALG" >
-    <ST Text="previousState := 2;&#10;thisProcRequested := FALSE;&#10;replyToProc0 := FALSE;&#10;System.out.println(this + &#34; In the held state&#34;);&#10;" />
+    <ST Text="previousState := 2;&#10;thisProcRequested := FALSE;&#10;replyToProc0 := FALSE;&#10;System.out.println(&#34;In the held state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="QUEUE_ALG" >
-    <ST Text="replyToProc0 := FALSE; //reset variables&#10;&#10;IF (isProc0Requested = TRUE) THEN&#10;    IF (IN_LAMPORT >= lamportTime) || (previousState = 2) || (previousState = 8) || (previousState = 9) THEN&#10;        System.out.println(&#34;Incoming lamport time was higher or mutex already held so it gets queued&#34;);&#10;        requests[0] := TRUE;&#10;    ELSE&#10;        System.out.println(&#34;Incoming lamport time was lower so our request gets preempted.&#34;);&#10;        previousState := 100; //mutex request preemption&#10;    END_IF;&#10;END_IF;&#10;&#10;System.out.println(this + &#34; in the queue state&#34;);&#10;" />
+    <ST Text="replyToProc0 := FALSE; //reset variables&#10;&#10;IF (isProc0Requested = TRUE) THEN&#10;    IF (IN_LAMPORT >= lamportTime) || (previousState = 2) || (previousState = 8) || (previousState = 9) THEN&#10;        System.out.println(&#34;Incoming lamport time was higher or mutex already held so it gets queued&#34;);&#10;        requests[0] := TRUE;&#10;    ELSE&#10;        System.out.println(&#34;Incoming lamport time was lower so our request gets preempted.&#34;);&#10;        previousState := 100; //mutex request preemption&#10;    END_IF;&#10;END_IF;&#10;&#10;System.out.println(&#34;In the queue state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="IMMEDATE_REPLY" >
     <ST Text="//reset all&#10;replyToProc0 := FALSE;&#10;IF isProc0Requested = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;END_IF;&#10;System.out.println(this + &#34; :The value of replyToProc0 is &#34; + replyToProc0);&#10;" />

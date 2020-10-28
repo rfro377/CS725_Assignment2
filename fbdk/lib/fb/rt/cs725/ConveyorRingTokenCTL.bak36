@@ -341,15 +341,15 @@ public void alg_DEBUG(){
 }
   /** ALGORITHM RELEASE_RING_TOKEN IN ST*/
 public void alg_RELEASE_RING_TOKEN(){
-System.out.println(this+" released the ring token!: "+this);
+//System.out.println("Released the token!: "+this);
 }
   /** ALGORITHM RECEIVED_RING_TOKEN IN ST*/
 public void alg_RECEIVED_RING_TOKEN(){
-System.out.println(this+" received ring token!");
+//System.out.println("Received token!");
 }
   /** ALGORITHM PRINT_AWAIT_TOKE IN ST*/
 public void alg_PRINT_AWAIT_TOKE(){
-System.out.println(this+" awaiting ring token!");
+System.out.println("Awaiting token!");
 }
   /** ALGORITHM DEBUG_START IN ST*/
 public void alg_DEBUG_START(){

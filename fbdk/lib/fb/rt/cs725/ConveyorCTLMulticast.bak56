@@ -456,7 +456,7 @@ allReplied.value=false;
 public void alg_REPLY_ALL(){
 if(((BOOL)requests.value[0]).value==true){
 replyToProc0.value=true;
-System.out.println(this+" sending reply to proc0");
+System.out.println(this+" sending multicast to all peers");
 };
 //System.out.println(this+" requests[0] = "+((BOOL)requests.value[0]).value);
 }

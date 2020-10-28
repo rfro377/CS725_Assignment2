@@ -220,7 +220,7 @@
     <ST Text="//first, check which processes are replying&#10;IF (isProc0Replied = TRUE) THEN&#10;    System.out.println(&#34;Reply received from proc0!&#34;);&#10;    replies[0] := TRUE;&#10;END_IF;&#10;&#10;//now, check if all replies are present&#10;allReplied := TRUE;&#10;FOR I := 0 TO 0 DO&#10;    System.out.println(&#34;Checking queued reply from process &#34; + I + &#34;:&#34; + replies[I]);&#10;    IF replies[I] = FALSE THEN&#10;        allReplied := FALSE;&#10;    END_IF;&#10;END_FOR&#10;" />
   </Algorithm>
   <Algorithm Name="REPLY_ALL" >
-    <ST Text="IF requests[0] = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;    System.out.println(this + &#34; sending reply to proc0&#34;);&#10;END_IF;&#10;//System.out.println(this + &#34; requests[0] = &#34; + requests[0]);&#10;" />
+    <ST Text="IF requests[0] = TRUE THEN&#10;    replyToProc0 := TRUE;&#10;    System.out.println(this + &#34; sending multicast to all peers&#34;);&#10;END_IF;&#10;//System.out.println(this + &#34; requests[0] = &#34; + requests[0]);&#10;" />
   </Algorithm>
   <Algorithm Name="WANTED_PENDING_ALG" >
     <ST Text="previousState := 4;&#10;System.out.println(this + &#34; In the wanted_pending state&#34;);&#10;" />

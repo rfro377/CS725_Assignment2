@@ -46,6 +46,8 @@
         <With Var="PE_D" />
         <With Var="PE_E" />
       </Event>
+      <Event Name="CONFIRM_RELEASE_RING_TOKEN_IN" >
+      </Event>
       <Event Name="IN_REPLY" >
         <With Var="isProc0Replied" />
       </Event>
@@ -77,6 +79,8 @@
       <Event Name="STOP" >
       </Event>
       <Event Name="RELEASE_RING_TOKEN" >
+      </Event>
+      <Event Name="CONFIRM_RELEASE_RING_TOKEN_OUT" >
       </Event>
       <Event Name="Initial_Release" >
       </Event>
@@ -137,8 +141,10 @@
       <Connection Source="FC13.STOP" Destination="STOP" dx1="9644.444" />
       <Connection Source="FC13.START" Destination="START" dx1="9661.11" />
       <Connection Source="I_PE_EVENT" Destination="Conv7Ctl.I_PE_EVENT" dx1="922.22217" />
+      <Connection Source="CONFIRM_RELEASE_RING_TOKEN_IN" Destination="Conv7Ctl.CONFIRM_TOKEN_RECEIVED_IN" dx1="572.2222" />
       <Connection Source="GRANTED_RING_TOKEN" Destination="Conv7Ctl.GRANTED_RING_TOKEN" dx1="755.55554" />
       <Connection Source="Conv7Ctl.RELEASE_RING_TOKEN" Destination="RELEASE_RING_TOKEN" dx1="2933.3333" />
+      <Connection Source="Conv7Ctl.CONFIRM_TOKEN_RECEIVED_OUT" Destination="CONFIRM_RELEASE_RING_TOKEN_OUT" dx1="3155.5554" />
       <Connection Source="CAS_STOP" Destination="Conv8Ctl.CAS_STOP" dx1="4733.333" />
       <Connection Source="CAS_START" Destination="Conv8Ctl.CAS_START" dx1="4716.6665" />
       <Connection Source="I_PE_EVENT" Destination="Conv8Ctl.PE_EVENT" dx1="4711.111" />

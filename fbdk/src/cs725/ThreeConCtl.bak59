@@ -46,6 +46,8 @@
         <With Var="PE_D" />
         <With Var="PE_E" />
       </Event>
+      <Event Name="CONFIRM_RELEASE_RING_TOKEN_IN" >
+      </Event>
       <Event Name="IN_REPLY" >
         <With Var="isProc0Replied" />
       </Event>
@@ -77,6 +79,8 @@
       <Event Name="STOP" >
       </Event>
       <Event Name="RELEASE_RING_TOKEN" >
+      </Event>
+      <Event Name="CONFIRM_RELEASE_RING_TOKEN_OUT" >
       </Event>
       <Event Name="Initial_Release" >
       </Event>

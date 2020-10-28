@@ -55,6 +55,8 @@ public class ThreeConCtl extends FBInstance
  public EventOutput GRANTED_RING_TOKEN = new EventOutput();
 /** EVENT I_PE_EVENT */
  public EventOutput I_PE_EVENT = new EventOutput();
+/** EVENT CONFIRM_RELEASE_RING_TOKEN_IN */
+ public EventOutput CONFIRM_RELEASE_RING_TOKEN_IN = new EventOutput();
 /** EVENT IN_REPLY */
  public EventOutput IN_REPLY = new EventOutput();
 /** EVENT IN_REQUEST */
@@ -69,6 +71,8 @@ public class ThreeConCtl extends FBInstance
  public EventOutput STOP = new EventOutput();
 /** EVENT RELEASE_RING_TOKEN */
  public EventOutput RELEASE_RING_TOKEN = new EventOutput();
+/** EVENT CONFIRM_RELEASE_RING_TOKEN_OUT */
+ public EventOutput CONFIRM_RELEASE_RING_TOKEN_OUT = new EventOutput();
 /** EVENT Initial_Release */
  public EventOutput Initial_Release = new EventOutput();
 /** EVENT OUT_REPLY */
@@ -86,6 +90,7 @@ public class ThreeConCtl extends FBInstance
     if("CAS_START".equals(s)) return CAS_START;
     if("GRANTED_RING_TOKEN".equals(s)) return GRANTED_RING_TOKEN;
     if("I_PE_EVENT".equals(s)) return I_PE_EVENT;
+    if("CONFIRM_RELEASE_RING_TOKEN_IN".equals(s)) return CONFIRM_RELEASE_RING_TOKEN_IN;
     if("IN_REPLY".equals(s)) return IN_REPLY;
     if("IN_REQUEST".equals(s)) return IN_REQUEST;
     return super.eiNamed(s);}
@@ -99,6 +104,7 @@ public class ThreeConCtl extends FBInstance
     if("START".equals(s)) return START;
     if("STOP".equals(s)) return STOP;
     if("RELEASE_RING_TOKEN".equals(s)) return RELEASE_RING_TOKEN;
+    if("CONFIRM_RELEASE_RING_TOKEN_OUT".equals(s)) return CONFIRM_RELEASE_RING_TOKEN_OUT;
     if("Initial_Release".equals(s)) return Initial_Release;
     if("OUT_REPLY".equals(s)) return OUT_REPLY;
     if("OUT_REQUEST".equals(s)) return OUT_REQUEST;

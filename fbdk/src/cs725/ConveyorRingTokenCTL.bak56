@@ -79,7 +79,7 @@
         <ECAction Algorithm="START" Output="START" />
         <ECAction Output="Initial_Release" />
       </ECState>
-      <ECState Name="REQ" Comment="Normal execution" x="3194.4443" y="705.55554" >
+      <ECState Name="REQ" Comment="Normal execution" x="144.44444" y="949.99994" >
         <ECAction Algorithm="REQ" Output="CNF" />
       </ECState>
       <ECState Name="CAS_START" x="2877.7776" y="449.99997" >
@@ -94,16 +94,16 @@
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Algorithm="PRINT_AWAIT_TOKE" Output="CNF" />
       </ECState>
-      <ECState Name="RELEASE_TOKE" x="249.99998" y="2872.2222" >
+      <ECState Name="RELEASE_TOKE" x="388.8889" y="4027.7776" >
         <ECAction Algorithm="RELEASE_RING_TOKEN" Output="RELEASE_RING_TOKEN" />
         <ECAction Algorithm="DEBUG" />
       </ECState>
-      <ECState Name="LEFT_CONV" x="5494.4443" y="1944.4443" >
+      <ECState Name="LEFT_CONV" x="5266.6665" y="1955.5554" >
       </ECState>
-      <ECState Name="RELEASE_TOKE_2" x="3361.111" y="1355.5555" >
+      <ECState Name="RELEASE_TOKE_2" x="2633.3333" y="1433.3333" >
         <ECAction Output="RELEASE_RING_TOKEN" />
       </ECState>
-      <ECState Name="HAS_TOKE" x="4866.6665" y="2861.111" >
+      <ECState Name="HAS_TOKE" x="3622.2222" y="3916.6665" >
         <ECAction Algorithm="START" Output="START" />
         <ECAction Output="CNF" />
       </ECState>
@@ -111,34 +111,34 @@
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="RELEASE_TOKE_3" x="6205.555" y="3855.5554" >
+      <ECState Name="RELEASE_TOKE_3" x="6583.333" y="3849.9998" >
         <ECAction Output="RELEASE_RING_TOKEN" />
       </ECState>
       <ECState Name="WAIT_FOR_LEAVE" x="6594.4443" y="2033.3333" >
       </ECState>
-      <ECState Name="WAIT_FOR_LEAVE_2" x="4022.2222" y="1883.3333" >
+      <ECState Name="WAIT_FOR_LEAVE_2" x="3872.2222" y="1961.1111" >
       </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1311.1111" y="716.6666" />
-      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="2700.0" y="705.55554" />
-      <ECTransition Source="REQ" Destination="START" Condition="1" x="2705.5554" y="833.3333" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="1100.0" y="1105.5555" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="816.6666" y="955.55554" />
       <ECTransition Source="START" Destination="CAS_START" Condition="CAS_START" x="2650.0" y="605.55554" />
       <ECTransition Source="CAS_START" Destination="START" Condition="1" x="2333.3333" y="449.99997" />
       <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="2100.0" y="216.66666" />
       <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="2050.0" y="394.44443" />
       <ECTransition Source="START" Destination="AWAIT_TOKE" Condition="I_PE_EVENT&#38;!PE_IN" x="1949.9999" y="1794.4443" />
-      <ECTransition Source="HAS_TOKE" Destination="LEFT_CONV" Condition="I_PE_EVENT&#38;PE_IN" x="5494.4443" y="2288.889" />
-      <ECTransition Source="AWAIT_TOKE" Destination="HAS_TOKE" Condition="GRANTED_RING_TOKEN" x="2827.7776" y="1983.3333" />
-      <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="I_PE_EVENT&#38;!PE_IN" x="5955.555" y="1544.4443" />
-      <ECTransition Source="START" Destination="RELEASE_TOKE" Condition="GRANTED_RING_TOKEN&#38;PE_IN" x="916.6666" y="1077.7777" />
+      <ECTransition Source="HAS_TOKE" Destination="LEFT_CONV" Condition="I_PE_EVENT&#38;PE_IN" x="4650.0" y="2683.3333" />
+      <ECTransition Source="AWAIT_TOKE" Destination="HAS_TOKE" Condition="GRANTED_RING_TOKEN" x="2461.111" y="3266.6665" />
+      <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="I_PE_EVENT&#38;!PE_IN" x="5727.7773" y="1555.5555" />
+      <ECTransition Source="START" Destination="RELEASE_TOKE" Condition="GRANTED_RING_TOKEN&#38;PE_IN" x="1055.5555" y="2233.3333" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="1672.2222" y="738.88885" />
-      <ECTransition Source="INIT" Destination="RELEASE_TOKE" Condition="GRANTED_RING_TOKEN" x="372.2222" y="438.8889" />
-      <ECTransition Source="RELEASE_TOKE" Destination="START" Condition="1" x="1361.1111" y="1783.3333" />
-      <ECTransition Source="RELEASE_TOKE_2" Destination="START" Condition="1" x="2594.4443" y="1272.2222" />
-      <ECTransition Source="RELEASE_TOKE_3" Destination="AWAIT_TOKE" Condition="1" x="3616.6665" y="3205.5554" />
-      <ECTransition Source="LEFT_CONV" Destination="WAIT_FOR_LEAVE_2" Condition="I_PE_EVENT&#38;!PE_OUT" x="4788.8887" y="1883.3333" />
-      <ECTransition Source="WAIT_FOR_LEAVE_2" Destination="RELEASE_TOKE_2" Condition="I_PE_EVENT&#38;PE_OUT" x="3716.6665" y="1633.3333" />
+      <ECTransition Source="INIT" Destination="RELEASE_TOKE" Condition="GRANTED_RING_TOKEN" x="511.11108" y="1594.4443" />
+      <ECTransition Source="RELEASE_TOKE" Destination="START" Condition="1" x="1500.0" y="2938.8887" />
+      <ECTransition Source="RELEASE_TOKE_2" Destination="START" Condition="1" x="2077.7776" y="1188.8888" />
+      <ECTransition Source="RELEASE_TOKE_3" Destination="AWAIT_TOKE" Condition="1" x="6005.555" y="3733.3333" />
+      <ECTransition Source="LEFT_CONV" Destination="WAIT_FOR_LEAVE_2" Condition="I_PE_EVENT&#38;!PE_OUT" x="4622.222" y="1961.1111" />
+      <ECTransition Source="WAIT_FOR_LEAVE_2" Destination="RELEASE_TOKE_2" Condition="I_PE_EVENT&#38;PE_OUT" x="3088.8887" y="1694.4443" />
       <ECTransition Source="SECOND_BAG" Destination="WAIT_FOR_LEAVE" Condition="I_PE_EVENT&#38;!PE_OUT" x="6594.4443" y="1622.2222" />
-      <ECTransition Source="WAIT_FOR_LEAVE" Destination="RELEASE_TOKE_3" Condition="I_PE_EVENT&#38;PE_OUT" x="6205.555" y="2888.8887" />
+      <ECTransition Source="WAIT_FOR_LEAVE" Destination="RELEASE_TOKE_3" Condition="I_PE_EVENT&#38;PE_OUT" x="6583.333" y="2883.3333" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(&#34;Initialised Ring client&#34;);&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;" />
@@ -156,13 +156,13 @@
     <ST Text="//System.out.println(&#34;release_toke state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="RELEASE_RING_TOKEN" >
-    <ST Text="System.out.println(this + &#34; released the ring token!: &#34; + this);&#10;" />
+    <ST Text="//System.out.println(&#34;Released the token!: &#34; + this);&#10;" />
   </Algorithm>
   <Algorithm Name="RECEIVED_RING_TOKEN" >
-    <ST Text="System.out.println(this + &#34; received ring token!&#34;);&#10;" />
+    <ST Text="//System.out.println(&#34;Received token!&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="PRINT_AWAIT_TOKE" >
-    <ST Text="System.out.println(this + &#34; awaiting ring token!&#34;);&#10;" />
+    <ST Text="System.out.println(&#34;Awaiting token!&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="DEBUG_START" >
     <ST Text="//System.out.println(&#34;In the start state: &#34; + this);&#10;" />

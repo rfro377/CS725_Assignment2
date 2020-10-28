@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK ConveyorCTLCentralClient
   * @author JHC
-  * @version 20201026/JHC
+  * @version 20201028/JHC
   */
 public class ConveyorCTLCentralClient extends FBInstance
 {
@@ -170,6 +170,7 @@ private void state_ST_REQUEST_TOKE(){
   alg_STOP();
   STOP.serviceEvent(this);
   CNF.serviceEvent(this);
+  alg_PRINT_REQUEST();
   REQUEST_TOKE.serviceEvent(this);
 }
 private static final int index_ST_ACQUIRED_TOKE = 6;
@@ -177,11 +178,13 @@ private void state_ST_ACQUIRED_TOKE(){
   eccState = index_ST_ACQUIRED_TOKE;
   alg_START();
   START.serviceEvent(this);
+  alg_PRINT_ACQUIRED();
   CNF.serviceEvent(this);
 }
 private static final int index_ST_RELEASE_TOKE = 7;
 private void state_ST_RELEASE_TOKE(){
   eccState = index_ST_RELEASE_TOKE;
+  alg_PRINT_RELEASED();
   RELEASE_TOKE.serviceEvent(this);
 state_START();
 }
@@ -195,6 +198,7 @@ private void state_SECOND_BAG(){
   alg_STOP();
   STOP.serviceEvent(this);
   CNF.serviceEvent(this);
+  alg_PRINT_REQUEST();
   REQUEST_TOKE.serviceEvent(this);
 state_LEFT_CONV2();
 }
@@ -205,6 +209,7 @@ private void state_LEFT_CONV2(){
 private static final int index_ST_RELEASE_TOKE_2 = 11;
 private void state_ST_RELEASE_TOKE_2(){
   eccState = index_ST_RELEASE_TOKE_2;
+  alg_PRINT_RELEASED();
   RELEASE_TOKE.serviceEvent(this);
 }
 private static final int index_WAITING_FOR_LEAVE = 12;
@@ -313,5 +318,17 @@ MotoRotate.value=false;
 System.out.println(this+" Stop "+MotoRotate.value);
 
 System.out.println("Stop "+MotoRotate.value);
+}
+  /** ALGORITHM PRINT_REQUEST IN ST*/
+public void alg_PRINT_REQUEST(){
+System.out.println(this+" requesting a token");
+}
+  /** ALGORITHM PRINT_ACQUIRED IN ST*/
+public void alg_PRINT_ACQUIRED(){
+System.out.println(this+" acquiring a token");
+}
+  /** ALGORITHM PRINT_RELEASED IN ST*/
+public void alg_PRINT_RELEASED(){
+System.out.println(this+" released a token");
 }
 }

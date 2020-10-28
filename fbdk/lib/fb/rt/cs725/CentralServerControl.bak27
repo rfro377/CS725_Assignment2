@@ -213,6 +213,6 @@ System.out.println("Adding request to queue");
 }
   /** ALGORITHM Granting_token IN ST*/
 public void alg_Granting_token(){
-System.out.println("Granting central server token");
+System.out.println("Granting token");
 }
 }

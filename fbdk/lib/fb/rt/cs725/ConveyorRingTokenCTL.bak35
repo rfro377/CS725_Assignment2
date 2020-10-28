@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK ConveyorRingTokenCTL
   * @author JHC
-  * @version 20201028/JHC
+  * @version 20201026/JHC
   */
 public class ConveyorRingTokenCTL extends FBInstance
 {
@@ -41,6 +41,8 @@ public class ConveyorRingTokenCTL extends FBInstance
  public EventServer GRANTED_RING_TOKEN = new EventInput(this);
 /** EVENT I_PE_EVENT */
  public EventServer I_PE_EVENT = new EventInput(this);
+/** EVENT CONFIRM_TOKEN_RECEIVED_IN */
+ public EventServer CONFIRM_TOKEN_RECEIVED_IN = new EventInput(this);
 /** Initialization Confirm */
  public EventOutput INITO = new EventOutput();
 /** Execution Confirmation */
@@ -51,6 +53,8 @@ public class ConveyorRingTokenCTL extends FBInstance
  public EventOutput START = new EventOutput();
 /** EVENT RELEASE_RING_TOKEN */
  public EventOutput RELEASE_RING_TOKEN = new EventOutput();
+/** EVENT CONFIRM_TOKEN_RECEIVED_OUT */
+ public EventOutput CONFIRM_TOKEN_RECEIVED_OUT = new EventOutput();
 /** EVENT Initial_Release */
  public EventOutput Initial_Release = new EventOutput();
 /** {@inheritDoc}
@@ -64,6 +68,7 @@ public class ConveyorRingTokenCTL extends FBInstance
     if("CAS_START".equals(s)) return CAS_START;
     if("GRANTED_RING_TOKEN".equals(s)) return GRANTED_RING_TOKEN;
     if("I_PE_EVENT".equals(s)) return I_PE_EVENT;
+    if("CONFIRM_TOKEN_RECEIVED_IN".equals(s)) return CONFIRM_TOKEN_RECEIVED_IN;
     return super.eiNamed(s);}
 /** {@inheritDoc}
 * @param s {@inheritDoc}
@@ -75,6 +80,7 @@ public class ConveyorRingTokenCTL extends FBInstance
     if("STOP".equals(s)) return STOP;
     if("START".equals(s)) return START;
     if("RELEASE_RING_TOKEN".equals(s)) return RELEASE_RING_TOKEN;
+    if("CONFIRM_TOKEN_RECEIVED_OUT".equals(s)) return CONFIRM_TOKEN_RECEIVED_OUT;
     if("Initial_Release".equals(s)) return Initial_Release;
     return super.eoNamed(s);}
 /** {@inheritDoc}
@@ -249,6 +255,7 @@ public ConveyorRingTokenCTL(){
     else if (e == CAS_START) service_CAS_START();
     else if (e == GRANTED_RING_TOKEN) service_GRANTED_RING_TOKEN();
     else if (e == I_PE_EVENT) service_I_PE_EVENT();
+    else if (e == CONFIRM_TOKEN_RECEIVED_IN) service_CONFIRM_TOKEN_RECEIVED_IN();
   }
 /** Services the INIT event. */
   public void service_INIT(){
@@ -281,6 +288,9 @@ public ConveyorRingTokenCTL(){
     else if ((eccState == index_WAIT_FOR_LEAVE_2) && (PE_OUT.value)) state_RELEASE_TOKE_2();
     else if ((eccState == index_SECOND_BAG) && (!PE_OUT.value)) state_WAIT_FOR_LEAVE();
     else if ((eccState == index_WAIT_FOR_LEAVE) && (PE_OUT.value)) state_RELEASE_TOKE_3();
+  }
+/** Services the CONFIRM_TOKEN_RECEIVED_IN event. */
+  public void service_CONFIRM_TOKEN_RECEIVED_IN(){
   }
   /** ALGORITHM INIT IN ST*/
 public void alg_INIT(){
@@ -341,15 +351,15 @@ public void alg_DEBUG(){
 }
   /** ALGORITHM RELEASE_RING_TOKEN IN ST*/
 public void alg_RELEASE_RING_TOKEN(){
-System.out.println(this+" released the ring token!: "+this);
+//System.out.println("Released the token!: "+this);
 }
   /** ALGORITHM RECEIVED_RING_TOKEN IN ST*/
 public void alg_RECEIVED_RING_TOKEN(){
-System.out.println(this+" received ring token!");
+//System.out.println("Received token!");
 }
   /** ALGORITHM PRINT_AWAIT_TOKE IN ST*/
 public void alg_PRINT_AWAIT_TOKE(){
-System.out.println(this+" awaiting ring token!");
+System.out.println("Awaiting token!");
 }
   /** ALGORITHM DEBUG_START IN ST*/
 public void alg_DEBUG_START(){

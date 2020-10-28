@@ -35,12 +35,16 @@ public class TWOCONRINGTOKEN extends FBInstance
  public EventOutput GRANTED_RING_TOKE = new EventOutput();
 /** EVENT I_PE_EVENT */
  public EventOutput I_PE_EVENT = new EventOutput();
+/** EVENT CONFIRM_RECEIVED_RING_TOKEN_IN */
+ public EventOutput CONFIRM_RECEIVED_RING_TOKEN_IN = new EventOutput();
 /** Initialization Confirm */
  public EventOutput INITO = new EventOutput();
 /** Execution Confirmation */
  public EventOutput CNF = new EventOutput();
 /** EVENT RELEASED_RING_TOKE */
  public EventOutput RELEASED_RING_TOKE = new EventOutput();
+/** EVENT CONFIRM_RECEIVED_RING_TOKEN_OUT */
+ public EventOutput CONFIRM_RECEIVED_RING_TOKEN_OUT = new EventOutput();
 /** EVENT Initial_Release */
  public EventOutput Initial_Release = new EventOutput();
 /** {@inheritDoc}
@@ -54,6 +58,7 @@ public class TWOCONRINGTOKEN extends FBInstance
     if("STOP".equals(s)) return STOP;
     if("GRANTED_RING_TOKE".equals(s)) return GRANTED_RING_TOKE;
     if("I_PE_EVENT".equals(s)) return I_PE_EVENT;
+    if("CONFIRM_RECEIVED_RING_TOKEN_IN".equals(s)) return CONFIRM_RECEIVED_RING_TOKEN_IN;
     return super.eiNamed(s);}
 /** {@inheritDoc}
 * @param s {@inheritDoc}
@@ -63,6 +68,7 @@ public class TWOCONRINGTOKEN extends FBInstance
     if("INITO".equals(s)) return INITO;
     if("CNF".equals(s)) return CNF;
     if("RELEASED_RING_TOKE".equals(s)) return RELEASED_RING_TOKE;
+    if("CONFIRM_RECEIVED_RING_TOKEN_OUT".equals(s)) return CONFIRM_RECEIVED_RING_TOKEN_OUT;
     if("Initial_Release".equals(s)) return Initial_Release;
     return super.eoNamed(s);}
 /** {@inheritDoc}
@@ -150,6 +156,8 @@ public TWOCONRINGTOKEN(){
     GRANTED_RING_TOKE.connectTo(Conv4Ctl.GRANTED_RING_TOKEN);
     Conv4Ctl.RELEASE_RING_TOKEN.connectTo(RELEASED_RING_TOKE);
     I_PE_EVENT.connectTo(Conv4Ctl.I_PE_EVENT);
+    CONFIRM_RECEIVED_RING_TOKEN_IN.connectTo(Conv4Ctl.CONFIRM_TOKEN_RECEIVED_IN);
+    Conv4Ctl.CONFIRM_TOKEN_RECEIVED_OUT.connectTo(CONFIRM_RECEIVED_RING_TOKEN_OUT);
     Conv4Ctl.Initial_Release.connectTo(Initial_Release);
     Conv4Ctl.connectIVNoException("Block",Block);
     Conv4Ctl.connectIVNoException("Candidate",Candidate);

@@ -303,6 +303,8 @@ private void state_SECOND_BAG(){
   STOP.serviceEvent(this);
   CNF.serviceEvent(this);
   alg_SECOND_BAG_ALG();
+  alg_SEND_ALL_REQUESTS();
+  OUT_REQUEST.serviceEvent(this);
 }
 private static final int index_LEFT_CONV = 14;
 private void state_LEFT_CONV(){
@@ -317,7 +319,7 @@ private void state_RELEASE_2(){
   alg_RELEASED_ALG();
   alg_LAMPORT_UPDATE();
   CNF.serviceEvent(this);
-state_WANTED();
+state_WANTED_PENDING();
 }
 /** The default constructor. */
 public ConveyorCTLMulticast(){
@@ -456,7 +458,7 @@ allReplied.value=false;
 public void alg_REPLY_ALL(){
 if(((BOOL)requests.value[0]).value==true){
 replyToProc0.value=true;
-System.out.println(this+" sending reply to proc0");
+System.out.println(this+" sending multicast to all peers");
 };
 //System.out.println(this+" requests[0] = "+((BOOL)requests.value[0]).value);
 }
