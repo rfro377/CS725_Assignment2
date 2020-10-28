@@ -69,35 +69,35 @@
       <Parameter Name="Block" Value="0" />
       <Parameter Name="PE" Value="0" />
     </FB>
-    <FB Name="FC12" Type="ConveyorRingTokenCTL" x="4122.222" y="449.99997" >
+    <FB Name="Conv4Ctl" Type="ConveyorRingTokenCTL" x="4122.222" y="449.99997" >
       <Parameter Name="HAS_INITIAL_TOKEN" Value="0" />
     </FB>
     <EventConnections>
       <Connection Source="INIT" Destination="FC11.INIT" dx1="222.22221" />
       <Connection Source="REQ" Destination="FC11.REQ" dx1="216.66666" />
-      <Connection Source="FC12.INITO" Destination="INITO" dx1="5650.0" />
-      <Connection Source="FC12.CNF" Destination="CNF" dx1="5627.7773" />
-      <Connection Source="REQ" Destination="FC12.REQ" dx1="4011.1108" />
-      <Connection Source="STOP" Destination="FC12.CAS_STOP" dx1="3994.4443" />
-      <Connection Source="START" Destination="FC12.CAS_START" dx1="3977.7776" />
-      <Connection Source="FC12.STOP" Destination="FC11.CAS_STOP" dx1="100.0" dx2="100.0" dy="-444.44443" />
-      <Connection Source="FC12.START" Destination="FC11.CAS_START" dx1="127.77777" dx2="127.77777" dy="-605.55554" />
-      <Connection Source="FC11.INITO" Destination="FC12.INIT" dx1="138.88889" />
-      <Connection Source="GRANTED_RING_TOKE" Destination="FC12.GRANTED_RING_TOKEN" dx1="3749.9998" />
-      <Connection Source="FC12.RELEASE_RING_TOKEN" Destination="RELEASED_RING_TOKE" dx1="5905.555" />
-      <Connection Source="I_PE_EVENT" Destination="FC12.I_PE_EVENT" dx1="3894.4443" />
-      <Connection Source="CONFIRM_RECEIVED_RING_TOKEN_IN" Destination="FC12.CONFIRM_TOKEN_RECEIVED_IN" dx1="3533.3333" />
-      <Connection Source="FC12.CONFIRM_TOKEN_RECEIVED_OUT" Destination="CONFIRM_RECEIVED_RING_TOKEN_OUT" dx1="6138.8887" />
-      <Connection Source="FC12.Initial_Release" Destination="Initial_Release" dx1="5766.6665" />
+      <Connection Source="Conv4Ctl.INITO" Destination="INITO" dx1="5650.0" />
+      <Connection Source="Conv4Ctl.CNF" Destination="CNF" dx1="5627.7773" />
+      <Connection Source="REQ" Destination="Conv4Ctl.REQ" dx1="4011.1108" />
+      <Connection Source="STOP" Destination="Conv4Ctl.CAS_STOP" dx1="3994.4443" />
+      <Connection Source="START" Destination="Conv4Ctl.CAS_START" dx1="3977.7776" />
+      <Connection Source="Conv4Ctl.STOP" Destination="FC11.CAS_STOP" dx1="100.0" dx2="100.0" dy="-444.44443" />
+      <Connection Source="Conv4Ctl.START" Destination="FC11.CAS_START" dx1="127.77777" dx2="127.77777" dy="-605.55554" />
+      <Connection Source="FC11.INITO" Destination="Conv4Ctl.INIT" dx1="138.88889" />
+      <Connection Source="GRANTED_RING_TOKE" Destination="Conv4Ctl.GRANTED_RING_TOKEN" dx1="3749.9998" />
+      <Connection Source="Conv4Ctl.RELEASE_RING_TOKEN" Destination="RELEASED_RING_TOKE" dx1="5905.555" />
+      <Connection Source="I_PE_EVENT" Destination="Conv4Ctl.I_PE_EVENT" dx1="3894.4443" />
+      <Connection Source="CONFIRM_RECEIVED_RING_TOKEN_IN" Destination="Conv4Ctl.CONFIRM_TOKEN_RECEIVED_IN" dx1="3533.3333" />
+      <Connection Source="Conv4Ctl.CONFIRM_TOKEN_RECEIVED_OUT" Destination="CONFIRM_RECEIVED_RING_TOKEN_OUT" dx1="6138.8887" />
+      <Connection Source="Conv4Ctl.Initial_Release" Destination="Initial_Release" dx1="5766.6665" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="Block" Destination="FC12.Block" dx1="3999.9998" />
-      <Connection Source="Candidate" Destination="FC12.Candidate" dx1="3933.3333" />
-      <Connection Source="FC12.BlockCon" Destination="BlockCon" dx1="5694.4443" />
+      <Connection Source="Block" Destination="Conv4Ctl.Block" dx1="3999.9998" />
+      <Connection Source="Candidate" Destination="Conv4Ctl.Candidate" dx1="3933.3333" />
+      <Connection Source="Conv4Ctl.BlockCon" Destination="BlockCon" dx1="5694.4443" />
       <Connection Source="FC11.MotoRotate" Destination="MotoRotate1" dx1="1127.7777" />
-      <Connection Source="FC12.MotoRotate" Destination="MotoRotate2" dx1="5738.8887" />
-      <Connection Source="PE_A" Destination="FC12.PE_IN" dx1="3999.9998" />
-      <Connection Source="PE_B" Destination="FC12.PE_OUT" dx1="3999.9998" />
+      <Connection Source="Conv4Ctl.MotoRotate" Destination="MotoRotate2" dx1="5738.8887" />
+      <Connection Source="PE_A" Destination="Conv4Ctl.PE_IN" dx1="3999.9998" />
+      <Connection Source="PE_B" Destination="Conv4Ctl.PE_OUT" dx1="3999.9998" />
     </DataConnections>
   </FBNetwork>
 </FBType>

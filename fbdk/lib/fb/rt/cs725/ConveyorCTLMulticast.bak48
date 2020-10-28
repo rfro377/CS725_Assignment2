@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK ConveyorCTLMulticast
   * @author JHC
-  * @version 20201028/JHC
+  * @version 20201027/JHC
   */
 public class ConveyorCTLMulticast extends FBInstance
 {
@@ -221,7 +221,6 @@ state_START();
 private static final int index_WANTED = 5;
 private void state_WANTED(){
   eccState = index_WANTED;
-  alg_LAMPORT_UPDATE();
   alg_SEND_ALL_REQUESTS();
   alg_STOP();
   STOP.serviceEvent(this);
@@ -244,7 +243,6 @@ private void state_RELEASED(){
   alg_REPLY_ALL();
   OUT_REPLY.serviceEvent(this);
   alg_RELEASED_ALG();
-  alg_LAMPORT_UPDATE();
   CNF.serviceEvent(this);
 state_START();
 }
@@ -280,8 +278,6 @@ private void state_ADD_TO_QUEUE(){
 private static final int index_IMMEDIATE_REPLY = 11;
 private void state_IMMEDIATE_REPLY(){
   eccState = index_IMMEDIATE_REPLY;
-  alg_LAMPORT_UPDATE();
-  CNF.serviceEvent(this);
   alg_IMMEDATE_REPLY();
   OUT_REPLY.serviceEvent(this);
   alg_LAMPORT_UPDATE();
@@ -293,7 +289,6 @@ private void state_PREEMPTED_REPLY(){
   eccState = index_PREEMPTED_REPLY;
   alg_IMMEDATE_REPLY();
   OUT_REPLY.serviceEvent(this);
-  alg_LAMPORT_UPDATE();
 state_WANTED_PENDING();
 }
 private static final int index_SECOND_BAG = 13;
@@ -315,7 +310,6 @@ private void state_RELEASE_2(){
   alg_REPLY_ALL();
   OUT_REPLY.serviceEvent(this);
   alg_RELEASED_ALG();
-  alg_LAMPORT_UPDATE();
   CNF.serviceEvent(this);
 state_WANTED();
 }
@@ -456,7 +450,6 @@ public void alg_REPLY_ALL(){
 if(((BOOL)requests.value[0]).value==true){
 replyToProc0.value=true;
 };
-System.out.println(this+" requests[0] = "+((BOOL)requests.value[0]).value);
 }
   /** ALGORITHM WANTED_PENDING_ALG IN ST*/
 public void alg_WANTED_PENDING_ALG(){
@@ -466,6 +459,8 @@ System.out.println("In the wanted_pending state");
   /** ALGORITHM WANTED_ALG IN ST*/
 public void alg_WANTED_ALG(){
 previousState.value=(short)(5);
+//resetall
+replyToProc0.value=false;
 System.out.println("In the wanted state");
 }
   /** ALGORITHM NEW_REPLY_ALG IN ST*/
@@ -482,7 +477,6 @@ System.out.println("In the released state");
 public void alg_HELD_ALG(){
 previousState.value=(short)(2);
 thisProcRequested.value=false;
-replyToProc0.value=false;
 System.out.println("In the held state");
 }
   /** ALGORITHM QUEUE_ALG IN ST*/
@@ -527,6 +521,5 @@ previousState.value=(short)(9);
   /** ALGORITHM SECOND_BAG_ALG IN ST*/
 public void alg_SECOND_BAG_ALG(){
 previousState.value=(short)(8);
-System.out.println(this+" in the second bag state");
 }
 }

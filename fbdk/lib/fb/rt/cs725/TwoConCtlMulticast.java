@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK TwoConCtlMulticast
   * @author JHC
-  * @version 20201027/JHC
+  * @version 20201028/JHC
   */
 public class TwoConCtlMulticast extends FBInstance
 {
@@ -128,7 +128,7 @@ public class TwoConCtlMulticast extends FBInstance
  */
   public void connect_Candidate(BOOL newIV) throws FBRManagementException{
     Candidate = newIV;
-    FC12.connectIVNoException("Candidate",Candidate);
+    Conv11Ctl.connectIVNoException("Candidate",Candidate);
     }
 /** Connect the given variable to the input variable Block
   * @param newIV The variable to connect
@@ -136,7 +136,7 @@ public class TwoConCtlMulticast extends FBInstance
  */
   public void connect_Block(BOOL newIV) throws FBRManagementException{
     Block = newIV;
-    FC12.connectIVNoException("Block",Block);
+    Conv11Ctl.connectIVNoException("Block",Block);
     }
 /** Connect the given variable to the input variable PE_A
   * @param newIV The variable to connect
@@ -144,7 +144,7 @@ public class TwoConCtlMulticast extends FBInstance
  */
   public void connect_PE_A(BOOL newIV) throws FBRManagementException{
     PE_A = newIV;
-    FC12.connectIVNoException("PE_IN",PE_A);
+    Conv11Ctl.connectIVNoException("PE_IN",PE_A);
     }
 /** Connect the given variable to the input variable PE_B
   * @param newIV The variable to connect
@@ -153,7 +153,7 @@ public class TwoConCtlMulticast extends FBInstance
   public void connect_PE_B(BOOL newIV) throws FBRManagementException{
     PE_B = newIV;
     FC11.connectIVNoException("PE",PE_B);
-    FC12.connectIVNoException("PE_OUT",PE_B);
+    Conv11Ctl.connectIVNoException("PE_OUT",PE_B);
     }
 /** Connect the given variable to the input variable IN_LAMPORT
   * @param newIV The variable to connect
@@ -161,7 +161,7 @@ public class TwoConCtlMulticast extends FBInstance
  */
   public void connect_IN_LAMPORT(UINT newIV) throws FBRManagementException{
     IN_LAMPORT = newIV;
-    FC12.connectIVNoException("IN_LAMPORT",IN_LAMPORT);
+    Conv11Ctl.connectIVNoException("IN_LAMPORT",IN_LAMPORT);
     }
 /** Connect the given variable to the input variable isProc0Requested
   * @param newIV The variable to connect
@@ -169,7 +169,7 @@ public class TwoConCtlMulticast extends FBInstance
  */
   public void connect_isProc0Requested(BOOL newIV) throws FBRManagementException{
     isProc0Requested = newIV;
-    FC12.connectIVNoException("isProc0Requested",isProc0Requested);
+    Conv11Ctl.connectIVNoException("isProc0Requested",isProc0Requested);
     }
 /** Connect the given variable to the input variable isProc0Replied
   * @param newIV The variable to connect
@@ -177,44 +177,44 @@ public class TwoConCtlMulticast extends FBInstance
  */
   public void connect_isProc0Replied(BOOL newIV) throws FBRManagementException{
     isProc0Replied = newIV;
-    FC12.connectIVNoException("isProc0Replied",isProc0Replied);
+    Conv11Ctl.connectIVNoException("isProc0Replied",isProc0Replied);
     }
 /** FB FC11 */
   protected ConveyorCTL FC11 = new ConveyorCTL() ;
-/** FB FC12 */
-  protected ConveyorCTLMulticast FC12 = new ConveyorCTLMulticast() ;
+/** FB Conv11Ctl */
+  protected ConveyorCTLMulticast Conv11Ctl = new ConveyorCTLMulticast() ;
 /** The default constructor. */
 public TwoConCtlMulticast(){
     super();
     INIT.connectTo(FC11.INIT);
     REQ.connectTo(FC11.REQ);
-    FC12.INITO.connectTo(INITO);
-    FC12.CNF.connectTo(CNF);
-    REQ.connectTo(FC12.REQ);
-    STOP.connectTo(FC12.CAS_STOP);
-    START.connectTo(FC12.CAS_START);
-    FC12.STOP.connectTo(FC11.CAS_STOP);
-    FC12.START.connectTo(FC11.CAS_START);
-    FC11.INITO.connectTo(FC12.INIT);
-    PE_EVENT.connectTo(FC12.PE_EVENT);
-    IN_REPLY.connectTo(FC12.IN_REPLY);
-    IN_REQUEST.connectTo(FC12.IN_REQUEST);
-    FC12.OUT_REPLY.connectTo(OUT_REPLY);
-    FC12.OUT_REQUEST.connectTo(OUT_REQUEST);
-    FC12.connectIVNoException("Block",Block);
-    FC12.connectIVNoException("Candidate",Candidate);
-    BlockCon = (BOOL)FC12.ovNamedNoException("BlockCon");
+    Conv11Ctl.INITO.connectTo(INITO);
+    Conv11Ctl.CNF.connectTo(CNF);
+    REQ.connectTo(Conv11Ctl.REQ);
+    STOP.connectTo(Conv11Ctl.CAS_STOP);
+    START.connectTo(Conv11Ctl.CAS_START);
+    Conv11Ctl.STOP.connectTo(FC11.CAS_STOP);
+    Conv11Ctl.START.connectTo(FC11.CAS_START);
+    FC11.INITO.connectTo(Conv11Ctl.INIT);
+    PE_EVENT.connectTo(Conv11Ctl.PE_EVENT);
+    IN_REPLY.connectTo(Conv11Ctl.IN_REPLY);
+    IN_REQUEST.connectTo(Conv11Ctl.IN_REQUEST);
+    Conv11Ctl.OUT_REPLY.connectTo(OUT_REPLY);
+    Conv11Ctl.OUT_REQUEST.connectTo(OUT_REQUEST);
+    Conv11Ctl.connectIVNoException("Block",Block);
+    Conv11Ctl.connectIVNoException("Candidate",Candidate);
+    BlockCon = (BOOL)Conv11Ctl.ovNamedNoException("BlockCon");
     MotoRotate1 = (BOOL)FC11.ovNamedNoException("MotoRotate");
-    MotoRotate2 = (BOOL)FC12.ovNamedNoException("MotoRotate");
+    MotoRotate2 = (BOOL)Conv11Ctl.ovNamedNoException("MotoRotate");
     FC11.connectIVNoException("PE",PE_B);
-    FC12.connectIVNoException("PE_IN",PE_A);
-    FC12.connectIVNoException("PE_OUT",PE_B);
-    FC12.connectIVNoException("IN_LAMPORT",IN_LAMPORT);
-    OUT_LAMPORT = (UINT)FC12.ovNamedNoException("OUT_LAMPORT");
-    thisProcRequested = (BOOL)FC12.ovNamedNoException("thisProcRequested");
-    replyToProc0 = (BOOL)FC12.ovNamedNoException("replyToProc0");
-    FC12.connectIVNoException("isProc0Requested",isProc0Requested);
-    FC12.connectIVNoException("isProc0Replied",isProc0Replied);
+    Conv11Ctl.connectIVNoException("PE_IN",PE_A);
+    Conv11Ctl.connectIVNoException("PE_OUT",PE_B);
+    Conv11Ctl.connectIVNoException("IN_LAMPORT",IN_LAMPORT);
+    OUT_LAMPORT = (UINT)Conv11Ctl.ovNamedNoException("OUT_LAMPORT");
+    thisProcRequested = (BOOL)Conv11Ctl.ovNamedNoException("thisProcRequested");
+    replyToProc0 = (BOOL)Conv11Ctl.ovNamedNoException("replyToProc0");
+    Conv11Ctl.connectIVNoException("isProc0Requested",isProc0Requested);
+    Conv11Ctl.connectIVNoException("isProc0Replied",isProc0Replied);
     FC11.Candidate.initializeNoException("0");
     FC11.Block.initializeNoException("0");
   }
@@ -226,16 +226,16 @@ public TwoConCtlMulticast(){
   throws FBRManagementException{
     super.initialize(fbName,r);
     FC11.initialize("FC11",r);
-    FC12.initialize("FC12",r);
+    Conv11Ctl.initialize("Conv11Ctl",r);
 }
 /** Start the FB instances. */
 public void start( ){
   FC11.start();
-  FC12.start();
+  Conv11Ctl.start();
 }
 /** Stop the FB instances. */
 public void stop( ){
   FC11.stop();
-  FC12.stop();
+  Conv11Ctl.stop();
 }
 }

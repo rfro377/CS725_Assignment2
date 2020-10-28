@@ -114,10 +114,10 @@
     </OutputVars>
   </InterfaceList>
   <FBNetwork >
-    <FB Name="Conv7Ctl" Type="ConveyorRingTokenCTL" x="1150.0" y="499.99997" >
+    <FB Name="FC11" Type="ConveyorRingTokenCTL" x="1150.0" y="499.99997" >
       <Parameter Name="HAS_INITIAL_TOKEN" Value="0" />
     </FB>
-    <FB Name="Conv8Ctl" Type="ConveyorCTLMulticast" x="4938.8887" y="244.44443" >
+    <FB Name="FC12" Type="ConveyorCTLMulticast" x="4938.8887" y="244.44443" >
       <Parameter Name="Block" Value="0" />
       <Parameter Name="Candidate" Value="0" />
     </FB>
@@ -126,51 +126,51 @@
       <Parameter Name="Candidate" Value="0" />
     </FB>
     <EventConnections>
-      <Connection Source="INIT" Destination="Conv7Ctl.INIT" dx1="1044.4445" />
-      <Connection Source="REQ" Destination="Conv7Ctl.REQ" dx1="1038.8888" />
-      <Connection Source="Conv7Ctl.INITO" Destination="Conv8Ctl.INIT" dx1="261.1111" dx2="22.222221" dy="-72.22222" />
-      <Connection Source="Conv8Ctl.INITO" Destination="FC13.INIT" dx1="344.44443" />
+      <Connection Source="INIT" Destination="FC11.INIT" dx1="1044.4445" />
+      <Connection Source="REQ" Destination="FC11.REQ" dx1="1038.8888" />
+      <Connection Source="FC11.INITO" Destination="FC12.INIT" dx1="261.1111" dx2="22.222221" dy="-72.22222" />
+      <Connection Source="FC12.INITO" Destination="FC13.INIT" dx1="344.44443" />
       <Connection Source="FC13.INITO" Destination="INITO" dx1="9644.444" />
       <Connection Source="FC13.CNF" Destination="CNF" dx1="9622.222" />
-      <Connection Source="REQ" Destination="Conv8Ctl.REQ" dx1="4827.778" />
+      <Connection Source="REQ" Destination="FC12.REQ" dx1="4827.778" />
       <Connection Source="REQ" Destination="FC13.REQ" dx1="8822.222" />
-      <Connection Source="Conv7Ctl.CNF" Destination="CNF" dx1="2655.5554" />
-      <Connection Source="Conv8Ctl.CNF" Destination="CNF" dx1="5816.6665" />
-      <Connection Source="CAS_STOP" Destination="Conv7Ctl.CAS_STOP" dx1="944.4444" />
-      <Connection Source="CAS_START" Destination="Conv7Ctl.CAS_START" dx1="927.7778" />
+      <Connection Source="FC11.CNF" Destination="CNF" dx1="2655.5554" />
+      <Connection Source="FC12.CNF" Destination="CNF" dx1="5816.6665" />
+      <Connection Source="CAS_STOP" Destination="FC11.CAS_STOP" dx1="944.4444" />
+      <Connection Source="CAS_START" Destination="FC11.CAS_START" dx1="927.7778" />
       <Connection Source="FC13.STOP" Destination="STOP" dx1="9644.444" />
       <Connection Source="FC13.START" Destination="START" dx1="9661.11" />
-      <Connection Source="I_PE_EVENT" Destination="Conv7Ctl.I_PE_EVENT" dx1="922.22217" />
-      <Connection Source="CONFIRM_RELEASE_RING_TOKEN_IN" Destination="Conv7Ctl.CONFIRM_TOKEN_RECEIVED_IN" dx1="572.2222" />
-      <Connection Source="GRANTED_RING_TOKEN" Destination="Conv7Ctl.GRANTED_RING_TOKEN" dx1="755.55554" />
-      <Connection Source="Conv7Ctl.RELEASE_RING_TOKEN" Destination="RELEASE_RING_TOKEN" dx1="2933.3333" />
-      <Connection Source="Conv7Ctl.CONFIRM_TOKEN_RECEIVED_OUT" Destination="CONFIRM_RELEASE_RING_TOKEN_OUT" dx1="3155.5554" />
-      <Connection Source="CAS_STOP" Destination="Conv8Ctl.CAS_STOP" dx1="4733.333" />
-      <Connection Source="CAS_START" Destination="Conv8Ctl.CAS_START" dx1="4716.6665" />
-      <Connection Source="I_PE_EVENT" Destination="Conv8Ctl.PE_EVENT" dx1="4711.111" />
-      <Connection Source="IN_REPLY" Destination="Conv8Ctl.IN_REPLY" dx1="4750.0" />
-      <Connection Source="IN_REQUEST" Destination="Conv8Ctl.IN_REQUEST" dx1="4705.555" />
-      <Connection Source="Conv8Ctl.OUT_REPLY" Destination="OUT_REPLY" dx1="5933.333" />
-      <Connection Source="Conv8Ctl.OUT_REQUEST" Destination="OUT_REQUEST" dx1="5977.7773" />
+      <Connection Source="I_PE_EVENT" Destination="FC11.I_PE_EVENT" dx1="922.22217" />
+      <Connection Source="CONFIRM_RELEASE_RING_TOKEN_IN" Destination="FC11.CONFIRM_TOKEN_RECEIVED_IN" dx1="572.2222" />
+      <Connection Source="GRANTED_RING_TOKEN" Destination="FC11.GRANTED_RING_TOKEN" dx1="755.55554" />
+      <Connection Source="FC11.RELEASE_RING_TOKEN" Destination="RELEASE_RING_TOKEN" dx1="2933.3333" />
+      <Connection Source="FC11.CONFIRM_TOKEN_RECEIVED_OUT" Destination="CONFIRM_RELEASE_RING_TOKEN_OUT" dx1="3155.5554" />
+      <Connection Source="CAS_STOP" Destination="FC12.CAS_STOP" dx1="4733.333" />
+      <Connection Source="CAS_START" Destination="FC12.CAS_START" dx1="4716.6665" />
+      <Connection Source="I_PE_EVENT" Destination="FC12.PE_EVENT" dx1="4711.111" />
+      <Connection Source="IN_REPLY" Destination="FC12.IN_REPLY" dx1="4750.0" />
+      <Connection Source="IN_REQUEST" Destination="FC12.IN_REQUEST" dx1="4705.555" />
+      <Connection Source="FC12.OUT_REPLY" Destination="OUT_REPLY" dx1="5933.333" />
+      <Connection Source="FC12.OUT_REQUEST" Destination="OUT_REQUEST" dx1="5977.7773" />
     </EventConnections>
     <DataConnections>
       <Connection Source="FC13.MotoRotate" Destination="MotoRotate3" dx1="9733.333" />
-      <Connection Source="Conv8Ctl.MotoRotate" Destination="MotoRotate2" dx1="5927.7773" />
-      <Connection Source="Conv7Ctl.MotoRotate" Destination="MotoRotate1" dx1="2766.6665" />
-      <Connection Source="Block" Destination="Conv7Ctl.Block" dx1="1027.7777" />
-      <Connection Source="Conv7Ctl.BlockCon" Destination="BlockCon" dx1="2722.2222" />
-      <Connection Source="Candidate" Destination="Conv7Ctl.Candidate" dx1="961.1111" />
+      <Connection Source="FC12.MotoRotate" Destination="MotoRotate2" dx1="5927.7773" />
+      <Connection Source="FC11.MotoRotate" Destination="MotoRotate1" dx1="2766.6665" />
+      <Connection Source="Block" Destination="FC11.Block" dx1="1027.7777" />
+      <Connection Source="FC11.BlockCon" Destination="BlockCon" dx1="2722.2222" />
+      <Connection Source="Candidate" Destination="FC11.Candidate" dx1="961.1111" />
       <Connection Source="PE_C" Destination="FC13.PE" dx1="8811.11" />
-      <Connection Source="PE_A" Destination="Conv7Ctl.PE_IN" dx1="1027.7777" />
-      <Connection Source="PE_B" Destination="Conv7Ctl.PE_OUT" dx1="1027.7777" />
-      <Connection Source="PE_D" Destination="Conv8Ctl.PE_OUT" dx1="4816.6665" />
-      <Connection Source="PE_C" Destination="Conv8Ctl.PE_IN" dx1="4816.6665" />
-      <Connection Source="isProc0Replied" Destination="Conv8Ctl.isProc0Replied" dx1="4688.8887" />
-      <Connection Source="Conv8Ctl.thisProcRequested" Destination="thisProcRequested" dx1="6005.555" />
-      <Connection Source="Conv8Ctl.replyToProc0" Destination="replyToProc0" dx1="5938.8887" />
-      <Connection Source="IN_LAMPORT" Destination="Conv8Ctl.IN_LAMPORT" dx1="4700.0" />
-      <Connection Source="Conv8Ctl.OUT_LAMPORT" Destination="OUT_LAMPORT" dx1="5977.7773" />
-      <Connection Source="isProc0Requested" Destination="Conv8Ctl.isProc0Requested" dx1="4650.0" />
+      <Connection Source="PE_A" Destination="FC11.PE_IN" dx1="1027.7777" />
+      <Connection Source="PE_B" Destination="FC11.PE_OUT" dx1="1027.7777" />
+      <Connection Source="PE_D" Destination="FC12.PE_OUT" dx1="4816.6665" />
+      <Connection Source="PE_C" Destination="FC12.PE_IN" dx1="4816.6665" />
+      <Connection Source="isProc0Replied" Destination="FC12.isProc0Replied" dx1="4688.8887" />
+      <Connection Source="FC12.thisProcRequested" Destination="thisProcRequested" dx1="6005.555" />
+      <Connection Source="FC12.replyToProc0" Destination="replyToProc0" dx1="5938.8887" />
+      <Connection Source="IN_LAMPORT" Destination="FC12.IN_LAMPORT" dx1="4700.0" />
+      <Connection Source="FC12.OUT_LAMPORT" Destination="OUT_LAMPORT" dx1="5977.7773" />
+      <Connection Source="isProc0Requested" Destination="FC12.isProc0Requested" dx1="4650.0" />
     </DataConnections>
   </FBNetwork>
 </FBType>

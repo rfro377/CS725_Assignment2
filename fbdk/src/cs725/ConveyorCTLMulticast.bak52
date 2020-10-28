@@ -111,7 +111,7 @@
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="WANTED" x="238.88889" y="1133.3333" >
+      <ECState Name="WANTED" x="300.0" y="1144.4445" >
         <ECAction Algorithm="LAMPORT_UPDATE" />
         <ECAction Algorithm="SEND_ALL_REQUESTS" />
         <ECAction Algorithm="STOP" Output="STOP" />
@@ -126,8 +126,7 @@
       </ECState>
       <ECState Name="RELEASED" x="6516.6665" y="2772.2222" >
         <ECAction Algorithm="REPLY_ALL" Output="OUT_REPLY" />
-        <ECAction Algorithm="RELEASED_ALG" />
-        <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
+        <ECAction Algorithm="RELEASED_ALG" Output="CNF" />
       </ECState>
       <ECState Name="WANTED_PENDING" x="622.22217" y="1777.7777" >
         <ECAction Algorithm="WANTED_PENDING_ALG" Output="CNF" />
@@ -143,13 +142,11 @@
         <ECAction Output="CNF" />
       </ECState>
       <ECState Name="IMMEDIATE_REPLY" x="3255.5554" y="927.7778" >
-        <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
         <ECAction Algorithm="IMMEDATE_REPLY" Output="OUT_REPLY" />
         <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
       </ECState>
       <ECState Name="PREEMPTED_REPLY" x="1611.1111" y="2166.6665" >
         <ECAction Algorithm="IMMEDATE_REPLY" Output="OUT_REPLY" />
-        <ECAction Algorithm="LAMPORT_UPDATE" />
       </ECState>
       <ECState Name="SECOND_BAG" x="5127.7773" y="4483.333" >
         <ECAction Algorithm="STOP" Output="STOP" />
@@ -161,8 +158,7 @@
       </ECState>
       <ECState Name="RELEASE_2" x="2450.0" y="4316.6665" >
         <ECAction Algorithm="REPLY_ALL" Output="OUT_REPLY" />
-        <ECAction Algorithm="RELEASED_ALG" />
-        <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
+        <ECAction Algorithm="RELEASED_ALG" Output="CNF" />
       </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1627.7777" y="372.2222" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="1500.0" y="366.66666" />
@@ -172,29 +168,29 @@
       <ECTransition Source="CAS_START" Destination="START" Condition="1" x="3877.7776" y="183.33333" />
       <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="2111.111" y="177.77777" />
       <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="2116.6665" y="272.2222" />
-      <ECTransition Source="START" Destination="WANTED" Condition="PE_EVENT&#38;!PE_IN" x="488.88885" y="644.4444" />
-      <ECTransition Source="WANTED" Destination="WANTED_PENDING" Condition="1" x="411.11108" y="1422.2222" />
+      <ECTransition Source="START" Destination="WANTED" Condition="PE_EVENT&#38;!PE_IN" x="550.0" y="655.55554" />
+      <ECTransition Source="WANTED" Destination="WANTED_PENDING" Condition="1" x="472.2222" y="1433.3333" />
       <ECTransition Source="WANTED_PENDING" Destination="NEW_REPLY" Condition="IN_REPLY" x="1255.5555" y="2866.6665" />
       <ECTransition Source="NEW_REPLY" Destination="WANTED_PENDING" Condition="!allReplied" x="1405.5555" y="2750.0" />
       <ECTransition Source="NEW_REPLY" Destination="HELD" Condition="allReplied" x="2750.0" y="3616.6665" />
       <ECTransition Source="RELEASED" Destination="START" Condition="1" x="6516.6665" y="633.3333" />
       <ECTransition Source="HELD" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4177.778" y="2450.0" />
       <ECTransition Source="WANTED_PENDING" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="1938.8888" y="1388.8888" />
-      <ECTransition Source="WANTED" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="3038.8887" y="1238.8888" />
+      <ECTransition Source="WANTED" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="3100.0" y="1250.0" />
       <ECTransition Source="NEW_REPLY" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="3166.6665" y="2400.0" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="HELD" Condition="previousState = 2" x="4450.0" y="2544.4443" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="NEW_REPLY" Condition="previousState = 3" x="3405.5554" y="2472.2222" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED_PENDING" Condition="previousState = 4" x="1961.1111" y="1500.0" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED" Condition="previousState = 5" x="3005.5554" y="1083.3333" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED" Condition="previousState = 5" x="3066.6665" y="1094.4445" />
       <ECTransition Source="START" Destination="IMMEDIATE_REPLY" Condition="IN_REQUEST" x="2622.2222" y="822.22217" />
       <ECTransition Source="IMMEDIATE_REPLY" Destination="START" Condition="1" x="2294.4443" y="927.7778" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="PREEMPTED_REPLY" Condition="previousState = 100" x="3094.4443" y="1877.7777" />
-      <ECTransition Source="PREEMPTED_REPLY" Destination="WANTED_PENDING" Condition="1" x="1161.1111" y="2072.2222" />
+      <ECTransition Source="PREEMPTED_REPLY" Destination="WANTED_PENDING" Condition="1" x="1272.2222" y="1894.4443" />
       <ECTransition Source="HELD" Destination="LEFT_CONV" Condition="PE_EVENT&#38;PE_IN" x="3172.2222" y="3783.3333" />
       <ECTransition Source="LEFT_CONV" Destination="RELEASED" Condition="PE_EVENT&#38;!PE_OUT" x="6516.6665" y="3649.9998" />
       <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="PE_EVENT&#38;!PE_IN" x="4277.778" y="4183.333" />
       <ECTransition Source="SECOND_BAG" Destination="RELEASE_2" Condition="PE_EVENT&#38;!PE_OUT" x="3649.9998" y="4783.333" />
-      <ECTransition Source="RELEASE_2" Destination="WANTED" Condition="1" x="288.8889" y="4305.555" />
+      <ECTransition Source="RELEASE_2" Destination="WANTED" Condition="1" x="350.0" y="4316.6665" />
       <ECTransition Source="ADD_TO_QUEUE" Destination="LEFT_CONV" Condition="previousState = 9" x="5222.222" y="2338.889" />
       <ECTransition Source="LEFT_CONV" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4977.7773" y="2438.889" />
       <ECTransition Source="SECOND_BAG" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="5650.0" y="2116.6665" />

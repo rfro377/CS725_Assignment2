@@ -96,109 +96,104 @@
     <ECC >
       <ECState Name="START" Comment="Initial State" x="1627.7777" y="705.55554" >
       </ECState>
-      <ECState Name="INIT" Comment="Initialization" x="1405.5555" y="111.11111" >
+      <ECState Name="INIT" Comment="Initialization" x="1544.4443" y="111.11111" >
         <ECAction Algorithm="INIT" Output="INITO" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="REQ" Comment="Normal execution" x="677.7778" y="88.888885" >
+      <ECState Name="REQ" Comment="Normal execution" x="638.88885" y="166.66666" >
         <ECAction Algorithm="REQ" Output="CNF" />
       </ECState>
-      <ECState Name="CAS_START" x="3638.8887" y="111.11111" >
+      <ECState Name="CAS_START" x="4049.9998" y="138.88889" >
         <ECAction Algorithm="START" Output="START" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="CAS_STOP" x="2444.4443" y="111.11111" >
+      <ECState Name="CAS_STOP" x="3077.7776" y="111.11111" >
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="WANTED" x="238.88889" y="1133.3333" >
-        <ECAction Algorithm="LAMPORT_UPDATE" />
+      <ECState Name="WANTED" x="244.44443" y="1194.4445" >
         <ECAction Algorithm="SEND_ALL_REQUESTS" />
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
         <ECAction Algorithm="WANTED_ALG" />
         <ECAction Output="OUT_REQUEST" />
       </ECState>
-      <ECState Name="HELD" x="3311.111" y="3172.2222" >
+      <ECState Name="HELD" x="3261.111" y="2861.111" >
         <ECAction Algorithm="START" Output="START" />
         <ECAction Output="CNF" />
         <ECAction Algorithm="HELD_ALG" />
       </ECState>
-      <ECState Name="RELEASED" x="6516.6665" y="2772.2222" >
+      <ECState Name="RELEASED" x="5477.7773" y="2844.4443" >
         <ECAction Algorithm="REPLY_ALL" Output="OUT_REPLY" />
-        <ECAction Algorithm="RELEASED_ALG" />
-        <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
+        <ECAction Algorithm="RELEASED_ALG" Output="CNF" />
       </ECState>
-      <ECState Name="WANTED_PENDING" x="622.22217" y="1777.7777" >
+      <ECState Name="WANTED_PENDING" x="377.77777" y="1777.7777" >
         <ECAction Algorithm="WANTED_PENDING_ALG" Output="CNF" />
       </ECState>
-      <ECState Name="NEW_REPLY" x="1922.2222" y="2866.6665" >
+      <ECState Name="NEW_REPLY" x="1749.9999" y="2966.6665" >
         <ECAction Algorithm="HANDLE_INCOMING_REPLY" />
         <ECAction Algorithm="NEW_REPLY_ALG" />
         <ECAction Algorithm="LAMPORT_UPDATE" />
       </ECState>
-      <ECState Name="ADD_TO_QUEUE" x="4127.778" y="1383.3333" >
+      <ECState Name="ADD_TO_QUEUE" x="3461.111" y="1372.2222" >
         <ECAction Algorithm="QUEUE_ALG" />
         <ECAction Algorithm="LAMPORT_UPDATE" />
         <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="IMMEDIATE_REPLY" x="3255.5554" y="927.7778" >
-        <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
+      <ECState Name="IMMEDIATE_REPLY" x="2994.4443" y="955.55554" >
         <ECAction Algorithm="IMMEDATE_REPLY" Output="OUT_REPLY" />
         <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
       </ECState>
-      <ECState Name="PREEMPTED_REPLY" x="1611.1111" y="2166.6665" >
+      <ECState Name="PREEMPTED_REPLY" x="1255.5555" y="2188.889" >
         <ECAction Algorithm="IMMEDATE_REPLY" Output="OUT_REPLY" />
-        <ECAction Algorithm="LAMPORT_UPDATE" />
       </ECState>
-      <ECState Name="SECOND_BAG" x="5127.7773" y="4483.333" >
+      <ECState Name="SECOND_BAG" x="5111.111" y="4477.778" >
         <ECAction Algorithm="STOP" Output="STOP" />
         <ECAction Output="CNF" />
         <ECAction Algorithm="SECOND_BAG_ALG" />
       </ECState>
-      <ECState Name="LEFT_CONV" x="4277.778" y="3649.9998" >
+      <ECState Name="LEFT_CONV" x="4416.6665" y="3638.8887" >
         <ECAction Algorithm="LEFT_CONV_ALG" />
       </ECState>
-      <ECState Name="RELEASE_2" x="2450.0" y="4316.6665" >
+      <ECState Name="RELEASE_2" x="6672.222" y="3938.8887" >
         <ECAction Algorithm="REPLY_ALL" Output="OUT_REPLY" />
-        <ECAction Algorithm="RELEASED_ALG" />
-        <ECAction Algorithm="LAMPORT_UPDATE" Output="CNF" />
+        <ECAction Algorithm="RELEASED_ALG" Output="CNF" />
       </ECState>
-      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1627.7777" y="372.2222" />
-      <ECTransition Source="INIT" Destination="START" Condition="1" x="1500.0" y="366.66666" />
-      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="1105.5555" y="433.3333" />
-      <ECTransition Source="REQ" Destination="START" Condition="1" x="1311.1111" y="344.44443" />
-      <ECTransition Source="START" Destination="CAS_START" Condition="CAS_START" x="3177.7776" y="249.99998" />
-      <ECTransition Source="CAS_START" Destination="START" Condition="1" x="3877.7776" y="183.33333" />
-      <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="2111.111" y="177.77777" />
-      <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="2116.6665" y="272.2222" />
-      <ECTransition Source="START" Destination="WANTED" Condition="PE_EVENT&#38;!PE_IN" x="488.88885" y="644.4444" />
-      <ECTransition Source="WANTED" Destination="WANTED_PENDING" Condition="1" x="411.11108" y="1422.2222" />
-      <ECTransition Source="WANTED_PENDING" Destination="NEW_REPLY" Condition="IN_REPLY" x="1255.5555" y="2866.6665" />
-      <ECTransition Source="NEW_REPLY" Destination="WANTED_PENDING" Condition="!allReplied" x="1405.5555" y="2750.0" />
-      <ECTransition Source="NEW_REPLY" Destination="HELD" Condition="allReplied" x="2750.0" y="3616.6665" />
-      <ECTransition Source="RELEASED" Destination="START" Condition="1" x="6516.6665" y="633.3333" />
-      <ECTransition Source="HELD" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4177.778" y="2450.0" />
-      <ECTransition Source="WANTED_PENDING" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="1938.8888" y="1388.8888" />
-      <ECTransition Source="WANTED" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="3038.8887" y="1238.8888" />
-      <ECTransition Source="NEW_REPLY" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="3166.6665" y="2400.0" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="HELD" Condition="previousState = 2" x="4450.0" y="2544.4443" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="NEW_REPLY" Condition="previousState = 3" x="3405.5554" y="2472.2222" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED_PENDING" Condition="previousState = 4" x="1961.1111" y="1500.0" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED" Condition="previousState = 5" x="3005.5554" y="1083.3333" />
-      <ECTransition Source="START" Destination="IMMEDIATE_REPLY" Condition="IN_REQUEST" x="2622.2222" y="822.22217" />
-      <ECTransition Source="IMMEDIATE_REPLY" Destination="START" Condition="1" x="2294.4443" y="927.7778" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="PREEMPTED_REPLY" Condition="previousState = 100" x="3094.4443" y="1877.7777" />
-      <ECTransition Source="PREEMPTED_REPLY" Destination="WANTED_PENDING" Condition="1" x="1161.1111" y="2072.2222" />
-      <ECTransition Source="HELD" Destination="LEFT_CONV" Condition="PE_EVENT&#38;PE_IN" x="3172.2222" y="3783.3333" />
-      <ECTransition Source="LEFT_CONV" Destination="RELEASED" Condition="PE_EVENT&#38;!PE_OUT" x="6516.6665" y="3649.9998" />
-      <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="PE_EVENT&#38;!PE_IN" x="4277.778" y="4183.333" />
-      <ECTransition Source="SECOND_BAG" Destination="RELEASE_2" Condition="PE_EVENT&#38;!PE_OUT" x="3649.9998" y="4783.333" />
-      <ECTransition Source="RELEASE_2" Destination="WANTED" Condition="1" x="288.8889" y="4305.555" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="LEFT_CONV" Condition="previousState = 9" x="5222.222" y="2338.889" />
-      <ECTransition Source="LEFT_CONV" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4977.7773" y="2438.889" />
-      <ECTransition Source="SECOND_BAG" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="5650.0" y="2116.6665" />
-      <ECTransition Source="ADD_TO_QUEUE" Destination="SECOND_BAG" Condition="previousState = 8" x="5833.333" y="1994.4443" />
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1822.2222" y="444.44443" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="1722.2222" y="377.77777" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;Candidate" x="1066.6666" y="511.11108" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1272.2222" y="422.2222" />
+      <ECTransition Source="START" Destination="CAS_START" Condition="CAS_START" x="4049.9998" y="455.55554" />
+      <ECTransition Source="CAS_START" Destination="START" Condition="1" x="4288.8887" y="211.1111" />
+      <ECTransition Source="START" Destination="CAS_STOP" Condition="CAS_STOP" x="2744.4443" y="177.77777" />
+      <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="2750.0" y="272.2222" />
+      <ECTransition Source="START" Destination="WANTED" Condition="PE_EVENT&#38;!PE_IN" x="588.88885" y="861.1111" />
+      <ECTransition Source="WANTED" Destination="WANTED_PENDING" Condition="1" x="200.0" y="1450.0" />
+      <ECTransition Source="WANTED_PENDING" Destination="NEW_REPLY" Condition="IN_REPLY" x="838.88885" y="2966.6665" />
+      <ECTransition Source="NEW_REPLY" Destination="WANTED_PENDING" Condition="!allReplied" x="988.88885" y="2850.0" />
+      <ECTransition Source="NEW_REPLY" Destination="HELD" Condition="allReplied" x="2911.111" y="3177.7776" />
+      <ECTransition Source="RELEASED" Destination="START" Condition="1" x="5477.7773" y="705.55554" />
+      <ECTransition Source="HELD" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="3461.111" y="2127.7776" />
+      <ECTransition Source="WANTED_PENDING" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="1588.8888" y="1494.4443" />
+      <ECTransition Source="WANTED" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="2377.7776" y="1288.8888" />
+      <ECTransition Source="NEW_REPLY" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="2400.0" y="2572.2222" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="HELD" Condition="previousState = 2" x="3744.4443" y="2505.5554" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="NEW_REPLY" Condition="previousState = 3" x="2738.8887" y="2655.5554" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED_PENDING" Condition="previousState = 4" x="1972.2222" y="1600.0" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="WANTED" Condition="previousState = 5" x="2344.4443" y="1133.3333" />
+      <ECTransition Source="START" Destination="IMMEDIATE_REPLY" Condition="IN_REQUEST" x="2361.111" y="849.99994" />
+      <ECTransition Source="IMMEDIATE_REPLY" Destination="START" Condition="1" x="2033.3333" y="955.55554" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="PREEMPTED_REPLY" Condition="previousState = 100" x="2072.2222" y="1888.8888" />
+      <ECTransition Source="PREEMPTED_REPLY" Destination="WANTED_PENDING" Condition="1" x="672.22217" y="1916.6666" />
+      <ECTransition Source="HELD" Destination="LEFT_CONV" Condition="PE_EVENT&#38;PE_IN" x="3261.111" y="3638.8887" />
+      <ECTransition Source="LEFT_CONV" Destination="RELEASED" Condition="PE_EVENT&#38;!PE_OUT" x="5477.7773" y="3638.8887" />
+      <ECTransition Source="LEFT_CONV" Destination="SECOND_BAG" Condition="PE_EVENT&#38;!PE_IN" x="4416.6665" y="4477.778" />
+      <ECTransition Source="SECOND_BAG" Destination="RELEASE_2" Condition="PE_EVENT&#38;!PE_OUT" x="6672.222" y="4477.778" />
+      <ECTransition Source="RELEASE_2" Destination="WANTED" Condition="1" x="566.6666" y="4049.9998" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="LEFT_CONV" Condition="previousState = 9" x="4588.8887" y="2283.3333" />
+      <ECTransition Source="LEFT_CONV" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="4416.6665" y="2433.3333" />
+      <ECTransition Source="SECOND_BAG" Destination="ADD_TO_QUEUE" Condition="IN_REQUEST" x="5261.111" y="1938.8888" />
+      <ECTransition Source="ADD_TO_QUEUE" Destination="SECOND_BAG" Condition="previousState = 8" x="4927.778" y="2122.2222" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;&#10;lamportTime := 0;&#10;" />
@@ -225,7 +220,7 @@
     <ST Text="previousState := 4;&#10;System.out.println(&#34;In the wanted_pending state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="WANTED_ALG" >
-    <ST Text="previousState := 5;&#10;System.out.println(&#34;In the wanted state&#34;);&#10;" />
+    <ST Text="previousState := 5;&#10;//reset all&#10;replyToProc0 := FALSE;&#10;System.out.println(&#34;In the wanted state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="NEW_REPLY_ALG" >
     <ST Text="previousState := 3;&#10;System.out.println(&#34;In the new_reply state&#34;);&#10;" />
@@ -234,7 +229,7 @@
     <ST Text="previousState := 1;&#10;System.out.println(&#34;In the released state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="HELD_ALG" >
-    <ST Text="previousState := 2;&#10;thisProcRequested := FALSE;&#10;replyToProc0 := FALSE;&#10;System.out.println(&#34;In the held state&#34;);&#10;" />
+    <ST Text="previousState := 2;&#10;thisProcRequested := FALSE;&#10;System.out.println(&#34;In the held state&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="QUEUE_ALG" >
     <ST Text="replyToProc0 := FALSE; //reset variables&#10;&#10;IF (isProc0Requested = TRUE) THEN&#10;    IF (IN_LAMPORT >= lamportTime) || (previousState = 2) || (previousState = 8) || (previousState = 9) THEN&#10;        System.out.println(&#34;Incoming lamport time was higher or mutex already held so it gets queued&#34;);&#10;        requests[0] := TRUE;&#10;    ELSE&#10;        System.out.println(&#34;Incoming lamport time was lower so our request gets preempted.&#34;);&#10;        previousState := 100; //mutex request preemption&#10;    END_IF;&#10;END_IF;&#10;&#10;System.out.println(&#34;In the queue state&#34;);&#10;" />

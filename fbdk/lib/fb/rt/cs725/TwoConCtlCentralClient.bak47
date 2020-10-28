@@ -104,7 +104,7 @@ public class TwoConCtlCentralClient extends FBInstance
  */
   public void connect_Candidate(BOOL newIV) throws FBRManagementException{
     Candidate = newIV;
-    ConvCentralCtl.connectIVNoException("Candidate",Candidate);
+    Conv2Ctl.connectIVNoException("Candidate",Candidate);
     }
 /** Connect the given variable to the input variable Block
   * @param newIV The variable to connect
@@ -112,7 +112,7 @@ public class TwoConCtlCentralClient extends FBInstance
  */
   public void connect_Block(BOOL newIV) throws FBRManagementException{
     Block = newIV;
-    ConvCentralCtl.connectIVNoException("Block",Block);
+    Conv2Ctl.connectIVNoException("Block",Block);
     }
 /** Connect the given variable to the input variable PE_A
   * @param newIV The variable to connect
@@ -120,7 +120,7 @@ public class TwoConCtlCentralClient extends FBInstance
  */
   public void connect_PE_A(BOOL newIV) throws FBRManagementException{
     PE_A = newIV;
-    ConvCentralCtl.connectIVNoException("PE_IN",PE_A);
+    Conv2Ctl.connectIVNoException("PE_IN",PE_A);
     }
 /** Connect the given variable to the input variable PE_B
   * @param newIV The variable to connect
@@ -128,36 +128,36 @@ public class TwoConCtlCentralClient extends FBInstance
  */
   public void connect_PE_B(BOOL newIV) throws FBRManagementException{
     PE_B = newIV;
-    ConvCentralCtl.connectIVNoException("PE_OUT",PE_B);
+    Conv2Ctl.connectIVNoException("PE_OUT",PE_B);
     }
 /** FB FC11 */
   protected ConveyorCTL FC11 = new ConveyorCTL() ;
-/** FB ConvCentralCtl */
-  protected ConveyorCTLCentralClient ConvCentralCtl = new ConveyorCTLCentralClient() ;
+/** FB Conv2Ctl */
+  protected ConveyorCTLCentralClient Conv2Ctl = new ConveyorCTLCentralClient() ;
 /** The default constructor. */
 public TwoConCtlCentralClient(){
     super();
     INIT.connectTo(FC11.INIT);
     REQ.connectTo(FC11.REQ);
-    ConvCentralCtl.INITO.connectTo(INITO);
-    ConvCentralCtl.CNF.connectTo(CNF);
-    REQ.connectTo(ConvCentralCtl.REQ);
-    STOP.connectTo(ConvCentralCtl.CAS_STOP);
-    START.connectTo(ConvCentralCtl.CAS_START);
-    ConvCentralCtl.STOP.connectTo(FC11.CAS_STOP);
-    ConvCentralCtl.START.connectTo(FC11.CAS_START);
-    FC11.INITO.connectTo(ConvCentralCtl.INIT);
-    PE_EVENT.connectTo(ConvCentralCtl.I_PE_EVENT);
-    ConvCentralCtl.REQUEST_TOKE.connectTo(REQUEST_TOKE);
-    ConvCentralCtl.RELEASE_TOKE.connectTo(RELEASE_TOKE);
-    GRANTED_TOKE.connectTo(ConvCentralCtl.GRANTED_TOKE);
-    ConvCentralCtl.connectIVNoException("Block",Block);
-    ConvCentralCtl.connectIVNoException("Candidate",Candidate);
-    BlockCon = (BOOL)ConvCentralCtl.ovNamedNoException("BlockCon");
+    Conv2Ctl.INITO.connectTo(INITO);
+    Conv2Ctl.CNF.connectTo(CNF);
+    REQ.connectTo(Conv2Ctl.REQ);
+    STOP.connectTo(Conv2Ctl.CAS_STOP);
+    START.connectTo(Conv2Ctl.CAS_START);
+    Conv2Ctl.STOP.connectTo(FC11.CAS_STOP);
+    Conv2Ctl.START.connectTo(FC11.CAS_START);
+    FC11.INITO.connectTo(Conv2Ctl.INIT);
+    PE_EVENT.connectTo(Conv2Ctl.I_PE_EVENT);
+    Conv2Ctl.REQUEST_TOKE.connectTo(REQUEST_TOKE);
+    Conv2Ctl.RELEASE_TOKE.connectTo(RELEASE_TOKE);
+    GRANTED_TOKE.connectTo(Conv2Ctl.GRANTED_TOKE);
+    Conv2Ctl.connectIVNoException("Block",Block);
+    Conv2Ctl.connectIVNoException("Candidate",Candidate);
+    BlockCon = (BOOL)Conv2Ctl.ovNamedNoException("BlockCon");
     MotoRotate1 = (BOOL)FC11.ovNamedNoException("MotoRotate");
-    MotoRotate2 = (BOOL)ConvCentralCtl.ovNamedNoException("MotoRotate");
-    ConvCentralCtl.connectIVNoException("PE_IN",PE_A);
-    ConvCentralCtl.connectIVNoException("PE_OUT",PE_B);
+    MotoRotate2 = (BOOL)Conv2Ctl.ovNamedNoException("MotoRotate");
+    Conv2Ctl.connectIVNoException("PE_IN",PE_A);
+    Conv2Ctl.connectIVNoException("PE_OUT",PE_B);
     FC11.Candidate.initializeNoException("0");
     FC11.Block.initializeNoException("0");
     FC11.PE.initializeNoException("0");
@@ -170,16 +170,16 @@ public TwoConCtlCentralClient(){
   throws FBRManagementException{
     super.initialize(fbName,r);
     FC11.initialize("FC11",r);
-    ConvCentralCtl.initialize("ConvCentralCtl",r);
+    Conv2Ctl.initialize("Conv2Ctl",r);
 }
 /** Start the FB instances. */
 public void start( ){
   FC11.start();
-  ConvCentralCtl.start();
+  Conv2Ctl.start();
 }
 /** Stop the FB instances. */
 public void stop( ){
   FC11.stop();
-  ConvCentralCtl.stop();
+  Conv2Ctl.stop();
 }
 }

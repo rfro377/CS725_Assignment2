@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK TWOCONRINGTOKEN
   * @author JHC
-  * @version 20201026/JHC
+  * @version 20201028/JHC
   */
 public class TWOCONRINGTOKEN extends FBInstance
 {
@@ -110,7 +110,7 @@ public class TWOCONRINGTOKEN extends FBInstance
  */
   public void connect_Candidate(BOOL newIV) throws FBRManagementException{
     Candidate = newIV;
-    FC12.connectIVNoException("Candidate",Candidate);
+    Conv4Ctl.connectIVNoException("Candidate",Candidate);
     }
 /** Connect the given variable to the input variable Block
   * @param newIV The variable to connect
@@ -118,7 +118,7 @@ public class TWOCONRINGTOKEN extends FBInstance
  */
   public void connect_Block(BOOL newIV) throws FBRManagementException{
     Block = newIV;
-    FC12.connectIVNoException("Block",Block);
+    Conv4Ctl.connectIVNoException("Block",Block);
     }
 /** Connect the given variable to the input variable PE_A
   * @param newIV The variable to connect
@@ -126,7 +126,7 @@ public class TWOCONRINGTOKEN extends FBInstance
  */
   public void connect_PE_A(BOOL newIV) throws FBRManagementException{
     PE_A = newIV;
-    FC12.connectIVNoException("PE_IN",PE_A);
+    Conv4Ctl.connectIVNoException("PE_IN",PE_A);
     }
 /** Connect the given variable to the input variable PE_B
   * @param newIV The variable to connect
@@ -134,42 +134,42 @@ public class TWOCONRINGTOKEN extends FBInstance
  */
   public void connect_PE_B(BOOL newIV) throws FBRManagementException{
     PE_B = newIV;
-    FC12.connectIVNoException("PE_OUT",PE_B);
+    Conv4Ctl.connectIVNoException("PE_OUT",PE_B);
     }
 /** FB FC11 */
   protected ConveyorCTL FC11 = new ConveyorCTL() ;
-/** FB FC12 */
-  protected ConveyorRingTokenCTL FC12 = new ConveyorRingTokenCTL() ;
+/** FB Conv4Ctl */
+  protected ConveyorRingTokenCTL Conv4Ctl = new ConveyorRingTokenCTL() ;
 /** The default constructor. */
 public TWOCONRINGTOKEN(){
     super();
     INIT.connectTo(FC11.INIT);
     REQ.connectTo(FC11.REQ);
-    FC12.INITO.connectTo(INITO);
-    FC12.CNF.connectTo(CNF);
-    REQ.connectTo(FC12.REQ);
-    STOP.connectTo(FC12.CAS_STOP);
-    START.connectTo(FC12.CAS_START);
-    FC12.STOP.connectTo(FC11.CAS_STOP);
-    FC12.START.connectTo(FC11.CAS_START);
-    FC11.INITO.connectTo(FC12.INIT);
-    GRANTED_RING_TOKE.connectTo(FC12.GRANTED_RING_TOKEN);
-    FC12.RELEASE_RING_TOKEN.connectTo(RELEASED_RING_TOKE);
-    I_PE_EVENT.connectTo(FC12.I_PE_EVENT);
-    CONFIRM_RECEIVED_RING_TOKEN_IN.connectTo(FC12.CONFIRM_TOKEN_RECEIVED_IN);
-    FC12.CONFIRM_TOKEN_RECEIVED_OUT.connectTo(CONFIRM_RECEIVED_RING_TOKEN_OUT);
-    FC12.Initial_Release.connectTo(Initial_Release);
-    FC12.connectIVNoException("Block",Block);
-    FC12.connectIVNoException("Candidate",Candidate);
-    BlockCon = (BOOL)FC12.ovNamedNoException("BlockCon");
+    Conv4Ctl.INITO.connectTo(INITO);
+    Conv4Ctl.CNF.connectTo(CNF);
+    REQ.connectTo(Conv4Ctl.REQ);
+    STOP.connectTo(Conv4Ctl.CAS_STOP);
+    START.connectTo(Conv4Ctl.CAS_START);
+    Conv4Ctl.STOP.connectTo(FC11.CAS_STOP);
+    Conv4Ctl.START.connectTo(FC11.CAS_START);
+    FC11.INITO.connectTo(Conv4Ctl.INIT);
+    GRANTED_RING_TOKE.connectTo(Conv4Ctl.GRANTED_RING_TOKEN);
+    Conv4Ctl.RELEASE_RING_TOKEN.connectTo(RELEASED_RING_TOKE);
+    I_PE_EVENT.connectTo(Conv4Ctl.I_PE_EVENT);
+    CONFIRM_RECEIVED_RING_TOKEN_IN.connectTo(Conv4Ctl.CONFIRM_TOKEN_RECEIVED_IN);
+    Conv4Ctl.CONFIRM_TOKEN_RECEIVED_OUT.connectTo(CONFIRM_RECEIVED_RING_TOKEN_OUT);
+    Conv4Ctl.Initial_Release.connectTo(Initial_Release);
+    Conv4Ctl.connectIVNoException("Block",Block);
+    Conv4Ctl.connectIVNoException("Candidate",Candidate);
+    BlockCon = (BOOL)Conv4Ctl.ovNamedNoException("BlockCon");
     MotoRotate1 = (BOOL)FC11.ovNamedNoException("MotoRotate");
-    MotoRotate2 = (BOOL)FC12.ovNamedNoException("MotoRotate");
-    FC12.connectIVNoException("PE_IN",PE_A);
-    FC12.connectIVNoException("PE_OUT",PE_B);
+    MotoRotate2 = (BOOL)Conv4Ctl.ovNamedNoException("MotoRotate");
+    Conv4Ctl.connectIVNoException("PE_IN",PE_A);
+    Conv4Ctl.connectIVNoException("PE_OUT",PE_B);
     FC11.Candidate.initializeNoException("0");
     FC11.Block.initializeNoException("0");
     FC11.PE.initializeNoException("0");
-    FC12.HAS_INITIAL_TOKEN.initializeNoException("0");
+    Conv4Ctl.HAS_INITIAL_TOKEN.initializeNoException("0");
   }
 /** {@inheritDoc}
  * @param fbName {@inheritDoc}
@@ -179,16 +179,16 @@ public TWOCONRINGTOKEN(){
   throws FBRManagementException{
     super.initialize(fbName,r);
     FC11.initialize("FC11",r);
-    FC12.initialize("FC12",r);
+    Conv4Ctl.initialize("Conv4Ctl",r);
 }
 /** Start the FB instances. */
 public void start( ){
   FC11.start();
-  FC12.start();
+  Conv4Ctl.start();
 }
 /** Stop the FB instances. */
 public void stop( ){
   FC11.stop();
-  FC12.stop();
+  Conv4Ctl.stop();
 }
 }
